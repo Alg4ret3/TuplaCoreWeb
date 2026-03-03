@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { ExternalLink, Github, Filter } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/atoms/button";
+import { Badge } from "@/components/atoms/badge";
 import { motion } from "framer-motion";
 import type { MotionProps } from "framer-motion";
 
@@ -109,14 +109,14 @@ const Portfolio = () => {
       : projects.filter((project) => project.category === activeFilter);
 
   return (
-    <section id="portafolio" className="py-20 bg-white">
+    <section id="portafolio" className="py-20 bg-white dark:bg-tupla-dark/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div className="text-center mb-16" {...fadeUp(0)}>
-          <h2 className="text-4xl md:text-5xl font-bold text-tupla-dark mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-tupla-dark dark:text-white mb-6">
             Nuestro Portafolio
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Descubre algunos de nuestros proyectos más destacados y la
             innovación que aportamos a cada solución tecnológica.
           </p>
@@ -149,7 +149,7 @@ const Portfolio = () => {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
+              className="group relative bg-white dark:bg-tupla-dark/60 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 dark:border dark:border-white/10"
               {...fadeUp(index * 0.1)}
             >
               {/* Project Image */}
@@ -184,10 +184,10 @@ const Portfolio = () => {
               {/* Project Content */}
               <div className="p-6 space-y-4">
                 <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-tupla-dark group-hover:text-tupla-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-tupla-dark dark:text-white group-hover:text-tupla-primary transition-colors duration-300">
                     {project.title}
                   </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -198,7 +198,7 @@ const Portfolio = () => {
                     <Badge
                       key={idx}
                       variant="secondary"
-                      className="bg-tupla-light text-tupla-dark text-xs font-medium"
+                      className="bg-tupla-light dark:bg-white/10 text-tupla-dark dark:text-gray-300 text-xs font-medium"
                     >
                       {tech}
                     </Badge>

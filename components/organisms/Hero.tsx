@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ArrowRight, Zap, Smartphone, Globe } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atoms/button";
 
 const Hero = () => {
   const [displayedText, setDisplayedText] = useState("");

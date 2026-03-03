@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { Send, Phone, Mail, MapPin, Clock } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/atoms/button';
+import { Input } from '@/components/atoms/input';
+import { Textarea } from '@/components/atoms/textarea';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/atoms/card';
 import { useToast } from '@/hooks/use-toast';
 import emailjs from '@emailjs/browser';
 import { motion } from "framer-motion";
@@ -119,15 +119,15 @@ const Contact = () => {
   };
 
   return (
-    <section id="contacto" className="py-20 bg-white">
+    <section id="contacto" className="py-20 bg-white dark:bg-tupla-dark/20 text-foreground">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <motion.div className="text-center mb-16" {...fadeUp(0)}>
-          <h2 className="text-4xl md:text-5xl font-bold text-tupla-dark mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-tupla-dark dark:text-white mb-6">
             Contáctanos
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
             ¿Listo para transformar tu idea en realidad? Conversemos sobre tu proyecto 
             y descubre cómo podemos ayudarte a alcanzar tus objetivos digitales.
           </p>
@@ -137,7 +137,7 @@ const Contact = () => {
           {/* Contact Information */}
           <motion.div className="lg:col-span-1 space-y-8" {...fadeUp(0.1)}>
             <div>
-              <h3 className="text-2xl font-bold text-tupla-dark mb-6">
+              <h3 className="text-2xl font-bold text-tupla-dark dark:text-white mb-6">
                 Información de Contacto
               </h3>
               <div className="space-y-6">
@@ -153,13 +153,13 @@ const Contact = () => {
                         <IconComponent className="h-5 w-5" />
                       </div>
                       <div>
-                        <h4 className="text-lg font-semibold text-tupla-dark mb-1">
+                        <h4 className="text-lg font-semibold text-tupla-dark dark:text-white mb-1">
                           {info.title}
                         </h4>
                         <p className="text-tupla-primary font-medium">
                           {info.details}
                         </p>
-                        <p className="text-gray-500 text-sm">
+                        <p className="text-gray-500 dark:text-gray-400 text-sm">
                           {info.subtitle}
                         </p>
                       </div>
@@ -194,12 +194,12 @@ const Contact = () => {
 
           {/* Contact Form */}
           <motion.div className="lg:col-span-2" {...fadeUp(0.2)}>
-            <Card className="shadow-xl">
+            <Card className="shadow-xl bg-white dark:bg-tupla-dark/60 dark:border-white/10">
               <CardHeader>
-                <CardTitle className="text-2xl text-tupla-dark">
+                <CardTitle className="text-2xl text-tupla-dark dark:text-white">
                   Solicita tu Cotización
                 </CardTitle>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-gray-400">
                   Completa el formulario y te contactaremos dentro de las próximas 24 horas.
                 </p>
               </CardHeader>
@@ -208,7 +208,7 @@ const Contact = () => {
                   {/* Campos */}
                   <motion.div className="grid md:grid-cols-2 gap-6" {...fadeUp(0.25)}>
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium text-tupla-dark">
+                      <label htmlFor="name" className="text-sm font-medium text-tupla-dark dark:text-gray-300">
                         Nombre completo *
                       </label>
                       <Input
@@ -219,11 +219,11 @@ const Contact = () => {
                         onChange={handleInputChange}
                         placeholder="Tu nombre completo"
                         required
-                        className="border-gray-300 focus:border-tupla-primary focus:ring-tupla-primary"
+                        className="border-gray-300 dark:border-white/10 bg-white dark:bg-tupla-dark/40 text-foreground focus:border-tupla-primary focus:ring-tupla-primary"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium text-tupla-dark">
+                      <label htmlFor="email" className="text-sm font-medium text-tupla-dark dark:text-gray-300">
                         Correo electrónico *
                       </label>
                       <Input
@@ -234,14 +234,14 @@ const Contact = () => {
                         onChange={handleInputChange}
                         placeholder="tu@email.com"
                         required
-                        className="border-gray-300 focus:border-tupla-primary focus:ring-tupla-primary"
+                        className="border-gray-300 dark:border-white/10 bg-white dark:bg-tupla-dark/40 text-foreground focus:border-tupla-primary focus:ring-tupla-primary"
                       />
                     </div>
                   </motion.div>
 
                   <motion.div className="grid md:grid-cols-2 gap-6" {...fadeUp(0.3)}>
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-medium text-tupla-dark">
+                      <label htmlFor="phone" className="text-sm font-medium text-tupla-dark dark:text-gray-300">
                         Teléfono
                       </label>
                       <Input
@@ -251,11 +251,11 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={handleInputChange}
                         placeholder="(555) 123-4567"
-                        className="border-gray-300 focus:border-tupla-primary focus:ring-tupla-primary"
+                        className="border-gray-300 dark:border-white/10 bg-white dark:bg-tupla-dark/40 text-foreground focus:border-tupla-primary focus:ring-tupla-primary"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="service" className="text-sm font-medium text-tupla-dark">
+                      <label htmlFor="service" className="text-sm font-medium text-tupla-dark dark:text-gray-300">
                         Servicio de interés *
                       </label>
                       <select
@@ -264,7 +264,7 @@ const Contact = () => {
                         value={formData.service}
                         onChange={handleInputChange}
                         required
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-tupla-primary focus:border-tupla-primary"
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-white/10 bg-white dark:bg-tupla-dark/40 text-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-tupla-primary focus:border-tupla-primary"
                       >
                         <option value="">Selecciona un servicio</option>
                         {services.map((service, index) => (
@@ -277,7 +277,7 @@ const Contact = () => {
                   </motion.div>
 
                   <motion.div className="space-y-2" {...fadeUp(0.35)}>
-                    <label htmlFor="message" className="text-sm font-medium text-tupla-dark">
+                    <label htmlFor="message" className="text-sm font-medium text-tupla-dark dark:text-gray-300">
                       Mensaje *
                     </label>
                     <Textarea
@@ -288,7 +288,7 @@ const Contact = () => {
                       placeholder="Cuéntanos sobre tu proyecto..."
                       required
                       rows={6}
-                      className="border-gray-300 focus:border-tupla-primary focus:ring-tupla-primary resize-none"
+                      className="border-gray-300 dark:border-white/10 bg-white dark:bg-tupla-dark/40 text-foreground focus:border-tupla-primary focus:ring-tupla-primary resize-none"
                     />
                   </motion.div>
 

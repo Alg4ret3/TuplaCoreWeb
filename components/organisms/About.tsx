@@ -1,7 +1,7 @@
 "use client";
 
 import { Users, Target, Eye, Award, Code, Heart } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/atoms/card";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { MotionProps } from "framer-motion";
@@ -71,14 +71,28 @@ const About = () => {
   ];
 
   return (
-    <section id="nosotros" className="py-20 bg-tupla-light">
+    <section id="nosotros" className="py-20 bg-tupla-light dark:bg-tupla-dark/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div className="text-center mb-16" {...fadeUp(0)}>
-          <h2 className="text-4xl md:text-5xl font-bold text-tupla-dark mb-6">
-            Conoce a TUPLΛ CORE
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <div className="flex flex-col items-center mb-6">
+            <span className="text-gray-500 uppercase tracking-widest text-sm mb-4">Conoce a</span>
+            <Image 
+              src="/logo.svg" 
+              alt="TUPLΛ CΩRE" 
+              width={320} 
+              height={96} 
+              className="h-20 w-auto object-contain dark:hidden"
+            />
+            <Image 
+              src="/LogoBlanco.svg" 
+              alt="TUPLΛ CΩRE" 
+              width={320} 
+              height={96} 
+              className="h-20 w-auto object-contain hidden dark:block"
+            />
+          </div>
+          <p className="text-xl text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed font-normal dark:font-medium">
             Somos un equipo apasionado por la tecnología y la innovación,
             comprometido con transformar tus ideas en soluciones digitales
             sólidas, funcionales y escalables, acompañamos a tu negocio en su
@@ -91,17 +105,17 @@ const About = () => {
         {/* Mission & Vision */}
         <div className="grid lg:grid-cols-2 gap-12 mb-20">
           <motion.div {...fadeUp(0.1)}>
-            <Card className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 group">
+            <Card className="bg-white dark:bg-tupla-dark/60 shadow-lg hover:shadow-xl transition-all duration-300 group dark:border-white/10">
               <CardContent className="p-8">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="p-3 bg-gradient-to-br from-tupla-primary to-tupla-accent rounded-lg text-white">
                     <Target className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-tupla-dark">
+                  <h3 className="text-2xl font-bold text-tupla-dark dark:text-white">
                     Nuestra Misión
                   </h3>
                 </div>
-                <p className="text-gray-600 leading-relaxed text-lg">
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                   Nuestra misión es empoderar a pequeñas y medianas empresas a
                   través del acceso democrático a la tecnología, ofreciendo
                   soluciones digitales de vanguardia, accesibles y de alta
@@ -115,17 +129,17 @@ const About = () => {
           </motion.div>
 
           <motion.div {...fadeUp(0.2)}>
-            <Card className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 group">
+            <Card className="bg-white dark:bg-tupla-dark/60 shadow-lg hover:shadow-xl transition-all duration-300 group dark:border-white/10">
               <CardContent className="p-8">
                 <div className="flex items-center space-x-4 mb-6">
                   <div className="p-3 bg-gradient-to-br from-tupla-accent to-tupla-primary rounded-lg text-white">
                     <Eye className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-tupla-dark">
+                  <h3 className="text-2xl font-bold text-tupla-dark dark:text-white">
                     Nuestra Visión
                   </h3>
                 </div>
-                <p className="text-gray-600 leading-relaxed text-lg">
+                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
                   Nuestra visión es convertirnos en el aliado tecnológico de
                   confianza para las empresas que buscan innovar, crecer y
                   liderar en el entorno digital y Aspiramos a ser reconocidos
@@ -141,7 +155,7 @@ const About = () => {
         {/* Values */}
         <div className="mb-20">
           <motion.h3
-            className="text-3xl font-bold text-tupla-dark text-center mb-12"
+            className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12"
             {...fadeUp(0)}
           >
             Nuestros Valores
@@ -151,17 +165,17 @@ const About = () => {
               const IconComponent = value.icon;
               return (
                 <motion.div key={index} {...fadeUp(0.1 * index)}>
-                  <Card className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2">
+                  <Card className="bg-white dark:bg-tupla-dark/60 shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2 dark:border-white/10">
                     <CardContent className="p-6 text-center">
                       <div className="mb-4">
                         <div className="inline-flex p-3 bg-gradient-to-br from-tupla-primary to-tupla-accent rounded-lg text-white group-hover:scale-110 transition-transform duration-300">
                           <IconComponent className="h-6 w-6" />
                         </div>
                       </div>
-                      <h4 className="text-xl font-semibold text-tupla-dark mb-3">
+                      <h4 className="text-xl font-semibold text-tupla-dark dark:text-white mb-3">
                         {value.title}
                       </h4>
-                      <p className="text-gray-600 leading-relaxed">
+                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                         {value.description}
                       </p>
                     </CardContent>
@@ -176,7 +190,7 @@ const About = () => {
         {/* Team */}
         <div className="mb-20">
           <motion.h3
-            className="text-3xl font-bold text-tupla-dark text-center mb-12"
+            className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12"
             {...fadeUp(0)}
           >
             Nuestro Equipo
@@ -194,7 +208,7 @@ const About = () => {
                 }}
                 viewport={{ once: false, amount: 0.2 }}
               >
-                <Card className="bg-white w-full max-w-sm shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden">
+                <Card className="bg-white dark:bg-tupla-dark/60 w-full max-w-sm shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden dark:border-white/10">
                   <div className="relative">
                     <Image
                       src={member.image}
@@ -214,7 +228,7 @@ const About = () => {
                     <p className="text-tupla-primary font-medium mb-3">
                       {member.role}
                     </p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                       {member.description}
                     </p>
                   </CardContent>
@@ -226,10 +240,10 @@ const About = () => {
 
         {/* Stats */}
         <motion.div
-          className="bg-white rounded-2xl p-8 md:p-12 shadow-lg"
+          className="bg-white dark:bg-tupla-dark/60 rounded-2xl p-8 md:p-12 shadow-lg dark:border dark:border-white/10"
           {...fadeUp(0.3)}
         >
-          <h3 className="text-3xl font-bold text-tupla-dark text-center mb-12">
+          <h3 className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12">
             Nuestros Logros
           </h3>
           <div className="grid md:grid-cols-4 gap-8">
@@ -242,7 +256,7 @@ const About = () => {
                 <div className="text-4xl md:text-5xl font-bold text-tupla-primary mb-2 group-hover:text-tupla-accent transition-colors duration-300">
                   {stat.number}
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
               </motion.div>
             ))}
           </div>

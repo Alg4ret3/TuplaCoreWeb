@@ -3,14 +3,14 @@ import type { MotionProps } from "framer-motion";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Globe, Smartphone, Settings, ArrowRight, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/atoms/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/atoms/card";
 
 const fadeUp = (delay = 0): MotionProps => ({
   initial: { opacity: 0, y: 50 },
@@ -94,20 +94,20 @@ const Services = () => {
   };
 
   return (
-    <section id="servicios" className="py-20 bg-tupla-light">
+    <section id="servicios" className="py-20 bg-tupla-light dark:bg-tupla-dark/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <motion.h2
             {...fadeUp(0)}
-            className="text-4xl md:text-5xl font-bold text-tupla-dark mb-6"
+            className="text-4xl md:text-5xl font-bold text-tupla-dark dark:text-white mb-6"
           >
             Nuestros Servicios
           </motion.h2>
 
           <motion.p
             {...zoomIn(0.15)}
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
           >
             Ofrecemos soluciones tecnológicas integrales que transforman la
             manera en que tu empresa opera en el mundo digital.
@@ -124,7 +124,7 @@ const Services = () => {
             return (
               <Card
                 key={index}
-                className={`relative overflow-hidden transition-all duration-500 cursor-pointer group ${
+                className={`relative overflow-hidden transition-all duration-500 cursor-pointer group bg-white dark:bg-tupla-dark/60 dark:border-white/10 ${
                   hoveredCard === index
                     ? "transform -translate-y-2 shadow-2xl"
                     : "hover:shadow-lg"
@@ -144,11 +144,11 @@ const Services = () => {
                     >
                       <IconComponent className="h-6 w-6" />
                     </div>
-                    <CardTitle className="text-2xl font-bold text-tupla-dark">
+                    <CardTitle className="text-2xl font-bold text-tupla-dark dark:text-white">
                       {service.title}
                     </CardTitle>
                   </div>
-                  <CardDescription className="text-gray-600 text-lg leading-relaxed">
+                  <CardDescription className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
@@ -156,14 +156,14 @@ const Services = () => {
                 <CardContent className="relative z-10 space-y-6">
                   {/* Features */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-tupla-dark">
+                    <h4 className="font-semibold text-tupla-dark dark:text-white">
                       Características:
                     </h4>
                     <ul className="space-y-2">
                       {service.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center space-x-2">
                           <Check className="h-4 w-4 text-tupla-accent" />
-                          <span className="text-sm text-gray-600">
+                          <span className="text-sm text-gray-600 dark:text-gray-400">
                             {feature}
                           </span>
                         </li>
@@ -173,14 +173,14 @@ const Services = () => {
 
                   {/* Technologies */}
                   <div className="space-y-3">
-                    <h4 className="font-semibold text-tupla-dark">
+                    <h4 className="font-semibold text-tupla-dark dark:text-white">
                       Tecnologías:
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {service.technologies.map((tech, idx) => (
                         <span
                           key={idx}
-                          className="px-3 py-1 bg-gray-100 text-tupla-dark text-xs font-medium rounded-full"
+                          className="px-3 py-1 bg-gray-100 dark:bg-white/10 text-tupla-dark dark:text-gray-300 text-xs font-medium rounded-full"
                         >
                           {tech}
                         </span>
@@ -205,9 +205,9 @@ const Services = () => {
         {/* Process Section */}
         <motion.div
           {...fadeUp(0.3)}
-          className="bg-white rounded-2xl p-8 md:p-12 shadow-lg"
+          className="bg-white dark:bg-tupla-dark/60 rounded-2xl p-8 md:p-12 shadow-lg dark:border dark:border-white/10"
         >
-          <h3 className="text-3xl font-bold text-tupla-dark text-center mb-12">
+          <h3 className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12">
             Nuestro Proceso de Trabajo
           </h3>
 
@@ -251,10 +251,10 @@ const Services = () => {
                     <div className="hidden md:block absolute left-full top-1/2 transform -translate-y-1/2 w-16 h-0.5 bg-tupla-primary"></div>
                   )}
                 </div>
-                <h4 className="text-xl font-semibold text-tupla-dark mb-2">
+                <h4 className="text-xl font-semibold text-tupla-dark dark:text-white mb-2">
                   {item.title}
                 </h4>
-                <p className="text-gray-600 text-sm">{item.desc}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
               </div>
             ))}
           </div>

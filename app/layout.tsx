@@ -1,9 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Audiowide } from 'next/font/google';
 import { MantineProvider } from '@mantine/core';
-import '@mantine/core/styles.css'; // Estilos globales de Mantine
-import AOSProvider from '@/components/ui/aos/AOSProvider';
+import '@mantine/core/styles.css';
+import AOSProvider from '@/components/atoms/aos/AOSProvider';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,11 +12,18 @@ const inter = Inter({
   display: 'swap',
 });
 
+const audiowide = Audiowide({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-audiowide',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'TUPLΛ CORE - Soluciones Tecnológicas Innovadoras',
+  title: 'TUPLΛ CΩRE - Soluciones Tecnológicas Innovadoras',
   description: 'Desarrollo de páginas web, aplicaciones móviles y software a medida para empresas que buscan digitalizar sus operaciones. Tecnología moderna, confiable y profesional.',
-  keywords: 'desarrollo web, aplicaciones móviles, software a medida, tecnología, digitalización, TUPLA CORE',
-  authors: [{ name: 'TUPLΛ CORE' }],
+  keywords: 'desarrollo web, aplicaciones móviles, software a medida, tecnología, digitalización, TUPLΛ CΩRE',
+  authors: [{ name: 'TUPLΛ CΩRE' }],
   viewport: 'width=device-width, initial-scale=1',
   icons: {
     icon: '/favicon.svg',
@@ -28,18 +36,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={inter.className}>
+    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${audiowide.variable}`}>
       <body className={inter.className}>
-        <MantineProvider
-          defaultColorScheme="light"
-          theme={{
-            fontFamily: 'Inter, sans-serif',
-          }}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
         >
-          <AOSProvider>
-            {children}
-          </AOSProvider>
-        </MantineProvider>
+          <MantineProvider
+            defaultColorScheme="auto"
+            theme={{
+              fontFamily: 'Inter, sans-serif',
+            }}
+          >
+            <AOSProvider>
+              {children}
+            </AOSProvider>
+          </MantineProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         inter: ['var(--font-inter)', 'sans-serif'],
+        audiowide: ['var(--font-audiowide)', 'cursive'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

@@ -1,21 +1,19 @@
-import Navbar from '@/components/layout/Navbar';
-import Hero from '@/components/sections/Hero';
-import Services from '@/components/sections/Services';
-import Portfolio from '@/components/sections/Portfolio';
-import About from '@/components/sections/About';
-import Contact from '@/components/sections/Contact';
-import Footer from '@/components/layout/Footer';
-import { Toaster } from '@/components/ui/toaster';
+import Navbar from '@/components/organisms/Navbar';
+import Hero from '@/components/organisms/Hero';
+import EcommerceBanner from '@/components/organisms/EcommerceBanner';
+import VideoShowcase from '@/components/organisms/VideoShowcase';
+import N8nBanner from '@/components/organisms/N8nBanner';
+import Footer from '@/components/organisms/Footer';
+import { Toaster } from '@/components/atoms/toaster';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <Services />
-      <Portfolio />
-      <About />
-      <Contact />
+      <EcommerceBanner />
+      <VideoShowcase />
+      <N8nBanner />
       <Footer />
       <Toaster />
     </main>
