@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ArrowRight, Zap, Smartphone, Globe } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 
@@ -9,12 +9,12 @@ const Hero = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const rotatingTexts = [
+  const rotatingTexts = useMemo(() => [
     "Páginas Web Modernas",
     "Aplicaciones Móviles",
     "Software a Medida",
     "Soluciones Digitales",
-  ];
+  ], []);
 
   useEffect(() => {
     const fullText = rotatingTexts[textIndex];
@@ -40,7 +40,7 @@ const Hero = () => {
     }, speed);
 
     return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, textIndex]);
+  }, [displayedText, isDeleting, textIndex, rotatingTexts]);
 
   useEffect(() => {
     // Al recargar la página, desplaza suavemente al inicio
@@ -60,7 +60,7 @@ const Hero = () => {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen bg-gradient-to-br from-tupla-dark via-tupla-dark to-gray-900 overflow-hidden"
+      className="relative min-h-screen bg-white transition-colors duration-500 dark:bg-gradient-to-br dark:from-tupla-dark dark:via-tupla-dark dark:to-gray-900 overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">

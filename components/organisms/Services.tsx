@@ -100,17 +100,18 @@ const Services = () => {
         <div className="text-center mb-16">
           <motion.h2
             {...fadeUp(0)}
-            className="text-4xl md:text-5xl font-bold text-tupla-dark dark:text-white mb-6"
+            className="text-4xl md:text-6xl font-black text-tupla-dark dark:text-white mb-6 uppercase tracking-tighter italic"
           >
-            Nuestros Servicios
+            Impulsa tu <span className="text-tupla-accent">Éxito Digital</span>
           </motion.h2>
 
           <motion.p
             {...zoomIn(0.15)}
-            className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed font-light"
           >
-            Ofrecemos soluciones tecnológicas integrales que transforman la
-            manera en que tu empresa opera en el mundo digital.
+            No solo creamos software; construimos los cimientos tecnológicos de tu 
+            crecimiento. Soluciones a medida, escalables y orientadas a resultados 
+            que transforman tu visión en una realidad competitiva.
           </motion.p>
         </div>
 

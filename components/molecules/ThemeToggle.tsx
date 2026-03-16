@@ -7,6 +7,19 @@ import { Button } from "@/components/atoms/button";
 
 export function ThemeToggle({ scrolled }: { scrolled?: boolean }) {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <Button variant="ghost" size="icon" className="rounded-full opacity-0">
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
+      </Button>
+    );
+  }
 
   return (
     <Button

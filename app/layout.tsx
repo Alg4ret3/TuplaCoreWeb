@@ -1,7 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter, Audiowide } from 'next/font/google';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import '@mantine/core/styles.css';
 import AOSProvider from '@/components/atoms/aos/AOSProvider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
@@ -37,6 +37,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning className={`${inter.variable} ${audiowide.variable}`}>
+      <head>
+        <ColorSchemeScript defaultColorScheme="auto" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
