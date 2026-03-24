@@ -32,6 +32,14 @@ const EcommerceBanner = () => {
     },
   ];
 
+  const [isMobile, setIsMobile] = (require("react")).useState(false);
+  (require("react")).useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section className="relative py-32 overflow-hidden bg-[#fafafa] dark:bg-tupla-dark transition-colors duration-500">
       {/* Premium Background Elements */}
@@ -46,14 +54,14 @@ const EcommerceBanner = () => {
           
           {/* Left Column - Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
             className="relative lg:pr-8"
           >
             <motion.div 
-              initial={{ opacity: 0, y: 10 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
               className="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-tupla-primary/20 shadow-sm mb-8"
@@ -80,7 +88,7 @@ const EcommerceBanner = () => {
               {features.map((item, idx) => (
                 <motion.div 
                   key={idx}
-                  whileHover={{ y: -5, scale: 1.02 }}
+                  whileHover={isMobile ? {} : { y: -5, scale: 1.02 }}
                   className="p-5 rounded-2xl bg-white/50 dark:bg-white/5 backdrop-blur-xl border border-white dark:border-white/10 shadow-xl shadow-black/5 group transition-all"
                 >
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center text-white mb-4 shadow-lg`}>
@@ -105,7 +113,7 @@ const EcommerceBanner = () => {
 
           {/* Right Column - Premium 3D Mockup */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, rotateY: 20 }}
+            initial={isMobile ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0.8, rotateY: 20 }}
             whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             viewport={{ once: true }}
@@ -154,7 +162,7 @@ const EcommerceBanner = () => {
                       {[30, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
                         <motion.div 
                           key={i}
-                          initial={{ height: 0 }}
+                          initial={isMobile ? { height: `${h}%` } : { height: 0 }}
                           whileInView={{ height: `${h}%` }}
                           transition={{ delay: i * 0.1, duration: 0.5 }}
                           className="w-full bg-gradient-to-t from-tupla-primary to-tupla-accent rounded-t-lg opacity-80"
@@ -171,7 +179,7 @@ const EcommerceBanner = () => {
 
             {/* Floating Elements - Extreme Depth */}
             <motion.div 
-              animate={{ y: [0, -20, 0] }}
+              animate={isMobile ? { y: 0 } : { y: [0, -20, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-10 -left-12 z-20 bg-white/90 dark:bg-tupla-dark/95 backdrop-blur-2xl p-6 rounded-[30px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border dark:border-white/10"
             >
@@ -190,7 +198,7 @@ const EcommerceBanner = () => {
             </motion.div>
 
             <motion.div 
-              animate={{ y: [0, 20, 0] }}
+              animate={isMobile ? { y: 0 } : { y: [0, 20, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
               className="absolute top-10 -right-8 z-20 bg-white/90 dark:bg-tupla-dark/95 backdrop-blur-2xl px-6 py-4 rounded-2xl shadow-xl border dark:border-white/10"
             >

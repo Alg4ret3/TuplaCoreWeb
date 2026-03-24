@@ -45,6 +45,14 @@ const PromoBanner = ({
     light: "text-slate-900 dark:text-white"
   };
 
+  const [isMobile, setIsMobile] = (require("react")).useState(false);
+  (require("react")).useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section className={`relative overflow-hidden ${fullWidth ? "w-full" : "max-w-7xl mx-auto rounded-3xl"} ${className}`}>
       {/* Background with understated professional gradient */}
@@ -98,7 +106,7 @@ const PromoBanner = ({
 
             {/* Action - Architectural CTA */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >

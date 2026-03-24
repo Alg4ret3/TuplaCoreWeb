@@ -13,6 +13,14 @@ const N8nSalesBanner = () => {
     { icon: Layers, x: "70%", y: "85%", delay: 0.8 },
   ];
 
+  const [isMobile, setIsMobile] = (require("react")).useState(false);
+  (require("react")).useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section className="relative py-32 overflow-hidden bg-white dark:bg-[#050510] text-tupla-dark dark:text-white transition-colors duration-500">
       {/* Dynamic Background */}
@@ -27,7 +35,7 @@ const N8nSalesBanner = () => {
           
           {/* Left Column - Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
@@ -73,7 +81,7 @@ const N8nSalesBanner = () => {
 
           {/* Right Column - Visual Illustration */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
@@ -93,7 +101,7 @@ const N8nSalesBanner = () => {
                   <span className="text-[10px] font-bold mt-2 tracking-widest opacity-60">{item.label}</span>
                   {i < 2 && (
                     <motion.div 
-                      animate={{ y: [0, 5, 0] }}
+                      animate={isMobile ? { y: 0 } : { y: [0, 5, 0] }}
                       transition={{ repeat: Infinity, duration: 2 }}
                       className="my-2 text-tupla-primary/30"
                     >
@@ -115,7 +123,7 @@ const N8nSalesBanner = () => {
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ 
+                    animate={isMobile ? { opacity: 1, y: 0, x: 0 } : { 
                       opacity: 1, 
                       y: [0, -20, 0],
                       x: [0, 10, 0]
@@ -136,8 +144,8 @@ const N8nSalesBanner = () => {
                 ))}
 
                 {/* Orbiting circles */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] border border-white/5 rounded-full animate-[spin_30s_linear_infinite_reverse]" />
+                <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-white/5 rounded-full ${isMobile ? '' : 'animate-[spin_20s_linear_infinite]'}`} />
+                <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] border border-white/5 rounded-full ${isMobile ? '' : 'animate-[spin_30s_linear_infinite_reverse]'}`} />
               </div>
               
               {/* Visual labels */}

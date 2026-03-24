@@ -59,6 +59,14 @@ const Hero = () => {
     }
   };
 
+  const [isMobile, setIsMobile] = (require("react")).useState(false);
+  (require("react")).useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section
       id="inicio"
@@ -75,7 +83,7 @@ const Hero = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 min-h-screen flex items-center">
         <div className="flex flex-col lg:flex-row items-center gap-12 w-full">
           {/* Left Column - Text Content */}
-          <div className="text-tupla-dark dark:text-white space-y-8 animate-fade-in text-center lg:text-left w-full">
+          <div className={`text-tupla-dark dark:text-white space-y-8 text-center lg:text-left w-full ${isMobile ? '' : 'animate-fade-in'}`}>
             <div className="space-y-4">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight uppercase tracking-tighter italic">
                 Transformamos Ideas en <br />
@@ -135,7 +143,7 @@ const Hero = () => {
           </div>
 
           {/* Right Column - Visual Element */}
-          <div className="w-full max-w-md lg:max-w-lg animate-slide-up">
+          <div className={`w-full max-w-md lg:max-w-lg ${isMobile ? '' : 'animate-slide-up'}`}>
             <div className="relative z-10 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
               <div className="space-y-6">
                 {/* Mock Code Editor */}
@@ -179,14 +187,14 @@ const Hero = () => {
             </div>
 
             {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-tupla-primary rounded-full opacity-20 animate-bounce"></div>
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-tupla-accent rounded-full opacity-20 animate-bounce animation-delay-1000"></div>
+            <div className={`absolute -top-4 -right-4 w-20 h-20 bg-tupla-primary rounded-full opacity-20 ${isMobile ? '' : 'animate-bounce'}`}></div>
+            <div className={`absolute -bottom-4 -left-4 w-16 h-16 bg-tupla-accent rounded-full opacity-20 ${isMobile ? '' : 'animate-bounce animation-delay-1000'}`}></div>
           </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 ${isMobile ? 'hidden' : 'animate-bounce'}`}>
         <div className="w-6 h-10 border-2 border-tupla-dark/30 dark:border-white/30 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-tupla-dark/50 dark:bg-white/50 rounded-full mt-2 animate-pulse"></div>
         </div>
