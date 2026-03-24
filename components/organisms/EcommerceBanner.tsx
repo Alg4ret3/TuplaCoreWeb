@@ -4,7 +4,7 @@ import { ShoppingCart, CreditCard, BarChart3, ShieldCheck, ArrowRight, TrendingU
 import { Button } from "@/components/atoms/button";
 import { motion } from "framer-motion";
 
-const EcommerceBanner = () => {
+const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
   const features = [
     { 
       icon: CreditCard, 
@@ -103,6 +103,7 @@ const EcommerceBanner = () => {
             <div className="flex flex-col sm:flex-row gap-6">
               <Button
                 size="lg"
+                onClick={onClick}
                 className="bg-tupla-primary hover:bg-tupla-primary/80 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
               >
                 Lanzar mi Tienda Online

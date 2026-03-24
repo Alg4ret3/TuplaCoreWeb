@@ -23,8 +23,19 @@ export default function Home() {
         icon={ShoppingBag}
         buttonText="Obtener Descuento"
         variant="navy"
+        onClick={() => {
+          const waNumber = "573193142840";
+          const waMessage = "Hola! Vi la promo del 20% para lanzar mi tienda online y me gustaría aprovecharla.";
+          window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
+        }}
       />
-      <EcommerceBanner />
+      <EcommerceBanner 
+        onClick={() => {
+          const waNumber = "573193142840";
+          const waMessage = "Hola! Me gustaría lanzar mi tienda online con Tupla Core.";
+          window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
+        }}
+      />
       <N8nSalesBanner />
       <Footer />
       <Toaster />

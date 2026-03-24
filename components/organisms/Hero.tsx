@@ -3,11 +3,13 @@
 import { useState, useEffect, useMemo } from "react";
 import { ArrowRight, Zap, Smartphone, Globe } from "lucide-react";
 import { Button } from "@/components/atoms/button";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const [displayedText, setDisplayedText] = useState("");
   const [textIndex, setTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const router = useRouter();
 
   const rotatingTexts = useMemo(
     () => [
@@ -125,7 +127,11 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button
-                onClick={() => scrollToSection("#contacto")}
+                onClick={() => {
+                  const waNumber = "573193142840";
+                  const waMessage = "Hola! Estoy en el sitio web de Tupla Core y me gustaría solicitar una cotización para un nuevo proyecto.";
+                  window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
+                }}
                 size="lg"
                 className="bg-tupla-accent hover:bg-tupla-accent/80 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
@@ -133,7 +139,7 @@ const Hero = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button
-                onClick={() => scrollToSection("#portafolio")}
+                onClick={() => router.push("/portafolio")}
                 size="lg"
                 className="bg-tupla-primary hover:bg-tupla-primary/80 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >

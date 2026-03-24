@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowRight } from "lucide-react";
+import { 
+  Menu, X, ArrowRight, Home, Layers, 
+  Briefcase, Users, Mail, Instagram, 
+  Linkedin, Github, ExternalLink 
+} from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -14,6 +18,7 @@ import { useTheme } from "next-themes";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSocialMenu, setActiveSocialMenu] = useState<string | null>(null);
   const pathname = usePathname();
   const { theme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -35,11 +40,31 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { name: "Inicio", href: "/" },
-    { name: "Servicios", href: "/servicios" },
-    { name: "Portafolio", href: "/portafolio" },
-    { name: "Nosotros", href: "/nosotros" },
-    { name: "Contacto", href: "/contacto" },
+    { name: "Inicio", href: "/", icon: Home },
+    { name: "Servicios", href: "/servicios", icon: Layers },
+    { name: "Portafolio", href: "/portafolio", icon: Briefcase },
+    { name: "Nosotros", href: "/nosotros", icon: Users },
+    { name: "Contacto", href: "/contacto", icon: Mail },
+  ];
+
+  const socialLinks = [
+    { icon: Instagram, href: "https://instagram.com/tupla.core", label: "Instagram" },
+    { 
+      icon: Linkedin, 
+      label: 'LinkedIn',
+      subLinks: [
+        { name: 'Ing Michael Coral', href: 'http://www.linkedin.com/in/maicol-coral-3626a4251' },  
+        { name: 'Ing Sergio Muñoz', href: 'https://www.linkedin.com/in/sergio-mu%C3%B1oz-b75bba208/' }
+      ]
+    },
+    { 
+      icon: Github, 
+      label: 'GitHub',
+      subLinks: [
+        { name: 'Ing Michael Coral', href: 'https://github.com/Mai1203' },
+        { name: 'Ing Sergio Muñoz', href: 'https://github.com/Alg4ret3' }
+      ]
+    }
   ];
 
   const isDarkHeroPage = pathname === "/";
@@ -135,62 +160,126 @@ const Navbar = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 md:hidden bg-tupla-dark/40 backdrop-blur-sm flex justify-end"
+              onClick={() => setIsOpen(false)}
             >
               <motion.div
-                initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                className="bg-white dark:bg-tupla-dark border border-black/10 dark:border-white/10 rounded-3xl p-6 mt-4 shadow-2xl relative overflow-hidden"
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-[300px] h-full bg-white dark:bg-tupla-dark/95 border-l border-black/10 dark:border-white/10 shadow-2xl overflow-hidden flex flex-col"
               >
-                {/* Background accents */}
-                <div className="absolute -top-10 -right-10 w-32 h-32 bg-tupla-primary/10 rounded-full blur-3xl" />
-                <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-tupla-accent/10 rounded-full blur-3xl" />
+                {/* Simple Header */}
+                <div className="p-6 flex items-center justify-between border-b border-black/5 dark:border-white/5">
+                  <Image src={currentTheme === 'dark' ? "/LogoBlanco.svg" : "/logo.svg"} alt="Logo" width={100} height={30} className="h-6 w-auto" />
+                  <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-colors">
+                    <X className="h-5 w-5 opacity-70" />
+                  </button>
+                </div>
 
-                <div className="flex flex-col gap-2 relative z-10">
-                  {navItems.map((item, index) => (
-                    <motion.div
-                      key={item.name}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <Link
-                        href={item.href}
-                        onClick={() => setIsOpen(false)}
-                        className={`group flex items-center justify-between w-full px-5 py-4 rounded-2xl font-bold text-lg transition-all duration-300
-                          ${pathname === item.href 
-                            ? "bg-tupla-primary text-white shadow-lg shadow-tupla-primary/30 scale-[1.02]" 
-                            : "bg-gray-50/80 dark:bg-white/5 text-gray-700 dark:text-gray-300 hover:bg-tupla-primary/10 hover:text-tupla-primary"
-                          }`}
+                {/* Navigation List */}
+                <div className="p-4 space-y-1">
+                  {navItems.map((item, index) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.03 }}
                       >
-                        <span className="flex items-center">
-                          {item.name}
-                        </span>
-                        {pathname === item.href ? (
-                          <motion.div 
-                            layoutId="active-dot"
-                            className="w-2 h-2 rounded-full bg-white animate-pulse" 
-                          />
-                        ) : (
-                          <ArrowRight className="h-5 w-5 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300" />
-                        )}
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link
+                          href={item.href}
+                          onClick={() => setIsOpen(false)}
+                          className={`flex items-center gap-3 px-4 py-3 rounded-2xl font-bold transition-all duration-200
+                            ${isActive 
+                              ? "bg-tupla-primary text-white shadow-lg shadow-tupla-primary/20" 
+                              : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
+                            }`}
+                        >
+                          <item.icon className={`h-5 w-5 ${isActive ? 'opacity-100' : 'opacity-50'}`} />
+                          <span>{item.name}</span>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
 
-                  <div className="pt-4">
-                    <Link href="/cotizar" onClick={() => setIsOpen(false)}>
-                      <Button
-                        className="w-full bg-tupla-primary hover:bg-tupla-accent font-bold text-lg h-16 shadow-xl shadow-tupla-primary/20 transition-all duration-300 active:scale-[0.98] rounded-xl"
-                      >
-                        Cotizar Proyecto
-                      </Button>
-                    </Link>
+                {/* Primary Action & Social Links */}
+                <div className="p-6 pb-12 mt-auto border-t border-black/5 dark:border-white/5 space-y-8">
+                  <Link href="/cotizar" onClick={() => setIsOpen(false)}>
+                    <Button className="w-full bg-tupla-primary hover:bg-tupla-accent text-white font-bold h-14 rounded-2xl shadow-lg shadow-tupla-primary/20 transition-all active:scale-[0.98]">
+                      Cotizar Proyecto
+                    </Button>
+                  </Link>
+
+                  <div className="relative pt-4">
+                    <div className="flex justify-center items-center space-x-6">
+                      {socialLinks.map((social, index) => {
+                        const IconComponent = social.icon;
+                        const isExpanded = activeSocialMenu === social.label;
+                        
+                        return (
+                          <div key={index} className="flex flex-col items-center">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setActiveSocialMenu(isExpanded ? null : social.label);
+                              }}
+                              className={`p-4 rounded-2xl transition-all duration-300 ${
+                                isExpanded 
+                                  ? "bg-tupla-primary text-white scale-110 shadow-lg shadow-tupla-primary/30" 
+                                  : "bg-black/5 dark:bg-white/5 text-gray-400 dark:text-gray-500 hover:text-tupla-primary"
+                              }`}
+                              aria-label={social.label}
+                            >
+                              {social.href && !social.subLinks ? (
+                                <a href={social.href} target="_blank" rel="noopener noreferrer">
+                                  <IconComponent className="h-6 w-6" />
+                                </a>
+                              ) : (
+                                <IconComponent className="h-6 w-6" />
+                              )}
+                            </button>
+
+                            {/* Selection Menu (Animated underneath) */}
+                            <AnimatePresence>
+                              {isExpanded && social.subLinks && (
+                                <motion.div
+                                  initial={{ opacity: 0, scale: 0.9 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  exit={{ opacity: 0, scale: 0.9 }}
+                                  className="absolute -top-32 left-0 right-0 p-3 bg-white dark:bg-tupla-dark/95 border border-black/10 dark:border-white/10 rounded-3xl shadow-2xl z-50 backdrop-blur-xl flex flex-col items-stretch space-y-1"
+                                >
+                                  <div className="text-[10px] font-black uppercase tracking-widest text-gray-400 text-center mb-2 px-2">Selecciona un Perfil</div>
+                                  {social.subLinks.map((sub, subIdx) => (
+                                    <a
+                                      key={subIdx}
+                                      href={sub.href}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onClick={() => {
+                                        setIsOpen(false);
+                                        setActiveSocialMenu(null);
+                                      }}
+                                      className="flex items-center justify-between px-4 py-3 text-sm font-bold text-gray-700 dark:text-gray-300 hover:bg-tupla-primary hover:text-white rounded-2xl transition-colors group/row"
+                                    >
+                                      <span>{sub.name}</span>
+                                      <ArrowRight size={14} className="opacity-0 group-hover/row:opacity-100 transition-opacity" />
+                                    </a>
+                                  ))}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               </motion.div>

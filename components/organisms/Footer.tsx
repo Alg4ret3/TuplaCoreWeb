@@ -18,18 +18,31 @@ const Footer = () => {
   const services = [
     { name: 'Desarrollo Web', href: '/servicios' },
     { name: 'Aplicaciones Móviles', href: '/servicios' },
-    { name: 'Software a Medida', href: '/servicios' },
-    { name: 'Consultoría Técnica', href: '/servicios' },
-    { name: 'Mantenimiento', href: '/servicios' },
+    { name: 'Software Personalizado', href: '/servicios' },
+    { name: 'Consultoría IT', href: '/servicios' },
+    { name: 'Soporte Técnico', href: '/servicios' },
     { name: 'Hosting y Dominio', href: '/servicios' }
   ];
 
   const socialLinks = [
     { icon: Facebook, href: '#', label: 'Facebook' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
     { icon: Instagram, href: '#', label: 'Instagram' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Github, href: '#', label: 'GitHub' }
+    { 
+      icon: Linkedin, 
+      label: 'LinkedIn',
+      subLinks: [
+        { name: 'Ing Michael Coral', href: 'http://www.linkedin.com/in/maicol-coral-3626a4251' },  
+        { name: 'Ing Sergio Muñoz', href: 'https://www.linkedin.com/in/sergio-mu%C3%B1oz-b75bba208/' }
+      ]
+    },
+    { 
+      icon: Github, 
+      label: 'GitHub',
+      subLinks: [
+        { name: 'Ing Michael Coral', href: 'https://github.com/Mai1203' },
+        { name: 'Ing Sergio Muñoz', href: 'https://github.com/Alg4ret3' }
+      ]
+    }
   ];
 
   return (
@@ -56,7 +69,7 @@ const Footer = () => {
                 <div className="p-2 bg-white/5 rounded-lg group-hover:bg-tupla-primary/20 transition-colors">
                   <Mail className="h-4 w-4 text-tupla-accent" />
                 </div>
-                <span className="text-gray-400 group-hover:text-white transition-colors">TUPLACORE@gmail.com</span>
+                <span className="text-gray-400 group-hover:text-white transition-colors">tuplacore@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3 group">
                 <div className="p-2 bg-white/5 rounded-lg group-hover:bg-tupla-primary/20 transition-colors">
@@ -109,7 +122,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter & Social */}
+          {/* Social */}
           <div className="space-y-6">
             <h3 className="text-xl font-semibold text-white">Síguenos</h3>
             <p className="text-gray-400">
@@ -120,32 +133,48 @@ const Footer = () => {
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => {
                 const IconComponent = social.icon;
+                
+                if (social.subLinks) {
+                  return (
+                    <div key={index} className="relative group/parent">
+                      <button
+                        aria-label={social.label}
+                        className="p-3 bg-white/5 rounded-xl hover:bg-tupla-primary transition-all duration-300 transform group-hover/parent:scale-110 group-hover/parent:bg-tupla-primary"
+                      >
+                        <IconComponent className="h-5 w-5 text-gray-400 group-hover/parent:text-white transition-colors" />
+                      </button>
+                      
+                      {/* Hover Menu */}
+                      <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 opacity-0 invisible group-hover/parent:opacity-100 group-hover/parent:visible transition-all duration-300 transform translate-y-2 group-hover/parent:translate-y-0 z-50">
+                        <div className="bg-tupla-dark border border-white/10 rounded-xl shadow-2xl overflow-hidden p-1 backdrop-blur-xl">
+                          {social.subLinks.map((sub, subIdx) => (
+                            <Link
+                              key={subIdx}
+                              href={sub.href}
+                              className="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                            >
+                              {sub.name}
+                            </Link>
+                          ))}
+                        </div>
+                        {/* Arrow */}
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-tupla-dark border-r border-b border-white/10 rotate-45"></div>
+                      </div>
+                    </div>
+                  );
+                }
+
                 return (
                   <a
                     key={index}
-                    href={social.href}
+                    href={social.href || '#'}
                     aria-label={social.label}
                     className="p-3 bg-white/5 rounded-xl hover:bg-tupla-primary transition-all duration-300 transform hover:scale-110 group"
                   >
-                    <IconComponent className="h-5 w-5 group-hover:text-white transition-colors" />
+                    <IconComponent className="h-5 w-5 text-gray-400 group-hover:text-white transition-colors" />
                   </a>
                 );
               })}
-            </div>
-
-            {/* Newsletter */}
-            <div className="space-y-3">
-              <h4 className="text-lg font-medium text-white">Boletín Digital</h4>
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="tu@email.com"
-                  className="flex-1 px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-tupla-primary text-white placeholder-gray-500"
-                />
-                <button className="px-5 py-2.5 bg-tupla-primary hover:bg-tupla-accent rounded-xl transition-all duration-300 shadow-lg shadow-tupla-primary/20">
-                  <Mail className="h-4 w-4" />
-                </button>
-              </div>
             </div>
           </div>
         </div>
@@ -157,13 +186,13 @@ const Footer = () => {
               © {currentYear} <span className="text-white font-medium font-audiowide">TUPLΛ CΩRE</span>. Todos los derechos reservados.
             </div>
             <div className="flex space-x-8 text-sm">
-              <Link href="#" className="text-gray-500 hover:text-white transition-colors">
+              <Link href="/privacidad" className="text-gray-500 hover:text-white transition-colors">
                 Privacidad
               </Link>
-              <Link href="#" className="text-gray-500 hover:text-white transition-colors">
+              <Link href="/terminos" className="text-gray-500 hover:text-white transition-colors">
                 Términos
               </Link>
-              <Link href="#" className="text-gray-500 hover:text-white transition-colors">
+              <Link href="/cookies" className="text-gray-500 hover:text-white transition-colors">
                 Cookies
               </Link>
             </div>

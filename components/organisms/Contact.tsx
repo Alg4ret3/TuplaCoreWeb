@@ -77,45 +77,34 @@ const Contact = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          service: formData.service,
-          message: formData.message
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      );
+    const waNumber = "573193142840";
+    const waMessage = `*Nueva Solicitud de Contacto - Tupla Core*%0A%0A` +
+      `*Nombre:* ${formData.name}%0A` +
+      `*Email:* ${formData.email}%0A` +
+      `*Teléfono:* ${formData.phone || 'No proporcionado'}%0A` +
+      `*Servicio:* ${formData.service}%0A` +
+      `*Mensaje:* ${formData.message}`;
 
-      toast({
-        title: '¡Mensaje enviado exitosamente!',
-        description: 'Nos pondremos en contacto contigo dentro de las próximas 24 horas.',
-      });
+    window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
 
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: '',
-        message: ''
-      });
-    } catch (error) {
-      toast({
-        variant: 'destructive',
-        title: 'Error al enviar el mensaje',
-        description: 'Por favor, inténtalo de nuevo más tarde.',
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    toast({
+      title: 'Redirigiendo a WhatsApp...',
+      description: 'Estamos preparando tu mensaje para enviarlo directamente.',
+    });
+
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      service: '',
+      message: ''
+    });
+    
+    setIsSubmitting(false);
   };
 
   return (

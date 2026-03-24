@@ -3,6 +3,7 @@
 import { Zap, Cpu, ArrowRight, Layers, Bot, Network, Settings } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const N8nSalesBanner = () => {
   const nodes = [
@@ -62,20 +63,15 @@ const N8nSalesBanner = () => {
             </p>
 
             <div className="hidden lg:flex flex-col sm:flex-row gap-4 pt-4">
-              <Button
-                size="lg"
-                className="bg-tupla-accent hover:bg-tupla-primary text-white font-bold px-8 py-7 rounded-xl transition-all hover:scale-105 shadow-[0_15px_30px_-5px_rgba(30,144,255,0.3)]"
-              >
-                CONOCE NUESTROS PLANES
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="bg-transparent border-tupla-primary/20 dark:border-white/20 hover:bg-tupla-primary/5 dark:hover:bg-white/10 text-tupla-primary dark:text-white font-bold px-8 py-7 rounded-xl transition-all"
-              >
-                VER DEMO EN VIVO
-              </Button>
+              <Link href="/planes">
+                <Button
+                  size="lg"
+                  className="bg-tupla-accent hover:bg-tupla-primary text-white font-bold px-10 py-7 rounded-xl transition-all hover:scale-105 shadow-[0_15px_30px_-5px_rgba(30,144,255,0.3)] group"
+                >
+                  CONOCE NUESTROS PLANES
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </div>
           </motion.div>
 
@@ -162,20 +158,15 @@ const N8nSalesBanner = () => {
 
         {/* Mobile Buttons - Staged at the end */}
         <div className="lg:hidden flex flex-col gap-4 mt-12 px-2">
-          <Button
-            size="lg"
-            className="bg-tupla-accent hover:bg-tupla-primary text-white font-bold px-8 py-7 rounded-xl transition-all shadow-[0_15px_30px_-5px_rgba(30,144,255,0.3)] w-full"
-          >
-            CONOCE NUESTROS PLANES
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="bg-transparent border-tupla-primary/20 dark:border-white/20 text-tupla-primary dark:text-white font-bold px-8 py-7 rounded-xl transition-all w-full"
-          >
-            VER DEMO EN VIVO
-          </Button>
+          <Link href="/planes">
+            <Button
+              size="lg"
+              className="bg-tupla-accent hover:bg-tupla-primary text-white font-bold px-8 py-7 rounded-xl transition-all shadow-[0_15px_30px_-5px_rgba(30,144,255,0.3)] w-full group"
+            >
+              CONOCE NUESTROS PLANES
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
