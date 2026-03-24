@@ -282,7 +282,7 @@ const Contact = () => {
             </span>
           </div>
 
-          <h2 className="text-2xl md:text-4xl lg:text-6xl font-black text-tupla-dark dark:text-white leading-[0.88] mb-8 uppercase tracking-tighter italic">
+          <h2 className="text-2xl md:text-3xl lg:text-5xl font-black text-tupla-dark dark:text-white leading-[1.1] mb-8 uppercase tracking-tighter italic">
             Transforma tu <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-tupla-primary to-tupla-accent pr-2">
               visión en realidad

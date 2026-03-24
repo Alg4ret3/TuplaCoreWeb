@@ -1,266 +1,182 @@
-"use client";
+'use client';
 
-import { Users, Target, Eye, Award, Code, Heart } from "lucide-react";
-import { Card, CardContent } from "@/components/atoms/card";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import type { MotionProps } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { team, stats, capabilities, values } from '@/constants/aboutData';
+import FlipCard from '../molecules/FlipCard';
+import { Target, Eye } from 'lucide-react';
 
-const fadeUp = (delay = 0): MotionProps => ({
-  initial: { opacity: 0, y: 50 },
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 50 },
-  transition: {
-    duration: 0.8,
-    delay,
-    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-  },
-  viewport: { once: false, amount: 0.2 },
+  exit: { opacity: 0, y: 40 },
+  transition: { duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
+  viewport: { once: false, amount: 0.15 },
 });
 
-const About = () => {
-  const values = [
-    {
-      icon: Code,
-      title: "Excelencia Técnica",
-      description:
-        "Aplicamos tecnologías de vanguardia y buenas prácticas de desarrollo para crear soluciones robustas, escalables y eficientes.",
-    },
-    {
-      icon: Users,
-      title: "Colaboración Humana",
-      description:
-        "Construimos relaciones cercanas con nuestros clientes, entendiendo sus retos y trabajando juntos como un solo equipo.",
-    },
-    {
-      icon: Award,
-      title: "Compromiso y Responsabilidad",
-      description:
-        "Asumimos cada proyecto con seriedad, cumpliendo los plazos acordados y garantizando resultados de alto impacto.",
-    },
-    {
-      icon: Heart,
-      title: "Pasión por la Innovación",
-      description:
-        "Nos mueve el entusiasmo por la tecnología, la creatividad y el deseo constante de superar expectativas.",
-    },
-  ];
+/* ─── SUB-COMPONENTS ────────────────────────────────────────── */
 
-  const team = [
-    {
-      name: "Sergio Muñoz",
-      role: "Full Stack Developer & AI Enthusiast",
-      image: "/img/team/perfilsergio.webp",
-      description:
-        "Experiencia en desarrollo de soluciones web y móviles con React, React Native y Node.js, dominando Python, JavaScript y SQL. Manejo bases de datos relacionales y no relacionales, con un enfoque en crear aplicaciones eficientes, escalables y con una experiencia de usuario optimizada.",
-    },
-    {
-      name: "Michael Coral",
-      role: "Full stack Developer & Web and Mobile Frontend Developer",
-      image: "/img/team/perfilmichael.webp",
-      description:
-        "Experiencia sólida en tecnologías frontend modernas dominas React, Next.js, React Native, HTML, CSS y JavaScript, que son tecnologías clave para la creación de interfaces web y móviles modernas.",
-    },
-  ];
+const MisionVisionCard = ({ title, icon, gradient, delay, children }: { title: string, icon: React.ReactNode, gradient: string, delay: number, children: React.ReactNode }) => (
+  <motion.div {...fadeUp(delay)} className="relative group h-full">
+    <div className={`absolute -inset-1 bg-gradient-to-r ${gradient} rounded-[28px] blur opacity-20 group-hover:opacity-50 transition duration-1000`} />
+    <div className="relative h-full bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white dark:border-white/10 rounded-[28px] shadow-xl p-10">
+      <div className="flex items-center gap-4 mb-6">
+        <div className={`p-3 bg-gradient-to-br ${gradient} rounded-xl text-white shadow-lg group-hover:scale-110 transition-transform`}>
+          {icon}
+        </div>
+        <h3 className="text-xl font-black text-tupla-dark dark:text-white uppercase tracking-tighter italic">
+          {title}
+        </h3>
+      </div>
+      <div className="text-gray-600 dark:text-gray-300 leading-relaxed text-base font-light">
+        {children}
+      </div>
+    </div>
+  </motion.div>
+);
 
-  const stats = [
-    { number: "10+", label: "Proyectos Completados" },
-    { number: "10+", label: "Clientes Satisfechos" },
-    { number: "2+", label: "Años de Experiencia" },
-    { number: "94%", label: "Tasa de Satisfacción" },
-  ];
-
+const ValueCard = ({ value, index }: { value: any, index: number }) => {
+  const IconComponent = value.icon;
   return (
-    <section id="nosotros" className="py-20 bg-tupla-light dark:bg-tupla-dark/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div className="text-center mb-16" {...fadeUp(0)}>
-          <div className="flex flex-col items-center mb-6">
-            <span className="text-gray-500 uppercase tracking-widest text-sm mb-4">Conoce a</span>
-            <Image 
-              src="/logo.svg" 
-              alt="TUPLΛ CΩRE" 
-              width={320} 
-              height={96} 
-              className="h-20 w-auto object-contain dark:hidden"
-            />
-            <Image 
-              src="/LogoBlanco.svg" 
-              alt="TUPLΛ CΩRE" 
-              width={320} 
-              height={96} 
-              className="h-20 w-auto object-contain hidden dark:block"
-            />
+    <motion.div {...fadeUp(0.1 * index)} className="group h-full">
+      <div className="h-full bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white dark:border-white/10 rounded-[24px] shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-6 text-center flex flex-col">
+        <div className="mb-6">
+          <div className="inline-flex p-3 bg-gradient-to-br from-tupla-primary to-tupla-accent rounded-xl text-white group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-md">
+            <IconComponent className="h-6 w-6" />
           </div>
-          <p className="text-xl text-gray-600 dark:text-white/70 max-w-3xl mx-auto leading-relaxed font-normal dark:font-medium">
-            Somos un equipo apasionado por la tecnología y la innovación,
-            comprometido con transformar tus ideas en soluciones digitales
-            sólidas, funcionales y escalables, acompañamos a tu negocio en su
-            evolución digital, impulsando su crecimiento y competitividad a
-            través de la colaboración, el diseño centrado en el usuario y el uso
-            estratégico de la tecnología.
+        </div>
+        <h4 className="text-sm font-black text-tupla-dark dark:text-white mb-2 uppercase tracking-tight italic">
+          {value.title}
+        </h4>
+        <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed font-light mt-auto">
+          {value.description}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
+
+/* ─── MAIN COMPONENT ────────────────────────────────────────── */
+
+const About = () => {
+  return (
+    <section id="nosotros" className="relative py-32 overflow-hidden bg-white dark:bg-tupla-dark transition-colors duration-500">
+      {/* Background blobs */}
+      <div className="absolute inset-0 z-0 opacity-10 dark:opacity-20 pointer-events-none">
+        <div className="absolute top-0 -left-10 w-[500px] h-[500px] bg-tupla-primary rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-0 -right-10 w-[600px] h-[600px] bg-tupla-accent rounded-full blur-[150px] animate-pulse" />
+      </div>
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05] pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        {/* ── HEADER ── */}
+        <motion.div className="text-center mb-24" {...fadeUp(0)}>
+          <p className="text-[11px] uppercase tracking-[.18em] font-black text-gray-400 dark:text-gray-500 mb-4 px-3 py-1 bg-white/5 inline-block rounded-full border border-white/10">
+            Quiénes somos
+          </p>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-tupla-dark dark:text-white uppercase tracking-tighter italic leading-[1.05] mb-8">
+            Fundadores.<br />
+            <span className="text-tupla-accent font-normal not-italic">Ingenieros. Estrategas.</span>
+          </h2>
+          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
+            Un equipo de especialistas senior que combina ingeniería de producto, arquitectura de software
+            y estrategia digital para construir soluciones que escalan.
           </p>
         </motion.div>
 
-        {/* Mission & Vision */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-20">
-          <motion.div {...fadeUp(0.1)}>
-            <Card className="bg-white dark:bg-tupla-dark/60 shadow-lg hover:shadow-xl transition-all duration-300 group dark:border-white/10">
-              <CardContent className="p-8">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="p-3 bg-gradient-to-br from-tupla-primary to-tupla-accent rounded-lg text-white">
-                    <Target className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-tupla-dark dark:text-white">
-                    Nuestra Misión
-                  </h3>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
-                  Nuestra misión es empoderar a pequeñas y medianas empresas a
-                  través del acceso democrático a la tecnología, ofreciendo
-                  soluciones digitales de vanguardia, accesibles y de alta
-                  calidad, nos comprometemos a impulsar su transformación
-                  digital con herramientas innovadoras y profesionales, que les
-                  permitan competir con confianza, adaptarse al cambio y
-                  destacar en un mercado global cada vez más exigente.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div {...fadeUp(0.2)}>
-            <Card className="bg-white dark:bg-tupla-dark/60 shadow-lg hover:shadow-xl transition-all duration-300 group dark:border-white/10">
-              <CardContent className="p-8">
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="p-3 bg-gradient-to-br from-tupla-accent to-tupla-primary rounded-lg text-white">
-                    <Eye className="h-6 w-6" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-tupla-dark dark:text-white">
-                    Nuestra Visión
-                  </h3>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
-                  Nuestra visión es convertirnos en el aliado tecnológico de
-                  confianza para las empresas que buscan innovar, crecer y
-                  liderar en el entorno digital y Aspiramos a ser reconocidos
-                  por nuestra excelencia técnica, nuestro compromiso genuino con
-                  el cliente y nuestra capacidad para transformar ideas en
-                  soluciones digitales exitosas, sostenibles y con impacto real.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-
-        {/* Values */}
-        <div className="mb-20">
-          <motion.h3
-            className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12"
-            {...fadeUp(0)}
-          >
-            Nuestros Valores
-          </motion.h3>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => {
-              const IconComponent = value.icon;
-              return (
-                <motion.div key={index} {...fadeUp(0.1 * index)}>
-                  <Card className="bg-white dark:bg-tupla-dark/60 shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2 dark:border-white/10">
-                    <CardContent className="p-6 text-center">
-                      <div className="mb-4">
-                        <div className="inline-flex p-3 bg-gradient-to-br from-tupla-primary to-tupla-accent rounded-lg text-white group-hover:scale-110 transition-transform duration-300">
-                          <IconComponent className="h-6 w-6" />
-                        </div>
-                      </div>
-                      <h4 className="text-xl font-semibold text-tupla-dark dark:text-white mb-3">
-                        {value.title}
-                      </h4>
-                      <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                        {value.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Team */}
-        {/* Team */}
-        <div className="mb-20">
-          <motion.h3
-            className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12"
-            {...fadeUp(0)}
-          >
-            Nuestro Equipo
-          </motion.h3>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center">
-            {team.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, rotateY: 90 }}
-                whileInView={{ opacity: 1, rotateY: 0 }}
-                transition={{
-                  duration: 0.8,
-                  delay: 0.15 * index,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                viewport={{ once: false, amount: 0.2 }}
-              >
-                <Card className="bg-white dark:bg-tupla-dark/60 w-full max-w-sm shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden dark:border-white/10">
-                  <div className="relative">
-                    <Image
-                      src={member.image}
-                      width={400}
-                      height={200}
-                      alt={member.name}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-tupla-dark/50 to-transparent opacity-0 group-hover:opacity-100 group-hover:scale-110 transition-opacity duration-300" />
-                    <div className="absolute bottom-2 left-5">
-                      <h4 className="text-lg font-extrabold text-white mb-1">
-                        {member.name}
-                      </h4>
-                    </div>
-                  </div>
-                  <CardContent className="p-6">
-                    <p className="text-tupla-primary font-medium mb-3">
-                      {member.role}
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                      {member.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Stats */}
+        {/* ── CAPABILITIES STRIP ── */}
         <motion.div
-          className="bg-white dark:bg-tupla-dark/60 rounded-2xl p-8 md:p-12 shadow-lg dark:border dark:border-white/10"
-          {...fadeUp(0.3)}
+          className="grid grid-cols-2 md:grid-cols-4 rounded-[20px] overflow-hidden mb-16 border border-white/20 dark:border-white/10 bg-white/5 backdrop-blur-md"
+          style={{ gap: "1px" }}
+          {...fadeUp(0.1)}
         >
-          <h3 className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12">
-            Nuestros Logros
-          </h3>
-          <div className="grid md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                className="text-center group"
-                {...fadeUp(0.1 * index)}
-              >
-                <div className="text-4xl md:text-5xl font-bold text-tupla-primary mb-2 group-hover:text-tupla-accent transition-colors duration-300">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+          {capabilities.map((cap) => (
+            <div key={cap.label} className="bg-white/70 dark:bg-white/5 backdrop-blur-xl px-5 py-5">
+              <div className="w-9 h-9 rounded-md bg-gray-100 dark:bg-white/10 flex items-center justify-center mb-3 text-gray-500 dark:text-gray-400">
+                {cap.icon}
+              </div>
+              <p className="text-xl font-medium text-tupla-dark dark:text-white mb-1">{cap.label}</p>
+              <p className="text-[16px] text-gray-500 dark:text-gray-500 leading-snug">{cap.desc}</p>
+            </div>
+          ))}
         </motion.div>
+
+        {/* ── FLIP CARDS ── */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
+          {team.map((member, i) => (
+            <motion.div key={member.id} {...fadeUp(0.1 * i)}>
+              <FlipCard member={member as any} />
+            </motion.div>
+          ))}
+        </div>
+
+        {/* ── STATS BAR ── */}
+        <motion.div
+          className="grid grid-cols-3 rounded-[24px] overflow-hidden mb-6 border border-white/20 dark:border-white/10 bg-white/5 backdrop-blur-md"
+          style={{ gap: "1px" }}
+          {...fadeUp(0.25)}
+        >
+          {stats.map((s) => (
+            <div key={s.label} className="bg-white/70 dark:bg-white/5 backdrop-blur-xl px-6 py-6 flex flex-col items-center justify-center text-center">
+              <span className="text-3xl font-black text-tupla-dark dark:text-white tracking-tight mb-1">{s.number}</span>
+              <span className="text-[10px] text-gray-500 dark:text-gray-500 uppercase tracking-[0.2em] font-bold">{s.label}</span>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* ── FOOTER NOTE ── */}
+        <motion.div className="text-center mb-16" {...fadeUp(0.2)}>
+          <p className="text-base text-gray-400 dark:text-gray-600 max-w-3xl mx-auto leading-relaxed font-medium">
+            Cada proyecto es gestionado directamente por los fundadores — sin intermediarios, sin delegación a juniors.
+            Acceso directo a la experiencia técnica desde el día uno.
+          </p>
+        </motion.div>
+
+        {/* ── MISIÓN & VISIÓN ── */}
+        <motion.div className="text-center mb-16" {...fadeUp(0)}>
+          <h3 className="text-3xl md:text-4xl font-black text-tupla-dark dark:text-white uppercase tracking-tighter italic">
+            Propósito & <span className="text-tupla-primary">Dirección</span>
+          </h3>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-10 mb-24">
+          <MisionVisionCard 
+            title="Nuestra Misión" 
+            icon={<Target className="h-5 w-5" />} 
+            gradient="from-tupla-primary to-blue-600"
+            delay={0.1}
+          >
+            Empoderar a empresas a través del acceso a la tecnología, ofreciendo soluciones digitales de
+            vanguardia. Nos comprometemos a impulsar su transformación digital con herramientas innovadoras
+            y profesionales, permitiendo competir con confianza, adaptarse al cambio y destacar en un
+            mercado global.
+          </MisionVisionCard>
+
+          <MisionVisionCard 
+            title="Nuestra Visión" 
+            icon={<Eye className="h-6 w-6" />} 
+            gradient="from-tupla-accent to-emerald-500"
+            delay={0.2}
+          >
+            Convertirnos en el aliado tecnológico de confianza para las empresas que buscan innovar y liderar
+            en el entorno digital. Aspiramos a ser reconocidos por nuestra excelencia técnica y capacidad para
+            transformar ideas en soluciones digitales exitosas, sostenibles y con impacto real.
+          </MisionVisionCard>
+        </div>
+
+        {/* ── VALORES ── */}
+        <motion.div className="text-center mb-14" {...fadeUp(0)}>
+          <h3 className="text-3xl md:text-4xl font-black text-tupla-dark dark:text-white uppercase tracking-tighter italic">
+            Nuestros <span className="text-tupla-primary">Valores</span>
+          </h3>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          {values.map((value, index) => (
+            <ValueCard key={value.title} value={value} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
