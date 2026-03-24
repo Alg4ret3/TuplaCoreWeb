@@ -44,7 +44,6 @@ const Navbar = () => {
     { name: "Servicios", href: "/servicios", icon: Layers },
     { name: "Portafolio", href: "/portafolio", icon: Briefcase },
     { name: "Nosotros", href: "/nosotros", icon: Users },
-    { name: "Contacto", href: "/contacto", icon: Mail },
   ];
 
   const socialLinks = [
