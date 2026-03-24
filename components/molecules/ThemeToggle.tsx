@@ -29,7 +29,7 @@ export function ThemeToggle({ scrolled }: { scrolled?: boolean }) {
       className={`rounded-full transition-colors duration-200 ${
         scrolled 
           ? "text-black dark:text-white hover:bg-gray-100 dark:hover:bg-white/10" 
-          : "text-white hover:bg-white/10"
+          : "text-black dark:text-white hover:bg-black/5 dark:hover:bg-white/10"
       }`}
     >
       <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

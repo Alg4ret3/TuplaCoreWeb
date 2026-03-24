@@ -9,12 +9,14 @@ const Hero = () => {
   const [textIndex, setTextIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const rotatingTexts = useMemo(() => [
-    "Páginas Web Modernas",
-    "Aplicaciones Móviles",
-    "Software a Medida",
-    "Soluciones Digitales",
-  ], []);
+  const rotatingTexts = useMemo(
+    () => [
+      "Software a Medida",
+      "Web Modernas",
+      "Apps Móviles",
+    ],
+    [],
+  );
 
   useEffect(() => {
     const fullText = rotatingTexts[textIndex];
@@ -24,7 +26,7 @@ const Hero = () => {
       setDisplayedText((prev) =>
         isDeleting
           ? fullText.substring(0, prev.length - 1)
-          : fullText.substring(0, prev.length + 1)
+          : fullText.substring(0, prev.length + 1),
       );
 
       // Si terminó de escribir, espera antes de borrar
@@ -73,9 +75,9 @@ const Hero = () => {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 min-h-screen flex items-center">
         <div className="flex flex-col lg:flex-row items-center gap-12 w-full">
           {/* Left Column - Text Content */}
-          <div className="text-white space-y-8 animate-fade-in text-center lg:text-left w-full">
+          <div className="text-tupla-dark dark:text-white space-y-8 animate-fade-in text-center lg:text-left w-full">
             <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight uppercase tracking-tighter italic">
                 Transformamos Ideas en <br />
                 <span className="text-tupla-accent relative min-h-[1em] inline-block">
                   {displayedText}
@@ -83,7 +85,7 @@ const Hero = () => {
                   {/* cursor parpadeante */}
                 </span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
                 Desarrollamos soluciones tecnológicas innovadoras para empresas
                 que buscan digitalizar sus operaciones y alcanzar el éxito
                 digital.
@@ -94,15 +96,21 @@ const Hero = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
               <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
                 <Globe className="h-6 w-6 text-tupla-accent" />
-                <span className="text-sm font-medium">Web Responsivo</span>
+                <span className="text-sm font-medium text-tupla-dark dark:text-white">
+                  Web Responsivo
+                </span>
               </div>
               <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
                 <Smartphone className="h-6 w-6 text-tupla-accent" />
-                <span className="text-sm font-medium">Apps Nativas</span>
+                <span className="text-sm font-medium text-tupla-dark dark:text-white">
+                  Apps Nativas
+                </span>
               </div>
               <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
                 <Zap className="h-6 w-6 text-tupla-accent" />
-                <span className="text-sm font-medium">Alta Performance</span>
+                <span className="text-sm font-medium text-tupla-dark dark:text-white">
+                  Alta Performance
+                </span>
               </div>
             </div>
 
@@ -154,13 +162,17 @@ const Hero = () => {
                     <div className="text-2xl font-bold text-tupla-accent">
                       10+
                     </div>
-                    <div className="text-sm text-gray-300">Proyectos</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                      Proyectos
+                    </div>
                   </div>
                   <div className="text-center p-4 bg-white/5 rounded-lg">
                     <div className="text-2xl font-bold text-tupla-accent">
                       94%
                     </div>
-                    <div className="text-sm text-gray-300">Satisfacción</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
+                      Satisfacción
+                    </div>
                   </div>
                 </div>
               </div>
@@ -175,8 +187,8 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
+        <div className="w-6 h-10 border-2 border-tupla-dark/30 dark:border-white/30 rounded-full flex justify-center">
+          <div className="w-1 h-3 bg-tupla-dark/50 dark:bg-white/50 rounded-full mt-2 animate-pulse"></div>
         </div>
       </div>
     </section>

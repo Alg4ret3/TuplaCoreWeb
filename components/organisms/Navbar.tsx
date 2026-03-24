@@ -4,16 +4,25 @@ import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button as MantineButton, Paper, Stack } from "@mantine/core";
+
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/molecules/ThemeToggle";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { theme, systemTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const currentTheme = theme === "system" ? systemTheme : theme;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +67,7 @@ const Navbar = () => {
           <Link href="/" className="flex items-center">
             {/* Logo for light mode at top of Dark Hero pages (shows White Logo) OR Scrolled/Other Pages (shows Color Logo) */}
             <Image 
-              src={(!scrolled && showDarkNavbarAtTop) ? "/LogoBlanco.svg" : "/logo.svg"} 
+              src={(!scrolled && showDarkNavbarAtTop && currentTheme === "dark") ? "/LogoBlanco.svg" : "/logo.svg"} 
               alt="TUPLΛ CΩRE" 
               width={200} 
               height={60} 
@@ -83,7 +92,7 @@ const Navbar = () => {
                   className={`${
                     scrolled 
                       ? "text-black dark:text-white" 
-                      : (showDarkNavbarAtTop ? "text-white" : "text-black dark:text-white")
+                      : (showDarkNavbarAtTop && currentTheme === "dark" ? "text-white" : "text-black dark:text-white")
                   } ${pathname === item.href ? "text-tupla-primary font-bold" : "hover:text-tupla-primary"} px-3 py-2 text-sm font-medium transition-colors duration-200`}
                 >
                   {item.name}
@@ -91,7 +100,7 @@ const Navbar = () => {
               ))}
             </div>
             
-            <ThemeToggle scrolled={scrolled || !showDarkNavbarAtTop} />
+            <ThemeToggle scrolled={scrolled || !showDarkNavbarAtTop || currentTheme === "light"} />
 
             <Link href="/cotizar">
               <Button
@@ -103,14 +112,16 @@ const Navbar = () => {
           </div>
 
           <div className="md:hidden flex items-center space-x-2">
-            <ThemeToggle scrolled={scrolled || !showDarkNavbarAtTop} />
+            <ThemeToggle scrolled={scrolled || !showDarkNavbarAtTop || currentTheme === "light"} />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`${
                 scrolled 
                   ? "text-black dark:text-white" 
-                  : (showDarkNavbarAtTop ? "text-white" : "text-black dark:text-white")
-              } hover:text-tupla-primary block px-3 py-2 text-base font-medium transition-colors duration-200`}
+                  : (showDarkNavbarAtTop && currentTheme === "dark" ? "text-white" : "text-black dark:text-white")
+              } hover:text-tupla-primary block px-3 py-2 text-base font-medium transition-colors duration-200 ${
+                !mounted ? "opacity-0" : "opacity-100"
+              }`}
             >
               {isOpen ? (
                 <X className="h-6 w-6" />
@@ -140,7 +151,7 @@ const Navbar = () => {
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-tupla-primary/10 rounded-full blur-3xl" />
                 <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-tupla-accent/10 rounded-full blur-3xl" />
 
-                <Stack gap="xs" className="relative z-10">
+                <div className="flex flex-col gap-2 relative z-10">
                   {navItems.map((item, index) => (
                     <motion.div
                       key={item.name}
@@ -174,17 +185,14 @@ const Navbar = () => {
 
                   <div className="pt-4">
                     <Link href="/cotizar" onClick={() => setIsOpen(false)}>
-                      <MantineButton
-                        fullWidth
-                        radius="xl"
-                        size="xl"
-                        className="bg-tupla-primary hover:bg-tupla-accent font-bold text-lg h-16 shadow-xl shadow-tupla-primary/20 transition-all duration-300 active:scale-[0.98]"
+                      <Button
+                        className="w-full bg-tupla-primary hover:bg-tupla-accent font-bold text-lg h-16 shadow-xl shadow-tupla-primary/20 transition-all duration-300 active:scale-[0.98] rounded-xl"
                       >
                         Cotizar Proyecto
-                      </MantineButton>
+                      </Button>
                     </Link>
                   </div>
-                </Stack>
+                </div>
               </motion.div>
             </motion.div>
           )}

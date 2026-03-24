@@ -5,8 +5,8 @@ import Hero from '@/components/organisms/Hero';
 import EcommerceBanner from '@/components/organisms/EcommerceBanner';
 import PromoBanner from '@/components/organisms/PromoBanner';
 import { ShoppingBag } from 'lucide-react';
-import VideoShowcase from '@/components/organisms/VideoShowcase';
-import N8nBanner from '@/components/organisms/N8nBanner';
+
+import N8nSalesBanner from '@/components/organisms/N8nSalesBanner';
 import Footer from '@/components/organisms/Footer';
 import { Toaster } from '@/components/atoms/toaster';
 
@@ -25,8 +25,7 @@ export default function Home() {
         variant="navy"
       />
       <EcommerceBanner />
-      <VideoShowcase />
-      <N8nBanner />
+      <N8nSalesBanner />
       <Footer />
       <Toaster />
     </main>
