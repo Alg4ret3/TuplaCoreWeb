@@ -39,7 +39,6 @@ const Navbar = () => {
     { name: "Servicios", href: "/servicios" },
     { name: "Portafolio", href: "/portafolio" },
     { name: "Nosotros", href: "/nosotros" },
-    { name: "Contacto", href: "/contacto" },
   ];
 
   const isDarkHeroPage = pathname === "/";
