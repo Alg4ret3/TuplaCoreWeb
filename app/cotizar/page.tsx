@@ -31,6 +31,9 @@ import {
 } from "@/components/atoms/select";
 import { Progress } from "@/components/atoms/progress";
 
+import { toast } from 'sonner';
+import emailjs from '@emailjs/browser';
+
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -58,6 +61,7 @@ const services = [
 export default function QuotePage() {
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     service: "",
     description: "",
@@ -72,6 +76,58 @@ export default function QuotePage() {
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
   const progress = (step / 4) * 100;
+
+  const handleSendQuote = async () => {
+    setLoading(true);
+    const toastId = toast.loading('Enviando tu solicitud...');
+
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      service: formData.service,
+      description: formData.description,
+      budget: formData.budget,
+      timeline: formData.timeline,
+      company: formData.company || 'N/A',
+      message: `Solicitud de cotización de ${formData.name} (${formData.email}) por el servicio ${formData.service}.`
+    };
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        templateParams,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      );
+
+      toast.success('¡Solicitud enviada correctamente!', { id: toastId });
+      
+      // WhatsApp as secondary notification (optional, but requested implicitly in previous session as a feature)
+      // I'll keep the logic but move it to a success stage or just let EmailJS handle it.
+      // Actually, since the user already had WA, I'll keep it as a button option in success or just send both.
+      
+      nextStep();
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      toast.error('Hubo un error al enviar la solicitud. Intenta por WhatsApp.', { id: toastId });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const openWhatsApp = () => {
+    const waNumber = "573193142840";
+    const waMessage = `*Nueva Solicitud de Cotización - Tupla Core*%0A%0A` +
+      `*Servicio:* ${formData.service || 'N/A'}%0A` +
+      `*Descripción:* ${formData.description || 'N/A'}%0A` +
+      `*Presupuesto:* ${formData.budget || 'N/A'}%0A` +
+      `*Tiempo:* ${formData.timeline || 'N/A'}%0A` +
+      `*Nombre:* ${formData.name}%0A` +
+      `*Email:* ${formData.email}%0A` +
+      `*Empresa:* ${formData.company || 'N/A'}`;
+
+    window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
+  };
 
   return (
     <main className="min-h-screen bg-white dark:bg-tupla-dark text-tupla-dark dark:text-white transition-colors duration-500 selection:bg-tupla-primary selection:text-white overflow-hidden">
@@ -268,6 +324,7 @@ export default function QuotePage() {
                         <SelectValue placeholder="Selecciona un rango" />
                       </SelectTrigger>
                       <SelectContent className="bg-white dark:bg-tupla-dark border-white/10">
+<<<<<<< HEAD
                         <SelectItem value="under-5m">
                           Menos de $5000000 COP
                         </SelectItem>
@@ -278,6 +335,12 @@ export default function QuotePage() {
                           $15000000 - $40000000
                         </SelectItem>
                         <SelectItem value="over-40m">$40000000+</SelectItem>
+=======
+                        <SelectItem value="menos de $5&apos;000.000">Menos de $5&apos;000.000 COP</SelectItem>
+                        <SelectItem value="$5&apos;000.000 - $15&apos;000.000">$5&apos;000.000 - $15&apos;000.000</SelectItem>
+                        <SelectItem value="$15&apos;000.000 - $40&apos;000.000">$15&apos;000.000 - $40&apos;000.000</SelectItem>
+                        <SelectItem value="$40&apos;000.000+">$40&apos;000.000+</SelectItem>
+>>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
                       </SelectContent>
                     </Select>
                   </div>
@@ -296,6 +359,7 @@ export default function QuotePage() {
                         <SelectValue placeholder="Periodo deseado" />
                       </SelectTrigger>
                       <SelectContent className="bg-white dark:bg-tupla-dark border-white/10">
+<<<<<<< HEAD
                         <SelectItem value="fast">
                           Urgente (menos de 1 mes)
                         </SelectItem>
@@ -305,6 +369,11 @@ export default function QuotePage() {
                         <SelectItem value="long">
                           A largo plazo (6+ meses)
                         </SelectItem>
+=======
+                        <SelectItem value="menos de 1 mes">Urgente (menos de 1 mes)</SelectItem>
+                        <SelectItem value="2-4 meses">Estándar (2-4 meses)</SelectItem>
+                        <SelectItem value="6+ meses">A largo plazo (6+ meses)</SelectItem>
+>>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
                       </SelectContent>
                     </Select>
                   </div>
@@ -388,6 +457,7 @@ export default function QuotePage() {
                   >
                     <ArrowLeft className="mr-2 w-4 h-4" /> Volver
                   </Button>
+<<<<<<< HEAD
                   <Button
                     disabled={!formData.name || !formData.email}
                     onClick={() => {
@@ -411,6 +481,14 @@ export default function QuotePage() {
                     className="bg-emerald-600 hover:bg-emerald-700 px-12 py-6 rounded-xl font-bold shadow-xl shadow-emerald-500/20 transition-all border-none"
                   >
                     Enviar Cotizacion <CheckCircle2 className="ml-2 w-4 h-4" />
+=======
+                  <Button 
+                    disabled={!formData.name || !formData.email || loading}
+                    onClick={handleSendQuote}
+                    className="bg-emerald-600 hover:bg-emerald-700 px-12 py-6 rounded-xl font-bold shadow-xl shadow-emerald-500/20 transition-all border-none disabled:opacity-50"
+                  >
+                    {loading ? "Enviando..." : "Enviar Cotización"} {!loading && <CheckCircle2 className="ml-2 w-4 h-4" />}
+>>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
                   </Button>
                 </div>
               </motion.div>
@@ -435,13 +513,27 @@ export default function QuotePage() {
                   tu requerimiento y nos pondremos en contacto contigo en menos
                   de 24 horas.
                 </p>
+<<<<<<< HEAD
                 <div className="pt-8">
                   <Button
                     variant="outline"
                     onClick={() => router.push("/")}
                     className="border-white/10 text-gray-300 hover:bg-white/5 rounded-xl px-8"
+=======
+                <div className="pt-8 flex flex-col md:flex-row items-center justify-center gap-4">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => router.push('/')}
+                    className="border-white/10 text-gray-300 hover:bg-white/5 rounded-xl px-8 h-12"
+>>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
                   >
                     Volver al Inicio
+                  </Button>
+                  <Button 
+                    onClick={openWhatsApp}
+                    className="bg-emerald-600 hover:bg-emerald-700 px-8 h-12 rounded-xl font-bold transition-all border-none"
+                  >
+                    Hablar por WhatsApp <ArrowRight className="ml-2 w-4 h-4" />
                   </Button>
                 </div>
               </motion.div>

@@ -20,13 +20,35 @@ const audiowide = Audiowide({
 });
 
 export const metadata: Metadata = {
-  title: 'TUPLΛ CΩRE - Soluciones Tecnológicas Innovadoras',
-  description: 'Desarrollo de páginas web, aplicaciones móviles y software a medida para empresas que buscan digitalizar sus operaciones. Tecnología moderna, confiable y profesional.',
-  keywords: 'desarrollo web, aplicaciones móviles, software a medida, tecnología, digitalización, TUPLΛ CΩRE',
-  authors: [{ name: 'TUPLΛ CΩRE' }],
-  viewport: 'width=device-width, initial-scale=1',
-  icons: {
-    icon: '/favicon.svg',
+  title: 'Desarrollo Web en Pasto | Apps y Software a Medida - TUPLΛ CORE',
+  description: 'Empresa de desarrollo web en Pasto. Creamos páginas web, apps móviles y software a medida para empresas.',
+  keywords: 'desarrollo web Pasto, software a medida Colombia, aplicaciones móviles, tupla core, tuplla core, tupla core colombia, tupla core pasto',
+  authors: [{ name: 'TUPLΛ CORE' }],
+  metadataBase: new URL('https://tuplla-core.vercel.app'),
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: 'Desarrollo Web en Pasto | TUPLΛ CORE',
+    description: 'Creamos páginas web, apps y software a medida.',
+    url: 'https://tuplla-core.vercel.app',
+    siteName: 'TUPLΛ CORE',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'es_CO',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TUPLΛ CORE',
+    description: 'Desarrollo web y software a medida',
+    images: ['/og-image.png'],
   },
 };
 
