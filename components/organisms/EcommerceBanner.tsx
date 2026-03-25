@@ -44,8 +44,8 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
     <section className="relative py-32 overflow-hidden bg-[#fafafa] dark:bg-tupla-dark transition-colors duration-500">
       {/* Premium Background Elements */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-tupla-primary/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-tupla-accent/10 rounded-full blur-[100px] animate-pulse transition-delay-2000" />
+        <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-tupla-primary/10 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-tupla-accent/10 rounded-full blur-[100px]" />
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03] dark:opacity-[0.05]" />
       </div>
 
@@ -165,6 +165,7 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
                           key={i}
                           initial={isMobile ? { height: `${h}%` } : { height: 0 }}
                           whileInView={{ height: `${h}%` }}
+                          viewport={{ once: true }}
                           transition={{ delay: i * 0.1, duration: 0.5 }}
                           className="w-full bg-gradient-to-t from-tupla-primary to-tupla-accent rounded-t-lg opacity-80"
                         />
@@ -180,8 +181,10 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
 
             {/* Floating Elements - Extreme Depth */}
             <motion.div 
-              animate={isMobile ? { y: 0 } : { y: [0, -20, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              initial={isMobile ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
               className="absolute -bottom-10 -left-12 z-20 bg-white/90 dark:bg-tupla-dark/95 backdrop-blur-2xl p-6 rounded-[30px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border dark:border-white/10"
             >
               <div className="flex items-center space-x-4">
@@ -199,8 +202,10 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
             </motion.div>
 
             <motion.div 
-              animate={isMobile ? { y: 0 } : { y: [0, 20, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              initial={isMobile ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
               className="absolute top-10 -right-8 z-20 bg-white/90 dark:bg-tupla-dark/95 backdrop-blur-2xl px-6 py-4 rounded-2xl shadow-xl border dark:border-white/10"
             >
               <div className="flex items-center gap-3">

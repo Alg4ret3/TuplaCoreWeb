@@ -1,146 +1,162 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, Github, Filter } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Clock, Zap } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { Badge } from "@/components/atoms/badge";
 import { motion } from "framer-motion";
 import type { MotionProps } from "framer-motion";
+import Link from "next/link";
+import { projectsData } from "@/constants/portfolioData";
 
 const fadeUp = (delay = 0): MotionProps => ({
-  initial: { opacity: 0, y: 50 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 50 },
   transition: {
     duration: 0.8,
     delay,
     ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
   },
-  viewport: { once: false, amount: 0.2 },
+  viewport: { once: true, amount: 0.2 },
 });
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("todos");
 
-  const projects = [
-    {
-      id: 1,
-      title: "E-Commerce ModaStyle",
-      description:
-        "Plataforma de comercio electrónico completa con panel de administración, pasarela de pagos y gestión de inventarios.",
-      image:
-        "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "web",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      id: 2,
-      title: "App Fitness Tracker",
-      description:
-        "Aplicación móvil para seguimiento de rutinas de ejercicio, nutrición y progreso personal con sincronización en la nube.",
-      image:
-        "https://images.pexels.com/photos/4164418/pexels-photo-4164418.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "mobile",
-      technologies: ["React Native", "Firebase", "Redux", "Chart.js"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      id: 3,
-      title: "Sistema de Gestión Hospitalaria",
-      description:
-        "Software integral para gestión de pacientes, citas médicas, historial clínico y facturación hospitalaria.",
-      image:
-        "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "software",
-      technologies: ["Python", "Django", "PostgreSQL", "Docker"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      id: 4,
-      title: "Portal Inmobiliario",
-      description:
-        "Plataforma web para búsqueda y publicación de propiedades con mapas interactivos y tours virtuales.",
-      image:
-        "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "web",
-      technologies: ["Next.js", "TypeScript", "Prisma", "Mapbox"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      id: 5,
-      title: "App de Delivery",
-      description:
-        "Aplicación móvil para pedidos de comida con tracking en tiempo real, múltiples métodos de pago y calificaciones.",
-      image:
-        "https://images.pexels.com/photos/4393426/pexels-photo-4393426.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "mobile",
-      technologies: ["Flutter", "Node.js", "Socket.io", "PayPal"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-    {
-      id: 6,
-      title: "ERP Empresarial",
-      description:
-        "Sistema de planificación de recursos empresariales con módulos de contabilidad, inventarios y recursos humanos.",
-      image:
-        "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
-      category: "software",
-      technologies: ["Java", "Spring Boot", "MySQL", "Angular"],
-      demoUrl: "#",
-      githubUrl: "#",
-    },
-  ];
+  // Función para obtener colores según la categoría
+  const getCategoryColors = (category: string) => {
+    switch (category) {
+      case "web":
+        return "border-green-500/30 dark:border-green-500/30 bg-gradient-to-br from-green-50 to-white dark:from-green-950/20 dark:to-tupla-dark/60";
+      case "mobile":
+        return "border-blue-500/30 dark:border-blue-500/30 bg-gradient-to-br from-blue-50 to-white dark:from-blue-950/20 dark:to-tupla-dark/60";
+      case "software":
+        return "border-purple-500/30 dark:border-purple-500/30 bg-gradient-to-br from-purple-50 to-white dark:from-purple-950/20 dark:to-tupla-dark/60";
+      case "ia":
+        return "border-red-500/30 dark:border-red-500/30 bg-gradient-to-br from-red-50 to-white dark:from-red-950/20 dark:to-tupla-dark/60";
+      default:
+        return "bg-white dark:bg-tupla-dark/60";
+    }
+  };
+
+  const getCategoryAccent = (category: string) => {
+    switch (category) {
+      case "web":
+        return "text-green-600 dark:text-green-400";
+      case "mobile":
+        return "text-blue-600 dark:text-blue-400";
+      case "software":
+        return "text-purple-600 dark:text-purple-400";
+      case "ia":
+        return "text-red-600 dark:text-red-400";
+      default:
+        return "text-tupla-primary";
+    }
+  };
 
   const filters = [
     { id: "todos", label: "Todos los Proyectos" },
     { id: "web", label: "Desarrollo Web" },
     { id: "mobile", label: "Apps Móviles" },
     { id: "software", label: "Software a Medida" },
+    { id: "ia", label: "Inteligencia Artificial" },
   ];
 
   const filteredProjects =
     activeFilter === "todos"
-      ? projects
-      : projects.filter((project) => project.category === activeFilter);
+      ? projectsData
+      : projectsData.filter((project) => project.category === activeFilter);
 
   return (
-    <section id="portafolio" className="py-20 bg-white dark:bg-tupla-dark/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="portafolio" className="relative py-20 bg-white dark:bg-tupla-dark transition-colors duration-500 overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+          <div className="absolute -top-[10%] -right-[10%] w-[500px] h-[500px] bg-tupla-primary/5 rounded-full blur-[120px]" />
+          <div className="absolute top-[20%] -left-[10%] w-[400px] h-[400px] bg-tupla-accent/5 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <motion.div className="text-center mb-16" {...fadeUp(0)}>
-          <h2 className="text-4xl md:text-5xl font-bold text-tupla-dark dark:text-white mb-6">
-            Nuestro Portafolio
+        <motion.div className="mb-20" {...fadeUp(0)}>
+          <div className="w-20 h-1.5 bg-tupla-primary mb-10 rounded-full" />
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-black dark:text-white leading-[0.85] mb-10 uppercase tracking-tighter italic text-left">
+            Nuestros <br />
+            <span className="text-tupla-primary lg:text-transparent lg:bg-clip-text lg:bg-gradient-to-r lg:from-tupla-primary lg:to-tupla-accent">proyectos </span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            Descubre algunos de nuestros proyectos más destacados y la
-            innovación que aportamos a cada solución tecnológica.
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed font-normal">
+            Mira nuestros trabajos. Una selección de ecosistemas digitales diseñados 
+            para dominar mercados y escalar negocios con tecnología de vanguardia.
           </p>
         </motion.div>
+      </div>
+
+      {/* Full-Width Conversion Banner - Premium Upgrade */}
+      <motion.div 
+        {...fadeUp(0.1)} 
+        className="w-full bg-[#080808] dark:bg-white/[0.02] border-y border-white/10 py-24 mb-32 relative overflow-hidden group"
+      >
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-tupla-primary/20 rounded-full blur-[120px] group-hover:scale-110 transition-transform duration-[3s]" />
+          <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-tupla-accent/10 rounded-full blur-[100px] group-hover:translate-x-10 transition-transform duration-[4s]" />
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/big-dot-grid.png')] opacity-[0.05] pointer-events-none" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
+          <div className="text-center lg:text-left space-y-4 max-w-2xl">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-tupla-primary/10 border border-tupla-primary/20 text-[10px] font-black uppercase tracking-[0.2em] text-tupla-primary mb-2">
+              <Zap className="w-3 h-3 fill-current" />
+              <span>Consultoría técnica gratuita</span>
+            </div>
+            <h3 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter italic leading-none">
+              ¿Listo para <br />
+              <span className="text-tupla-primary">escalar tu visión?</span>
+            </h3>
+            <p className="text-lg text-gray-400 font-normal leading-relaxed">
+              Recibe una arquitectura técnica personalizada y un presupuesto detallado en menos de 24 horas.
+            </p>
+          </div>
+
+          <div className="flex flex-col items-center lg:items-end gap-6">
+            <Button
+              size="lg"
+              onClick={() => {
+                const waNumber = "573193142840";
+                const waMessage = "Hola! Estoy en el portafolio de Tupla Core y me gustaría solicitar una cotización para un nuevo proyecto.";
+                window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`, '_blank');
+              }}
+              className="bg-white text-black hover:bg-tupla-primary hover:text-white font-black px-14 py-10 rounded-2xl transition-all duration-500 transform hover:scale-105 shadow-[0_20px_40px_-15px_rgba(255,255,255,0.2)] group uppercase tracking-widest text-sm relative overflow-hidden"
+            >
+              <span className="relative z-10 flex items-center">
+                Iniciar Cotización
+                <ArrowRight className="ml-4 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-tupla-primary to-tupla-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </Button>
+            <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.3em]">Respuesta inmediata asegurada</p>
+          </div>
+        </div>
+      </motion.div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Filters */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-12"
-          {...fadeUp(0.1)}
+          className="flex flex-wrap justify-start gap-3 mb-16"
+          {...fadeUp(0.2)}
         >
           {filters.map((filter) => (
-            <Button
+            <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
-              variant={activeFilter === filter.id ? "default" : "outline"}
-              className={`transition-all duration-300 ${
+              className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
                 activeFilter === filter.id
-                  ? "bg-tupla-primary hover:bg-tupla-accent text-white"
-                  : "border-tupla-primary text-tupla-primary hover:bg-tupla-primary hover:text-white"
+                  ? "bg-tupla-dark dark:bg-white text-white dark:text-black border-transparent shadow-lg scale-105"
+                  : "bg-transparent text-gray-500 border-gray-200 dark:border-white/10 hover:border-tupla-primary hover:text-tupla-primary"
               }`}
             >
-              <Filter className="mr-2 h-4 w-4" />
               {filter.label}
-            </Button>
+            </button>
           ))}
         </motion.div>
 
@@ -149,105 +165,90 @@ const Portfolio = () => {
           {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
-              className="group relative bg-white dark:bg-tupla-dark/60 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 dark:border dark:border-white/10"
+              className={`group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border ${getCategoryColors(project.category)}`}
               {...fadeUp(index * 0.1)}
             >
               {/* Project Image */}
               <div className="relative overflow-hidden h-48">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-tupla-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                {/* Overlay Buttons */}
-                <div className="absolute inset-0 flex items-center justify-center space-x-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Button
-                    size="sm"
-                    className="bg-tupla-primary hover:bg-tupla-accent text-white"
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Demo
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="bg-white/90 hover:bg-white text-tupla-dark border-white"
-                  >
-                    <Github className="h-4 w-4 mr-2" />
-                    Código
-                  </Button>
-                </div>
               </div>
 
-              {/* Project Content */}
-              <div className="p-6 space-y-4">
-                <div className="space-y-2">
-                  <h3 className="text-xl font-bold text-tupla-dark dark:text-white group-hover:text-tupla-primary transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                {/* Project Content */}
+              <div className="p-8 space-y-6">
+                <div className="space-y-3">
+                  <div className="flex justify-between items-start">
+                    <h3 className={`text-2xl font-black text-black dark:text-white uppercase tracking-tight italic transition-colors duration-300 leading-tight ${getCategoryAccent(project.category)}`}>
+                      {project.title}
+                    </h3>
+                  </div>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed font-normal">
                     {project.description}
                   </p>
                 </div>
 
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, idx) => (
-                    <Badge
-                      key={idx}
-                      variant="secondary"
-                      className="bg-tupla-light dark:bg-white/10 text-tupla-dark dark:text-gray-300 text-xs font-medium"
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
+                {/* Tech & Duration Stats */}
+                <div className="grid grid-cols-2 gap-4 py-4 border-y border-gray-100 dark:border-white/5">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Tecnologías</span>
+                    <div className="flex flex-wrap gap-1.5 mt-1">
+                      {project.technologies.slice(0, 3).map((tech, idx) => (
+                        <span key={idx} className={`text-[10px] font-bold ${getCategoryAccent(project.category)}`}>
+                          #{tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-1 text-right">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Desarrollo</span>
+                    <span className="text-xs font-bold text-black dark:text-white mt-1 flex items-center justify-end gap-1.5">
+                      <Clock className={`w-3 h-3 ${getCategoryAccent(project.category)}`} />
+                      {project.duration}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Category Badge */}
-                <div className="pt-2">
-                  <Badge
-                    className={`${
-                      project.category === "web"
-                        ? "bg-blue-100 text-blue-800"
-                        : project.category === "mobile"
-                        ? "bg-purple-100 text-purple-800"
-                        : "bg-green-100 text-green-800"
-                    }`}
-                  >
-                    {project.category === "web" && "Desarrollo Web"}
-                    {project.category === "mobile" && "App Móvil"}
-                    {project.category === "software" && "Software a Medida"}
-                  </Badge>
-                </div>
+                <Link href={`/portafolio/${project.id}`} className="block">
+                  <Button className={`w-full text-white font-black uppercase tracking-widest text-[10px] h-10 rounded-lg transition-all ${
+                    project.category === "web" 
+                      ? "bg-green-600 hover:bg-green-700" 
+                      : project.category === "mobile" 
+                      ? "bg-blue-600 hover:bg-blue-700" 
+                      : project.category === "software"
+                      ? "bg-purple-600 hover:bg-purple-700"
+                      : "bg-red-600 hover:bg-red-700"
+                  }`}>
+                    Ver Detalles
+                  </Button>
+                </Link>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* CTA Section */}
+        {/* Gallery Footer */}
         <motion.div
-          className="text-center mt-16 p-8 bg-gradient-to-r from-tupla-primary to-tupla-accent rounded-2xl text-white"
-          {...fadeUp(0.2)}
+          className="mt-32 text-center flex flex-col items-center"
+          {...fadeUp(0.3)}
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            ¿Tienes un proyecto en mente?
-          </h3>
-          <p className="text-lg mb-6 opacity-90">
-            Trabajemos juntos para convertir tu idea en realidad digital
+          <div className="w-px h-24 bg-gradient-to-b from-tupla-primary to-transparent mb-8" />
+          <h4 className="text-4xl md:text-6xl font-black text-black dark:text-white uppercase tracking-tighter italic leading-none mb-6">
+            Tu próximo éxito <br />
+            <span className="text-tupla-primary">empieza aquí.</span>
+          </h4>
+          <p className="text-gray-500 dark:text-gray-400 font-normal max-w-md mx-auto mb-10">
+            Estamos listos para construir la arquitectura técnica que tu visión merece.
           </p>
-          <Button
-            onClick={() => {
-              const element = document.querySelector("#contacto");
-              if (element) {
-                element.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-            size="lg"
-            className="bg-white text-tupla-primary hover:bg-gray-100 font-semibold px-8 py-4"
+          <Button 
+            onClick={() => window.open('https://wa.me/573193142840', '_blank')}
+            className="rounded-full px-12 py-7 bg-tupla-dark dark:bg-white text-white dark:text-black font-black uppercase tracking-widest text-xs hover:scale-105 transition-transform shadow-2xl"
           >
-            Iniciar Proyecto
+            Lanzar proyecto
           </Button>
         </motion.div>
       </div>

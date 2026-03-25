@@ -4,6 +4,7 @@ import { Inter, Audiowide } from 'next/font/google';
 
 import AOSProvider from '@/components/atoms/aos/AOSProvider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
+import WhatsAppButton from '@/components/atoms/WhatsAppButton';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -39,12 +40,13 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
           <AOSProvider>
             {children}
+            <WhatsAppButton />
           </AOSProvider>
         </ThemeProvider>
       </body>

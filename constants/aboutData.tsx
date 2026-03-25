@@ -62,6 +62,7 @@ export const team = [
       { name: "Bases datos", pct: 88 },
     ],
     chips: ["React", "Node.js", "Python", "SQL", "React Native"],
+    github: "https://github.com/Alg4ret3",
   },
   {
     id: "michael",
@@ -81,6 +82,7 @@ export const team = [
       { name: "API Design", pct: 87 },
     ],
     chips: ["Node.js", "Supabase", "PostgreSQL", "Next.js", "TypeScript"],
+    github: "https://github.com/Mai1203",
   },
 ];
 

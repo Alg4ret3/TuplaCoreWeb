@@ -17,6 +17,7 @@ export interface Member {
   glowColor: string;
   skills: { name: string; pct: number }[];
   chips: string[];
+  github: string;
 }
 
 interface FlipCardProps {
@@ -26,6 +27,7 @@ interface FlipCardProps {
 const FlipCard: React.FC<FlipCardProps> = ({ member }) => {
   const [flipped, setFlipped] = useState(false);
   const [animateBars, setAnimateBars] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
   const isTouch = useRef(false);
 
   useEffect(() => {
@@ -41,13 +43,21 @@ const FlipCard: React.FC<FlipCardProps> = ({ member }) => {
     }
   };
 
+  const handleClick = (e: React.MouseEvent) => {
+    if (!isTouch.current) {
+      window.open(member.github, '_blank');
+    } else {
+      setShowOptions(true);
+    }
+  };
+
   return (
     <div
       className="relative cursor-pointer w-full h-full"
       style={{ perspective: "1000px", aspectRatio: "3/4" }}
       onMouseEnter={() => !isTouch.current && handleFlip(true)}
       onMouseLeave={() => !isTouch.current && handleFlip(false)}
-      onClick={() => isTouch.current && handleFlip(!flipped)}
+      onClick={handleClick}
     >
       {/* Inner */}
       <div
@@ -188,6 +198,46 @@ const FlipCard: React.FC<FlipCardProps> = ({ member }) => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Options Overlay */}
+      {showOptions && isTouch.current && (
+        <div 
+          className="absolute inset-0 z-50 bg-black/80 backdrop-blur-md flex flex-col items-center justify-center p-6 rounded-2xl animate-fade-in"
+          onClick={(e) => { e.stopPropagation(); setShowOptions(false); }}
+        >
+          <div className="w-full space-y-4">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(member.github, '_blank');
+                setShowOptions(false);
+              }}
+              className="w-full py-4 bg-tupla-primary text-white font-bold rounded-xl shadow-lg active:scale-95 transition-transform"
+            >
+              Visitar GitHub
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFlip(!flipped);
+                setShowOptions(false);
+              }}
+              className="w-full py-4 bg-white/10 text-white font-bold rounded-xl border border-white/20 active:scale-95 transition-transform"
+            >
+              {flipped ? "Ver Foto" : "Mostrar Perfil"}
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowOptions(false);
+              }}
+              className="w-full py-3 text-sm text-gray-400 font-medium"
+            >
+              Cancelar
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
