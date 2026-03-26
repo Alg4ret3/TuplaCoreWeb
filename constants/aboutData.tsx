@@ -114,7 +114,19 @@ export const values = [
 ];
 
 export const stats = [
-  { number: "10+", label: "Proyectos entregados" },
-  { number: "94%", label: "Satisfacción" },
-  { number: "2+", label: "Años de experiencia" },
+  { 
+    number: "10+", 
+    label: "Proyectos entregados",
+    description: "Soluciones de software personalizadas implementadas con éxito en diversos sectores industriales."
+  },
+  { 
+    number: "94%", 
+    label: "Satisfacción",
+    description: "Nuestros clientes valoran la transparencia, la calidad técnica y el cumplimiento riguroso de objetivos."
+  },
+  { 
+    number: "2+", 
+    label: "Años de experiencia",
+    description: "Trayectoria sólida construyendo productos digitales escalables con las últimas tecnologías del mercado."
+  },
 ];

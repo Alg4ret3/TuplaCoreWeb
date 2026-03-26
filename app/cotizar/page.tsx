@@ -139,17 +139,17 @@ export default function QuotePage() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-500/20 rounded-full blur-[120px] animate-pulse delay-700" />
       </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto pt-40 pb-32 px-6">
+      <div className="relative z-10 max-w-5xl mx-auto pt-40 pb-32 px-6">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic mb-6">
+          <h1 className="text-3xl md:text-6xl font-black uppercase tracking-tighter italic mb-6">
             Cotiza tu <span className="text-tupla-accent">Proyecto</span>
           </h1>
-          <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl font-light max-w-2xl mx-auto">
-            Ayudanos a entender tu vision y te daremos las herramientas para
+          <p className="text-gray-500 dark:text-gray-400 text-base md:text-xl font-light max-w-2xl mx-auto">
+            Ayúdanos a entender tu visión y te daremos las herramientas para
             hacerla realidad.
           </p>
         </motion.div>
@@ -169,7 +169,7 @@ export default function QuotePage() {
         </div>
 
         {/* Form Container */}
-        <div className="relative min-h-[500px] bg-white/40 dark:bg-tupla-dark/40 backdrop-blur-3xl border border-white/20 dark:border-white/5 p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
+        <div className="relative min-h-[500px] bg-white/40 dark:bg-tupla-dark/40 backdrop-blur-3xl border border-white/20 dark:border-white/5 p-6 md:p-12 rounded-[2rem] md:rounded-[2.5rem] shadow-2xl">
           <AnimatePresence mode="wait">
             {/* Step 1: Service Selection */}
             {step === 1 && (
@@ -228,18 +228,18 @@ export default function QuotePage() {
                           setFormData({ ...formData, service: s.id });
                           nextStep();
                         }}
-                        className={`group relative p-6 rounded-2xl border transition-all duration-300 text-left overflow-hidden ${
+                        className={`group relative p-5 md:p-6 rounded-2xl border transition-all duration-300 text-left overflow-hidden ${
                           isActive
                             ? colorMap[s.color]
                             : "border-white/10 hover:border-white/30 bg-white/5"
                         }`}
                       >
                         <div
-                          className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 ${bgMap[s.color]}`}
+                          className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110 ${bgMap[s.color]}`}
                         >
-                          <s.icon className={`w-6 h-6 ${iconMap[s.color]}`} />
+                          <s.icon className={`w-5 h-5 md:w-6 md:h-6 ${iconMap[s.color]}`} />
                         </div>
-                        <h3 className="font-bold text-lg">{s.title}</h3>
+                        <h3 className="font-bold text-base md:text-lg">{s.title}</h3>
                         <div
                           className={`absolute top-4 right-4 transition-opacity ${
                             isActive
