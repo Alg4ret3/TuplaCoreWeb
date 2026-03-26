@@ -157,7 +157,7 @@ export default function QuotePage() {
         {/* Progress Bar */}
         <div className="mb-12 space-y-4">
           <Progress
-            value={progress}
+            value={Math.min(100, Math.max(0, progress))}
             className="h-1.5 bg-gray-100 dark:bg-white/5"
           />
           <div className="flex justify-between text-[0.65rem] font-bold uppercase tracking-widest text-gray-400">
@@ -324,10 +324,10 @@ export default function QuotePage() {
                         <SelectValue placeholder="Selecciona un rango" />
                       </SelectTrigger>
                       <SelectContent className="bg-white dark:bg-tupla-dark border-white/10">
-                        <SelectItem value="menos de $5&apos;000.000">Menos de $5&apos;000.000 COP</SelectItem>
-                        <SelectItem value="$5&apos;000.000 - $15&apos;000.000">$5&apos;000.000 - $15&apos;000.000</SelectItem>
-                        <SelectItem value="$15&apos;000.000 - $40&apos;000.000">$15&apos;000.000 - $40&apos;000.000</SelectItem>
-                        <SelectItem value="$40&apos;000.000+">$40&apos;000.000+</SelectItem>
+                        <SelectItem value="menos de $5.000.000">Menos de $5.000.000 COP</SelectItem>
+                        <SelectItem value="$5.000.000 - $15.000.000">$5.000.000 - $15.000.000</SelectItem>
+                        <SelectItem value="$15.000.000 - $40.000.000">$15.000.000 - $40.000.000</SelectItem>
+                        <SelectItem value="$40.000.000+">$40.000.000+</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
