@@ -324,23 +324,10 @@ export default function QuotePage() {
                         <SelectValue placeholder="Selecciona un rango" />
                       </SelectTrigger>
                       <SelectContent className="bg-white dark:bg-tupla-dark border-white/10">
-<<<<<<< HEAD
-                        <SelectItem value="under-5m">
-                          Menos de $5000000 COP
-                        </SelectItem>
-                        <SelectItem value="5m-15m">
-                          $5000000 - $15000000
-                        </SelectItem>
-                        <SelectItem value="15m-40m">
-                          $15000000 - $40000000
-                        </SelectItem>
-                        <SelectItem value="over-40m">$40000000+</SelectItem>
-=======
                         <SelectItem value="menos de $5&apos;000.000">Menos de $5&apos;000.000 COP</SelectItem>
                         <SelectItem value="$5&apos;000.000 - $15&apos;000.000">$5&apos;000.000 - $15&apos;000.000</SelectItem>
                         <SelectItem value="$15&apos;000.000 - $40&apos;000.000">$15&apos;000.000 - $40&apos;000.000</SelectItem>
                         <SelectItem value="$40&apos;000.000+">$40&apos;000.000+</SelectItem>
->>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
                       </SelectContent>
                     </Select>
                   </div>
@@ -359,21 +346,9 @@ export default function QuotePage() {
                         <SelectValue placeholder="Periodo deseado" />
                       </SelectTrigger>
                       <SelectContent className="bg-white dark:bg-tupla-dark border-white/10">
-<<<<<<< HEAD
-                        <SelectItem value="fast">
-                          Urgente (menos de 1 mes)
-                        </SelectItem>
-                        <SelectItem value="normal">
-                          Estandar (2-4 meses)
-                        </SelectItem>
-                        <SelectItem value="long">
-                          A largo plazo (6+ meses)
-                        </SelectItem>
-=======
                         <SelectItem value="menos de 1 mes">Urgente (menos de 1 mes)</SelectItem>
                         <SelectItem value="2-4 meses">Estándar (2-4 meses)</SelectItem>
                         <SelectItem value="6+ meses">A largo plazo (6+ meses)</SelectItem>
->>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
                       </SelectContent>
                     </Select>
                   </div>
@@ -457,38 +432,13 @@ export default function QuotePage() {
                   >
                     <ArrowLeft className="mr-2 w-4 h-4" /> Volver
                   </Button>
-<<<<<<< HEAD
-                  <Button
-                    disabled={!formData.name || !formData.email}
-                    onClick={() => {
-                      const waNumber = "573193142840";
-                      const waMessage =
-                        "*Nueva Solicitud de Cotizacion - Tupla Core*%0A%0A" +
-                        `*Servicio:* ${formData.service || "N/A"}%0A` +
-                        `*Descripcion:* ${formData.description || "N/A"}%0A` +
-                        `*Presupuesto:* ${formData.budget || "N/A"}%0A` +
-                        `*Tiempo:* ${formData.timeline || "N/A"}%0A` +
-                        `*Nombre:* ${formData.name}%0A` +
-                        `*Email:* ${formData.email}%0A` +
-                        `*Empresa:* ${formData.company || "N/A"}`;
-
-                      window.open(
-                        `https://wa.me/${waNumber}?text=${waMessage}`,
-                        "_blank"
-                      );
-                      nextStep();
-                    }}
-                    className="bg-emerald-600 hover:bg-emerald-700 px-12 py-6 rounded-xl font-bold shadow-xl shadow-emerald-500/20 transition-all border-none"
-                  >
-                    Enviar Cotizacion <CheckCircle2 className="ml-2 w-4 h-4" />
-=======
                   <Button 
                     disabled={!formData.name || !formData.email || loading}
                     onClick={handleSendQuote}
                     className="bg-emerald-600 hover:bg-emerald-700 px-12 py-6 rounded-xl font-bold shadow-xl shadow-emerald-500/20 transition-all border-none disabled:opacity-50"
                   >
                     {loading ? "Enviando..." : "Enviar Cotización"} {!loading && <CheckCircle2 className="ml-2 w-4 h-4" />}
->>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
+
                   </Button>
                 </div>
               </motion.div>
@@ -513,19 +463,12 @@ export default function QuotePage() {
                   tu requerimiento y nos pondremos en contacto contigo en menos
                   de 24 horas.
                 </p>
-<<<<<<< HEAD
-                <div className="pt-8">
-                  <Button
-                    variant="outline"
-                    onClick={() => router.push("/")}
-                    className="border-white/10 text-gray-300 hover:bg-white/5 rounded-xl px-8"
-=======
+
                 <div className="pt-8 flex flex-col md:flex-row items-center justify-center gap-4">
                   <Button 
                     variant="outline" 
                     onClick={() => router.push('/')}
                     className="border-white/10 text-gray-300 hover:bg-white/5 rounded-xl px-8 h-12"
->>>>>>> 0e24c0e2ebd6b2d662cc8bbf7dac2ee14585060c
                   >
                     Volver al Inicio
                   </Button>
