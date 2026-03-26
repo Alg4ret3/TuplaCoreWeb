@@ -4,13 +4,13 @@ import ProjectDetail from '@/components/organisms/ProjectDetail';
 import { projectsData } from '@/constants/portfolioData';
 import { notFound } from 'next/navigation';
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 type Params = {
   id: string;
 };
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return projectsData.map((project) => ({
     id: project.id,
   }));
