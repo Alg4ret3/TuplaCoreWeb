@@ -1,7 +1,7 @@
 "use client";
 import type { MotionProps } from "framer-motion";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Globe, Smartphone, Settings, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import {
@@ -98,25 +98,25 @@ const Services = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <motion.h2
+          <m.h2
             {...fadeUp(0)}
             className="text-4xl md:text-6xl font-black text-tupla-dark dark:text-white mb-6 uppercase tracking-tighter italic"
           >
             Impulsa tu <span className="text-tupla-accent">Éxito Digital</span>
-          </motion.h2>
+          </m.h2>
 
-          <motion.p
+          <m.p
             {...zoomIn(0.15)}
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed font-light"
           >
             No solo creamos software; construimos los cimientos tecnológicos de tu 
             crecimiento. Soluciones a medida, escalables y orientadas a resultados 
             que transforman tu visión en una realidad competitiva.
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Services Grid */}
-        <motion.div
+        <m.div
           {...fadeUp(0.2)}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
         >
@@ -201,10 +201,10 @@ const Services = () => {
               </Card>
             );
           })}
-        </motion.div>
+        </m.div>
 
         {/* Process Section */}
-        <motion.div
+        <m.div
           {...fadeUp(0.3)}
           className="bg-white dark:bg-tupla-dark/60 rounded-2xl p-8 md:p-12 shadow-lg dark:border dark:border-white/10"
         >
@@ -237,7 +237,7 @@ const Services = () => {
             ].map((item, index) => (
               <div key={index} className="text-center group">
                 <div className="relative mb-4 flex justify-center">
-                  <motion.div
+                  <m.div
                     whileHover={{
                       scale: [1, 1.15, 0.95, 1.05, 1],
                       transition: { duration: 0.8, ease: "easeOut" },
@@ -246,7 +246,7 @@ const Services = () => {
                     
                   >
                     {item.step}
-                  </motion.div>
+                  </m.div>
 
                   {index < 3 && (
                     <div className="hidden md:block absolute left-full top-1/2 transform -translate-y-1/2 w-16 h-0.5 bg-tupla-primary"></div>
@@ -259,7 +259,7 @@ const Services = () => {
               </div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

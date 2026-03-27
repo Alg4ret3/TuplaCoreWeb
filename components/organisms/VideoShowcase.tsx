@@ -1,14 +1,14 @@
 "use client";
 
 import { Play, Monitor } from "lucide-react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const VideoShowcase = () => {
   return (
     <section className="py-24 bg-gray-50 dark:bg-tupla-dark/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16 space-y-4">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -18,9 +18,9 @@ const VideoShowcase = () => {
             <div className="p-3 bg-tupla-accent/20 rounded-2xl text-tupla-accent">
               <Monitor className="w-8 h-8" />
             </div>
-          </motion.div>
+          </m.div>
           
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -28,9 +28,9 @@ const VideoShowcase = () => {
             className="text-3xl md:text-5xl font-bold text-tupla-dark dark:text-white"
           >
             Nuestra Tecnología en Acción
-          </motion.h2>
+          </m.h2>
           
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -39,10 +39,10 @@ const VideoShowcase = () => {
           >
             Descubre cómo transformamos procesos complejos en experiencias digitales 
             fluidas y eficientes a través de nuestras soluciones personalizadas.
-          </motion.p>
+          </m.p>
         </div>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
@@ -81,7 +81,7 @@ const VideoShowcase = () => {
           {/* Decorative accents */}
           <div className="absolute -top-10 -right-10 w-40 h-40 bg-tupla-primary/20 rounded-full blur-3xl" />
           <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-tupla-accent/20 rounded-full blur-3xl" />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

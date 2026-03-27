@@ -1,14 +1,15 @@
 "use client";
 
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/organisms/Navbar';
 import Hero from '@/components/organisms/Hero';
-import EcommerceBanner from '@/components/organisms/EcommerceBanner';
-import PromoBanner from '@/components/organisms/PromoBanner';
 import { ShoppingBag } from 'lucide-react';
 
-import N8nSalesBanner from '@/components/organisms/N8nSalesBanner';
-import Footer from '@/components/organisms/Footer';
-import { Toaster } from '@/components/atoms/toaster';
+const PromoBanner = dynamic(() => import('@/components/organisms/PromoBanner'), { ssr: false });
+const EcommerceBanner = dynamic(() => import('@/components/organisms/EcommerceBanner'), { ssr: false });
+const N8nSalesBanner = dynamic(() => import('@/components/organisms/N8nSalesBanner'), { ssr: false });
+const Footer = dynamic(() => import('@/components/organisms/Footer'), { ssr: false });
+const Toaster = dynamic(() => import('@/components/atoms/toaster').then(mod => mod.Toaster), { ssr: false });
 
 export default function Home() {
   return (

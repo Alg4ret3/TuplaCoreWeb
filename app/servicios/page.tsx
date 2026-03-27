@@ -3,7 +3,7 @@
 import Navbar from '@/components/organisms/Navbar';
 import Footer from '@/components/organisms/Footer';
 import { Globe, Smartphone, Code2, Lightbulb, Sparkles, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 import { Button } from '@/components/atoms/button';
 
 const fadeInUp = {
@@ -25,7 +25,7 @@ export default function ServicesPage() {
       
       {/* Dynamic Background Elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <motion.div 
+        <m.div 
           animate={{ 
             x: [0, 100, 0], 
             y: [0, 50, 0],
@@ -34,7 +34,7 @@ export default function ServicesPage() {
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-tupla-primary/10 rounded-full blur-[120px]" 
         />
-        <motion.div 
+        <m.div 
           animate={{ 
             x: [0, -80, 0], 
             y: [0, 100, 0],
@@ -50,7 +50,7 @@ export default function ServicesPage() {
         {/* Hero Section */}
         <section className="relative pt-48 pb-24 overflow-hidden">
           <div className="max-w-7xl mx-auto px-6">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
@@ -73,7 +73,7 @@ export default function ServicesPage() {
                   Ecosistemas digitales diseñados para el alto rendimiento, la escalabilidad global y una experiencia de usuario que <span className="text-tupla-dark dark:text-white font-medium italic underline decoration-tupla-accent/50 decoration-2 underline-offset-4">cautiva</span> y convierte.
                 </p>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
 
@@ -84,7 +84,7 @@ export default function ServicesPage() {
           <section id="desarrollo-web" className="py-24 bg-emerald-500/[0.05] dark:bg-emerald-500/[0.03] transition-colors duration-700 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
-                <motion.div {...fadeInUp} className="lg:sticky lg:top-32">
+                <m.div {...fadeInUp} className="lg:sticky lg:top-32">
                   <div className="space-y-6">
                     <h2 className="text-3xl md:text-5xl font-black leading-none uppercase tracking-tighter italic font-audiowide">
                       Desarrollo <span className="text-emerald-500 drop-shadow-[0_0_15px_rgba(16,185,129,0.2)]">Web Profesional</span>
@@ -97,7 +97,7 @@ export default function ServicesPage() {
                   
                   <div className="mt-12 space-y-6">
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-emerald-500/60 dark:text-emerald-400/40 px-1">Casos de Uso</h4>
-                    <motion.div 
+                    <m.div 
                       variants={staggerContainer}
                       initial="initial"
                       whileInView="whileInView"
@@ -105,7 +105,7 @@ export default function ServicesPage() {
                       className="flex flex-wrap gap-2"
                     >
                       {['E-commerce', 'Portales Corporativos', 'SaaS Escalables', 'LP de Conversión'].map((use) => (
-                        <motion.span 
+                        <m.span 
                           key={use} 
                           variants={{
                             initial: { opacity: 0, scale: 0.9 },
@@ -115,9 +115,9 @@ export default function ServicesPage() {
                           className="px-3 py-1.5 bg-emerald-500/5 dark:bg-white/5 border border-emerald-500/10 dark:border-white/10 rounded-lg text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur-sm transition-all"
                         >
                           {use}
-                        </motion.span>
+                        </m.span>
                       ))}
-                    </motion.div>
+                    </m.div>
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-emerald-500/60 dark:text-emerald-400/40 px-1 mt-6">Tecnologías</h4>
                     <div className="flex flex-wrap gap-x-4 gap-y-2 px-1 text-[0.65rem] font-medium text-gray-500 dark:text-gray-400">
                       {['Next.js 14', 'React', 'TypeScript', 'Tailwind', 'Node.js', 'Vercel'].map((tech) => (
@@ -137,9 +137,9 @@ export default function ServicesPage() {
                       <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
-                </motion.div>
+                </m.div>
 
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -165,7 +165,7 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                   </div>
-                </motion.div>
+                </m.div>
               </div>
             </div>
           </section>
@@ -174,7 +174,7 @@ export default function ServicesPage() {
           <section id="apps-moviles" className="py-24 bg-blue-500/[0.05] dark:bg-blue-500/[0.03] transition-colors duration-700 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -200,9 +200,9 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                   </div>
-                </motion.div>
+                </m.div>
                 
-                <motion.div {...fadeInUp} className="order-1 lg:order-2 lg:sticky lg:top-32 lg:text-right">
+                <m.div {...fadeInUp} className="order-1 lg:order-2 lg:sticky lg:top-32 lg:text-right">
                   <div className="space-y-6">
                     <h2 className="text-3xl md:text-5xl font-black leading-none uppercase tracking-tighter italic font-audiowide">
                       Apps <span className="text-blue-500 drop-shadow-[0_0_15px_rgba(59,130,246,0.2)]">Móviles de Impacto</span>
@@ -215,7 +215,7 @@ export default function ServicesPage() {
                   
                   <div className="mt-12 space-y-6">
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-blue-500/60 dark:text-blue-400/40 px-1">Casos de Uso</h4>
-                    <motion.div 
+                    <m.div 
                       variants={staggerContainer}
                       initial="initial"
                       whileInView="whileInView"
@@ -223,7 +223,7 @@ export default function ServicesPage() {
                       className="flex flex-wrap gap-2 lg:justify-end"
                     >
                       {['Delivery Apps', 'Redes Sociales', 'Gestión de Inventario', 'Fintech'].map((use) => (
-                        <motion.span 
+                        <m.span 
                           key={use} 
                           variants={{
                             initial: { opacity: 0, scale: 0.9 },
@@ -233,9 +233,9 @@ export default function ServicesPage() {
                           className="px-3 py-1.5 bg-blue-500/5 dark:bg-white/5 border border-blue-500/10 dark:border-white/10 rounded-lg text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur-sm transition-all"
                         >
                           {use}
-                        </motion.span>
+                        </m.span>
                       ))}
-                    </motion.div>
+                    </m.div>
                     
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-blue-500/60 dark:text-blue-400/40 px-1 mt-6">Tecnologías</h4>
                     <div className="flex flex-wrap gap-x-4 gap-y-2 px-1 lg:justify-end text-[0.65rem] font-medium text-gray-500 dark:text-gray-400">
@@ -256,7 +256,7 @@ export default function ServicesPage() {
                       <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
-                </motion.div>
+                </m.div>
               </div>
             </div>
           </section>
@@ -265,7 +265,7 @@ export default function ServicesPage() {
           <section id="software-personalizado" className="py-24 bg-purple-500/[0.05] dark:bg-purple-500/[0.03] transition-colors duration-700 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
-                <motion.div {...fadeInUp} className="lg:sticky lg:top-32">
+                <m.div {...fadeInUp} className="lg:sticky lg:top-32">
                   <div className="space-y-6">
                     <h2 className="text-3xl md:text-5xl font-black leading-none uppercase tracking-tighter italic font-audiowide">
                       Software <span className="text-purple-500 drop-shadow-[0_0_15px_rgba(168,85,247,0.2)]">a Medida Elite</span>
@@ -278,7 +278,7 @@ export default function ServicesPage() {
                   
                   <div className="mt-12 space-y-6">
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-purple-500/60 dark:text-purple-400/40 px-1">Casos de Uso</h4>
-                    <motion.div 
+                    <m.div 
                       variants={staggerContainer}
                       initial="initial"
                       whileInView="whileInView"
@@ -286,7 +286,7 @@ export default function ServicesPage() {
                       className="flex flex-wrap gap-2"
                     >
                       {['CRMs Personalizados', 'Automatización Industrial', 'Dashboards de BI', 'Sistemas ERP'].map((use) => (
-                        <motion.span 
+                        <m.span 
                           key={use} 
                           variants={{
                             initial: { opacity: 0, scale: 0.9 },
@@ -296,9 +296,9 @@ export default function ServicesPage() {
                           className="px-3 py-1.5 bg-purple-500/5 dark:bg-white/5 border border-purple-500/10 dark:border-white/10 rounded-lg text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur-sm transition-all"
                         >
                           {use}
-                        </motion.span>
+                        </m.span>
                       ))}
-                    </motion.div>
+                    </m.div>
                     
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-purple-500/60 dark:text-purple-400/40 px-1 mt-6">Tecnologías</h4>
                     <div className="flex flex-wrap gap-x-4 gap-y-2 px-1 text-[0.65rem] font-medium text-gray-500 dark:text-gray-400">
@@ -319,9 +319,9 @@ export default function ServicesPage() {
                       <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
-                </motion.div>
+                </m.div>
 
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, x: 30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -347,7 +347,7 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                   </div>
-                </motion.div>
+                </m.div>
               </div>
             </div>
           </section>
@@ -356,7 +356,7 @@ export default function ServicesPage() {
           <section id="consultoria-it" className="py-24 bg-amber-500/[0.05] dark:bg-amber-500/[0.03] transition-colors duration-700 overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid lg:grid-cols-2 gap-16 items-start mb-24">
-                <motion.div 
+                <m.div 
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -382,9 +382,9 @@ export default function ServicesPage() {
                       ))}
                     </ul>
                   </div>
-                </motion.div>
+                </m.div>
                 
-                <motion.div {...fadeInUp} className="order-1 lg:order-2 lg:sticky lg:top-32 lg:text-right">
+                <m.div {...fadeInUp} className="order-1 lg:order-2 lg:sticky lg:top-32 lg:text-right">
                   <div className="space-y-6">
                     <h2 className="text-3xl md:text-5xl font-black leading-none uppercase tracking-tighter italic font-audiowide">
                       Consultoría <span className="text-amber-500 drop-shadow-[0_0_15px_rgba(245,158,11,0.2)]">IT Estratégica</span>
@@ -397,7 +397,7 @@ export default function ServicesPage() {
                   
                   <div className="mt-12 space-y-6">
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-amber-500/60 dark:text-amber-400/40 px-1">Casos de Uso</h4>
-                    <motion.div 
+                    <m.div 
                       variants={staggerContainer}
                       initial="initial"
                       whileInView="whileInView"
@@ -405,7 +405,7 @@ export default function ServicesPage() {
                       className="flex flex-wrap gap-2 lg:justify-end"
                     >
                       {['Transformación Digital', 'Ciberseguridad', 'Roadmaps de IA', 'Auditoría Cloud'].map((use) => (
-                        <motion.span 
+                        <m.span 
                           key={use} 
                           variants={{
                             initial: { opacity: 0, scale: 0.9 },
@@ -415,9 +415,9 @@ export default function ServicesPage() {
                           className="px-3 py-1.5 bg-amber-500/5 dark:bg-white/5 border border-amber-500/10 dark:border-white/10 rounded-lg text-[0.65rem] font-bold uppercase tracking-wider backdrop-blur-sm transition-all"
                         >
                           {use}
-                        </motion.span>
+                        </m.span>
                       ))}
-                    </motion.div>
+                    </m.div>
                     
                     <h4 className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-amber-500/60 dark:text-amber-400/40 px-1 mt-6">Tecnologías</h4>
                     <div className="flex flex-wrap gap-x-4 gap-y-2 px-1 lg:justify-end text-[0.65rem] font-medium text-gray-500 dark:text-gray-400">
@@ -438,7 +438,7 @@ export default function ServicesPage() {
                       <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
                     </a>
                   </div>
-                </motion.div>
+                </m.div>
               </div>
             </div>
           </section>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const WhatsAppButton = () => {
   const waNumber = "573193142840";
@@ -9,7 +9,7 @@ const WhatsAppButton = () => {
   const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
 
   return (
-    <motion.a
+    <m.a
       href={waUrl}
       target="_blank"
       rel="noopener noreferrer"
@@ -29,7 +29,7 @@ const WhatsAppButton = () => {
       </svg>
       {/* Pulse effect wrapper */}
       <span className="absolute inset-0 rounded-full animate-ping bg-[#25D366] opacity-30 pointer-events-none" />
-    </motion.a>
+    </m.a>
   );
 };
 

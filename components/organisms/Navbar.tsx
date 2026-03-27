@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, startTransition } from "react";
 import { 
   Menu, X, ArrowRight, Home, Layers, 
   Briefcase, Users, Mail, Instagram, 
   Linkedin, Github, ExternalLink 
 } from "lucide-react";
 import { Button } from "@/components/atoms/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -70,7 +70,7 @@ const Navbar = () => {
   const showDarkNavbarAtTop = isDarkHeroPage;
 
   return (
-    <motion.nav
+    <m.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -114,10 +114,13 @@ const Navbar = () => {
                   key={item.name}
                   href={item.href}
                   className={`${
-                    scrolled 
-                      ? "text-black dark:text-white" 
-                      : (showDarkNavbarAtTop && currentTheme === "dark" ? "text-white" : "text-black dark:text-white")
-                  } ${pathname === item.href ? "text-tupla-primary font-bold" : "hover:text-tupla-primary"} px-3 py-2 text-sm font-medium transition-colors duration-200`}
+                    pathname === item.href
+                      ? "text-tupla-primary font-bold" 
+                      : `${scrolled 
+                          ? "text-black dark:text-white" 
+                          : (showDarkNavbarAtTop && currentTheme === "dark" ? "text-white" : "text-black dark:text-white")
+                        } hover:text-tupla-primary dark:hover:text-tupla-primary`
+                  } px-3 py-2 text-sm font-medium transition-colors duration-200 group`}
                 >
                   {item.name}
                 </Link>
@@ -143,7 +146,7 @@ const Navbar = () => {
                 scrolled 
                   ? "text-black dark:text-white" 
                   : (showDarkNavbarAtTop && currentTheme === "dark" ? "text-white" : "text-black dark:text-white")
-              } hover:text-tupla-primary block px-3 py-2 text-base font-medium transition-colors duration-200 ${
+              } hover:text-tupla-primary dark:hover:text-tupla-primary block px-3 py-2 text-base font-medium transition-colors duration-200 ${
                 !mounted ? "opacity-0" : "opacity-100"
               }`}
             >
@@ -158,18 +161,18 @@ const Navbar = () => {
 
         <AnimatePresence>
           {isOpen && (
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-50 md:hidden bg-tupla-dark/40 backdrop-blur-sm flex justify-end"
               onClick={() => setIsOpen(false)}
             >
-              <motion.div
+              <m.div
                 initial={{ x: "100%" }}
                 animate={{ x: 0 }}
                 exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                transition={{ type: "tween", duration: 0.25, ease: "easeOut" }}
                 onClick={(e) => e.stopPropagation()}
                 className="w-full max-w-[300px] h-full bg-white dark:bg-tupla-dark/95 border-l border-black/10 dark:border-white/10 shadow-2xl overflow-hidden flex flex-col"
               >
@@ -186,32 +189,33 @@ const Navbar = () => {
                   {navItems.map((item, index) => {
                     const isActive = pathname === item.href;
                     return (
-                      <motion.div
+                      <m.div
                         key={item.name}
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.03 }}
+                        transition={{ type: "tween", delay: index * 0.03 }}
                       >
                         <Link
                           href={item.href}
-                          onClick={() => setIsOpen(false)}
-                          className={`flex items-center gap-3 px-4 py-3 rounded-2xl font-bold transition-all duration-200
+                          prefetch={true}
+                          onClick={() => startTransition(() => setIsOpen(false))}
+                          className={`flex items-center gap-3 px-4 py-3 rounded-2xl font-bold transition-all duration-200 group
                             ${isActive 
-                              ? "bg-tupla-primary text-white shadow-lg shadow-tupla-primary/20" 
-                              : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5"
+                              ? "text-tupla-primary bg-tupla-primary/10 shadow-sm shadow-tupla-primary/10" 
+                              : "text-gray-500 dark:text-gray-400 hover:text-tupla-primary dark:hover:text-tupla-primary hover:bg-tupla-primary/10"
                             }`}
                         >
-                          <item.icon className={`h-5 w-5 ${isActive ? 'opacity-100' : 'opacity-50'}`} />
+                          <item.icon className={`h-5 w-5 transition-colors ${isActive ? 'text-tupla-primary opacity-100' : 'opacity-70 group-hover:text-tupla-primary'}`} />
                           <span>{item.name}</span>
                         </Link>
-                      </motion.div>
+                      </m.div>
                     );
                   })}
                 </div>
 
                 {/* Primary Action & Social Links */}
                 <div className="p-6 pb-12 mt-auto border-t border-black/5 dark:border-white/5 space-y-8">
-                  <Link href="/cotizar" onClick={() => setIsOpen(false)}>
+                  <Link href="/cotizar" prefetch={true} onClick={() => startTransition(() => setIsOpen(false))}>
                     <Button className="w-full bg-tupla-primary hover:bg-tupla-accent text-white font-bold h-14 rounded-2xl shadow-lg shadow-tupla-primary/20 transition-all active:scale-[0.98]">
                       Cotizar Proyecto
                     </Button>
@@ -249,7 +253,7 @@ const Navbar = () => {
                             {/* Selection Menu (Animated underneath) */}
                             <AnimatePresence>
                               {isExpanded && social.subLinks && (
-                                <motion.div
+                                <m.div
                                   initial={{ opacity: 0, scale: 0.9 }}
                                   animate={{ opacity: 1, scale: 1 }}
                                   exit={{ opacity: 0, scale: 0.9 }}
@@ -263,8 +267,10 @@ const Navbar = () => {
                                       target="_blank"
                                       rel="noopener noreferrer"
                                       onClick={() => {
-                                        setIsOpen(false);
-                                        setActiveSocialMenu(null);
+                                        startTransition(() => {
+                                          setIsOpen(false);
+                                          setActiveSocialMenu(null);
+                                        });
                                       }}
                                       className="flex items-center justify-between px-4 py-3 text-sm font-bold text-gray-700 dark:text-gray-300 hover:bg-tupla-primary hover:text-white rounded-2xl transition-colors group/row"
                                     >
@@ -272,7 +278,7 @@ const Navbar = () => {
                                       <ArrowRight size={14} className="opacity-0 group-hover/row:opacity-100 transition-opacity" />
                                     </a>
                                   ))}
-                                </motion.div>
+                                </m.div>
                               )}
                             </AnimatePresence>
                           </div>
@@ -281,12 +287,12 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>
-    </motion.nav>
+    </m.nav>
   );
 };
 

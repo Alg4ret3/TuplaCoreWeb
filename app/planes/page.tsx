@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/organisms/Navbar";
 import Footer from "@/components/organisms/Footer";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Check, Zap, Bot, Crown, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 
@@ -74,7 +74,7 @@ export default function PlanesPage() {
         </div>
         
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -91,7 +91,7 @@ export default function PlanesPage() {
               Elige el nivel de automatización que tu empresa necesita para eliminar 
               el trabajo manual y multiplicar la productividad.
             </p>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
@@ -99,7 +99,7 @@ export default function PlanesPage() {
       <section className="pb-32 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-8">
           {plans.map((plan, idx) => (
-            <motion.div
+            <m.div
               key={plan.name}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -153,7 +153,7 @@ export default function PlanesPage() {
                 {plan.cta}
                 <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
               </Button>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </section>

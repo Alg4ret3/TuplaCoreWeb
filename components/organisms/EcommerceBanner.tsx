@@ -2,7 +2,7 @@
 
 import { ShoppingCart, CreditCard, BarChart3, ShieldCheck, ArrowRight, TrendingUp, Globe, Zap } from "lucide-react";
 import { Button } from "@/components/atoms/button";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
   const features = [
@@ -53,14 +53,14 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
         <div className="grid lg:grid-cols-2 gap-20 items-center">
           
           {/* Left Column - Content */}
-          <motion.div
+          <m.div
             initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
             className="relative lg:pr-8"
           >
-            <motion.div 
+            <m.div 
               initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -70,7 +70,7 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
               <span className="text-tupla-primary dark:text-tupla-accent text-sm font-bold tracking-tight uppercase">
                 Líderes en Desarrollo E-commerce
               </span>
-            </motion.div>
+            </m.div>
 
             <h2 className="text-3xl md:text-5xl font-black text-tupla-dark dark:text-white leading-[1.1] mb-8 uppercase tracking-tighter italic">
               Transforma <br />
@@ -86,7 +86,7 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
 
             <div className="grid sm:grid-cols-2 gap-6 mb-12">
               {features.map((item, idx) => (
-                <motion.div 
+                <m.div 
                   key={idx}
                   whileHover={isMobile ? {} : { y: -5, scale: 1.02 }}
                   className="p-5 rounded-2xl bg-white/50 dark:bg-white/5 backdrop-blur-xl border border-white dark:border-white/10 shadow-xl shadow-black/5 group transition-all"
@@ -96,7 +96,7 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
                   </div>
                   <h4 className="font-bold text-tupla-dark dark:text-white mb-2">{item.title}</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">{item.desc}</p>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
@@ -110,16 +110,10 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1" />
               </Button>
             </div>
-          </motion.div>
+          </m.div>
 
-          {/* Right Column - Premium 3D Mockup */}
-          <motion.div
-            initial={isMobile ? { opacity: 1, scale: 1, rotateY: 0 } : { opacity: 0, scale: 0.8, rotateY: 20 }}
-            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            viewport={{ once: true }}
-            className="relative perspective-[1500px]"
-          >
+          {/* Right Column - Premium Mockup */}
+          <div className="relative isolate mt-10 lg:mt-0">
             {/* Main Window Frame */}
             <div className="relative z-10 bg-white dark:bg-tupla-dark rounded-[40px] p-2 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border border-black/5 dark:border-white/10 overflow-hidden transform-gpu">
               
@@ -161,12 +155,9 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
                     {/* Activity Chart Mockup */}
                     <div className="h-28 bg-tupla-dark rounded-3xl p-4 flex items-end justify-around gap-2 shadow-2xl">
                       {[30, 70, 45, 90, 60, 80, 50, 95].map((h, i) => (
-                        <motion.div 
+                        <div 
                           key={i}
-                          initial={isMobile ? { height: `${h}%` } : { height: 0 }}
-                          whileInView={{ height: `${h}%` }}
-                          viewport={{ once: true }}
-                          transition={{ delay: i * 0.1, duration: 0.5 }}
+                          style={{ height: `${h}%` }}
                           className="w-full bg-gradient-to-t from-tupla-primary to-tupla-accent rounded-t-lg opacity-80"
                         />
                       ))}
@@ -179,13 +170,9 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
               </div>
             </div>
 
-            {/* Floating Elements - Extreme Depth */}
-            <motion.div 
-              initial={isMobile ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="absolute -bottom-10 -left-12 z-20 bg-white/90 dark:bg-tupla-dark/95 backdrop-blur-2xl p-6 rounded-[30px] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] border dark:border-white/10"
+            {/* Floating Elements - Adjusted for mobile */}
+            <div 
+              className="absolute -bottom-6 -left-4 lg:-bottom-10 lg:-left-12 z-20 bg-white/95 dark:bg-tupla-dark/95 backdrop-blur-2xl p-4 lg:p-6 rounded-2xl lg:rounded-[30px] shadow-2xl border dark:border-white/10"
             >
               <div className="flex items-center space-x-4">
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white shadow-lg shadow-teal-500/30">
@@ -199,14 +186,10 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div 
-              initial={isMobile ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="absolute top-10 -right-8 z-20 bg-white/90 dark:bg-tupla-dark/95 backdrop-blur-2xl px-6 py-4 rounded-2xl shadow-xl border dark:border-white/10"
+            <div 
+              className="absolute top-6 -right-4 lg:top-10 lg:-right-8 z-20 bg-white/95 dark:bg-tupla-dark/95 backdrop-blur-2xl px-4 py-3 lg:px-6 lg:py-4 rounded-2xl shadow-xl border dark:border-white/10"
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-tupla-accent/20 flex items-center justify-center text-tupla-accent">
@@ -217,12 +200,12 @@ const EcommerceBanner = ({ onClick }: { onClick?: () => void }) => {
                     <p className="text-sm font-black dark:text-white">Nueva York, US</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Decorative background glows */}
             <div className="absolute top-20 right-0 w-80 h-80 bg-tupla-primary/20 rounded-full blur-[100px] -z-10" />
             <div className="absolute bottom-10 left-0 w-80 h-80 bg-tupla-accent/20 rounded-full blur-[100px] -z-10" />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

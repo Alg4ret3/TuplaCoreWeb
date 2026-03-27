@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ArrowRight, Clock, Zap } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { Badge } from "@/components/atoms/badge";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import type { MotionProps } from "framer-motion";
 import Link from "next/link";
 import { projectsData } from "@/constants/portfolioData";
@@ -77,7 +77,7 @@ const Portfolio = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <motion.div className="mb-20" {...fadeUp(0)}>
+        <m.div className="mb-20" {...fadeUp(0)}>
           <div className="w-20 h-1.5 bg-tupla-primary mb-10 rounded-full" />
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-black dark:text-white leading-[0.85] mb-10 uppercase tracking-tighter italic text-left">
             Nuestros <br />
@@ -87,11 +87,11 @@ const Portfolio = () => {
             Mira nuestros trabajos. Una selección de ecosistemas digitales diseñados 
             para dominar mercados y escalar negocios con tecnología de vanguardia.
           </p>
-        </motion.div>
+        </m.div>
       </div>
 
       {/* Full-Width Conversion Banner - Premium Upgrade */}
-      <motion.div 
+      <m.div 
         {...fadeUp(0.1)} 
         className="w-full bg-[#080808] dark:bg-white/[0.02] border-y border-white/10 py-24 mb-32 relative overflow-hidden group"
       >
@@ -136,12 +136,12 @@ const Portfolio = () => {
             <p className="text-[10px] text-gray-500 font-bold uppercase tracking-[0.3em]">Respuesta inmediata asegurada</p>
           </div>
         </div>
-      </motion.div>
+      </m.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         {/* Filters */}
-        <motion.div
+        <m.div
           className="flex flex-wrap justify-start gap-3 mb-16"
           {...fadeUp(0.2)}
         >
@@ -158,12 +158,12 @@ const Portfolio = () => {
               {filter.label}
             </button>
           ))}
-        </motion.div>
+        </m.div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project, index) => (
-            <motion.div
+            <m.div
               key={project.id}
               className={`group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border ${getCategoryColors(project.category)}`}
               {...fadeUp(index * 0.1)}
@@ -227,12 +227,12 @@ const Portfolio = () => {
                   </Button>
                 </Link>
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 
         {/* Gallery Footer */}
-        <motion.div
+        <m.div
           className="mt-32 text-center flex flex-col items-center"
           {...fadeUp(0.3)}
         >
@@ -250,7 +250,7 @@ const Portfolio = () => {
           >
             Lanzar proyecto
           </Button>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   );

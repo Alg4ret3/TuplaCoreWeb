@@ -2,7 +2,7 @@
 
 import { Cpu, Zap, Settings2, Network, ArrowRight } from "lucide-react";
 import { Button } from "@/components/atoms/button";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const N8nBanner = () => {
   return (
@@ -19,7 +19,7 @@ const N8nBanner = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Column - Visual Representation of Automation */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
@@ -39,7 +39,7 @@ const N8nBanner = () => {
                 { icon: Network, pos: "-bottom-10 left-1/2 -translate-x-1/2", delay: 0.4 },
                 { icon: Settings2, pos: "top-1/2 -left-10 -translate-y-1/2", delay: 0.6 },
               ].map((node, idx) => (
-                <motion.div
+                <m.div
                   key={idx}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
@@ -47,16 +47,16 @@ const N8nBanner = () => {
                   className={`absolute ${node.pos} w-20 h-20 bg-tupla-dark/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-center shadow-2xl z-10`}
                 >
                   <node.icon className="w-8 h-8 text-tupla-accent" />
-                </motion.div>
+                </m.div>
               ))}
 
               {/* Connecting Lines (Decorative) */}
               <div className="absolute inset-0 border-2 border-dashed border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Right Column - Content */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -102,7 +102,7 @@ const N8nBanner = () => {
                 <ArrowRight className="ml-3 w-6 h-6" />
               </Button>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@
 
 import { Zap, Cpu, ArrowRight, Layers, Bot, Network, Settings } from "lucide-react";
 import { Button } from "@/components/atoms/button";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import Link from "next/link";
 
 const N8nSalesBanner = () => {
@@ -35,7 +35,7 @@ const N8nSalesBanner = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           
           {/* Left Column - Content */}
-          <motion.div
+          <m.div
             initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -73,10 +73,10 @@ const N8nSalesBanner = () => {
                 </Button>
               </Link>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Right Column - Visual Illustration */}
-          <motion.div
+          <m.div
             initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -96,13 +96,13 @@ const N8nSalesBanner = () => {
                   </div>
                   <span className="text-[10px] font-bold mt-2 tracking-widest opacity-60">{item.label}</span>
                   {i < 2 && (
-                    <motion.div 
+                    <m.div 
                       animate={isMobile ? { y: 0 } : { y: [0, 5, 0] }}
                       transition={{ repeat: Infinity, duration: 2 }}
                       className="my-2 text-tupla-primary/30"
                     >
                       <ArrowRight className="w-5 h-5 rotate-90" />
-                    </motion.div>
+                    </m.div>
                   )}
                 </div>
               ))}
@@ -116,7 +116,7 @@ const N8nSalesBanner = () => {
               <div className="relative w-full h-full">
                 {/* Animated Nodes */}
                 {nodes.map((node, i) => (
-                  <motion.div
+                  <m.div
                     key={i}
                     initial={{ opacity: 0, y: 20 }}
                     animate={isMobile ? { opacity: 1, y: 0, x: 0 } : { 
@@ -136,7 +136,7 @@ const N8nSalesBanner = () => {
                     
                     {/* Connecting lines (pseudo) */}
                     <div className="absolute top-1/2 left-full w-32 h-[1px] bg-gradient-to-r from-tupla-primary/30 dark:from-tupla-accent/50 to-transparent -translate-y-1/2 origin-left rotate-45 opacity-20" />
-                  </motion.div>
+                  </m.div>
                 ))}
 
                 {/* Orbiting circles */}
@@ -145,15 +145,15 @@ const N8nSalesBanner = () => {
               </div>
               
               {/* Visual labels */}
-              <motion.div 
+              <m.div 
                   animate={{ opacity: [0.3, 0.7, 0.3] }}
                   transition={{ repeat: Infinity, duration: 3 }}
                   className="absolute top-[10%] right-[10%] px-4 py-2 border border-tupla-primary/10 dark:border-white/10 rounded-lg bg-white/40 dark:bg-black/40 text-[10px] text-tupla-dark dark:text-white font-mono tracking-tighter"
               >
                   AUTO_FLOW_v2.0
-              </motion.div>
+              </m.div>
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Mobile Buttons - Staged at the end */}

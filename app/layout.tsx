@@ -4,6 +4,7 @@ import { Inter, Audiowide } from 'next/font/google';
 
 import AOSProvider from '@/components/atoms/aos/AOSProvider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
+import { FramerProvider } from '@/components/providers/framer-provider';
 import WhatsAppButton from '@/components/atoms/WhatsAppButton';
 
 const inter = Inter({ 
@@ -66,10 +67,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AOSProvider>
-            {children}
-            <WhatsAppButton />
-          </AOSProvider>
+          <FramerProvider>
+            <AOSProvider>
+              {children}
+              <WhatsAppButton />
+            </AOSProvider>
+          </FramerProvider>
         </ThemeProvider>
       </body>
     </html>

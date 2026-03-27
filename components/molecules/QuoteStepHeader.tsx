@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 
 interface QuoteStepHeaderProps {
   title: string;

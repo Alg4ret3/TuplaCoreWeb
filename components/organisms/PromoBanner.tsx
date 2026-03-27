@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
@@ -105,7 +105,7 @@ const PromoBanner = ({
             )}
 
             {/* Action - Architectural CTA */}
-            <motion.div
+            <m.div
               initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -124,7 +124,7 @@ const PromoBanner = ({
                 {/* Subtle Shine */}
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-tupla-primary/5 dark:via-white/5 to-transparent -translate-x-full group-hover:animate-[shine_2s_infinite] pointer-events-none" />
               </button>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>

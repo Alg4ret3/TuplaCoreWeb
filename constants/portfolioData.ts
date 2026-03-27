@@ -38,7 +38,7 @@ export const projectsData: Project[] = [
     fullDescription:
       "Esta tienda online cuenta con un banner principal que destaca promociones y productos estrella, acompañado de un catálogo organizado por categorías y subcategorías (por ejemplo: esmaltes, herramientas, decoración, cuidado de uñas). Los usuarios pueden crear una cuenta e iniciar sesión, con opciones de restablecimiento de contraseña para mayor seguridad. El sistema incluye un carrito de compras donde se pueden añadir, modificar o eliminar productos antes de finalizar la compra. Además, la plataforma ofrece una navegación intuitiva, filtros de búsqueda, y un diseño pensado para que tanto profesionales como clientes encuentren fácilmente lo que necesitan. Todo está orientado a brindar una experiencia de compra rápida, segura y eficiente, con un enfoque en la distribución especializada de productos para uñas.",
     image:
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store1.webp",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto,w_800,c_limit/v1774647012/w7dyk63arpdnmrrb4lvu.webp",
     category: "software",
     technologies: [
       "Medusa.js",
@@ -105,68 +105,88 @@ export const projectsData: Project[] = [
       },
     ],
     gallery: [
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store2.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store3.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store4.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store5.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store6.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store7.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store8.webp",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto,w_800,c_limit/v1774647015/vvvpdmjzqoqyqpdl3snl.webp",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto,w_800,c_limit/v1774647014/sbpajym010vystinj6xq.webp",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto,w_800,c_limit/v1774647013/rwi4d4pxtfuradqevaux.webp",
     ],
   },
-  {
-    id: "reserva-plus",
-    title: "ReservaPlus",
+    {
+    id: "gamification-app",
+    title: "Gamification App",
     description:
-      "Sistema de reservas para gimnasio, comidas y más, con inicio de sesión, panel de administración y gestión completa mediante CRUD.",
+      "Plataforma educativa gamificada con desafíos de programación interactivos, sistema de puntos y autenticación segura para potenciar el aprendizaje en código",
     fullDescription:
-      "Un sistema de reservas integral que permite a los usuarios registrarse e iniciar sesión para gestionar sus reservas de manera segura y personalizada. La plataforma está diseñada para cubrir múltiples servicios como gimnasio, comidas y actividades adicionales, ofreciendo un catálogo organizado por categorías y subcategorías. El panel de administración brinda herramientas completas para crear, editar, eliminar y actualizar (CRUD) tanto usuarios como reservas, garantizando un control eficiente de la información. Además, incluye funciones de restablecimiento de contraseña, gestión de disponibilidad en tiempo real y una interfaz intuitiva que facilita la experiencia tanto para clientes como para administradores.",
+      "Esta aplicación de gamificación está orientada al aprendizaje de programación mediante mecánicas de juego. Los usuarios pueden autenticarse de forma segura, acceder a desafíos de código resolvibles desde un editor integrado directamente en el navegador, y obtener retroalimentación visual inmediata con animaciones y notificaciones. La plataforma utiliza Firebase como backend para la persistencia de datos en tiempo real, Clerk para la gestión de identidad y sesiones, y Phaser para elementos de juego 2D. Las animaciones fluidas con Framer Motion y GSAP ofrecen una experiencia visual envolvente. El proyecto está pensado para estudiantes y desarrolladores que quieren practicar habilidades de programación de forma entretenida y motivadora.",
     image:
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app1.webp",
     category: "web",
-    technologies: ["Spring Boot", "Angular", "PostgreSQL"],
-    duration: "1 mes",
-    year: "2026",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Firebase",
+      "Clerk",
+      "Phaser",
+      "Framer Motion",
+      "GSAP",
+      "Tailwind CSS",
+      "Monaco Editor",
+    ],
+    duration: "6 meses",
+    year: "2025",
     cost: "3,000,000 - 5,000,000 COP",
-    demoUrl: "https://ladynails.vercel.app/",
+    demoUrl: "https://edocode.vercel.app/",
     githubUrl: "",
     videoUrl: "",
     modules: [
       {
         title: "Sistema de Autenticación",
         description:
-          "Registro de usuarios, inicio de sesión seguro y recuperación de contraseña, con manejo de roles y permisos.",
+          "Gestión de identidad y sesiones mediante Clerk, con registro, inicio de sesión, protección de rutas por middleware y manejo de roles de usuario.",
       },
       {
-        title: "Panel Administrativo",
+        title: "Editor de Código Integrado",
         description:
-          "Gestión centralizada con CRUD completo (crear, editar, eliminar) de reservas, servicios y usuarios.",
+          "Editor Monaco embebido directamente en el navegador con resaltado de sintaxis, soporte multilenguaje y ejecución de desafíos de programación en tiempo real.",
       },
       {
-        title: "Notificaciones",
+        title: "Motor de Juego 2D",
         description:
-          "Alertas automáticas al crear, editar o eliminar registros, con envío por correo o dentro del sistema.",
+          "Integración con Phaser 3 para escenas interactivas, mecánicas de juego, control de sprites y lógica de niveles gamificados.",
+      },
+      {
+        title: "Sistema de Puntos y Progreso",
+        description:
+          "Seguimiento del progreso del usuario, acumulación de puntos por desafíos completados y persistencia de datos en Firebase en tiempo real.",
+      },
+      {
+        title: "Animaciones e Interfaz Visual",
+        description:
+          "Animaciones complejas con Framer Motion y GSAP, incluyendo transiciones entre pantallas, retroalimentación visual con Lottie y notificaciones con React Hot Toast.",
+      },
+      {
+        title: "Protección de Rutas",
+        description:
+          "Middleware de Next.js integrado con Clerk para restringir el acceso a rutas protegidas según el estado de autenticación del usuario.",
       },
     ],
     engineers: [
       {
-        name: "Sergio Muñoz",
-        role: "Frontend & Computer Engineer",
-        github: "https://github.com/Alg4ret3",
-        linkedin: "https://www.linkedin.com/in/sergio-muñoz-b75bba208",
-      },
-      {
         name: "Michael Coral",
-        role: "Backend & Computer Engineer",
+        role: "Fullstack & Computer Engineer",
         github: "https://github.com/Mai1203",
         linkedin: "https://linkedin.com/in/michaelcoral",
       },
     ],
     gallery: [
-      "https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app2.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app3.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app4.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app5.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app6.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app7.webp",
     ],
   },
+
   {
     id: "gym-tracker",
     title: "GymTracker",
@@ -175,7 +195,7 @@ export const projectsData: Project[] = [
     fullDescription:
       "Un sistema de seguimiento de entrenamiento enfocado en ejercicios de gimnasio, que funciona directamente sobre Google Sheets en lugar de una base de datos tradicional. Cada usuario puede loguearse y llevar su propio historial, marcando los ejercicios realizados, las series, repeticiones y el peso utilizado. La plataforma permite crear y visualizar rutinas personalizadas, aplicar filtros dinámicos para revisar el progreso a lo largo del tiempo y evitar olvidar cargas anteriores. El enfoque está en la simplicidad y accesibilidad: todo se gestiona desde un panel conectado a Google Sheets, lo que facilita la administración sin necesidad de infraestructura compleja.",
     image:
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_webp,q_auto,dpr_auto,w_1200,c_limit/v1774647580/s7dyruw9rjijxdfrfku8.png",
     category: "web",
     technologies: ["Javascript", "Typescript", "Google Sheets"],
     duration: "1 mes",
@@ -219,11 +239,9 @@ export const projectsData: Project[] = [
         linkedin: "https://www.linkedin.com/in/sergio-muñoz-b75bba208",
       },
     ],
-    gallery: [
-      "https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
+    gallery: [],
   },
+
   {
     id: "fundacion-campaes",
     title: "Fundacion Caminos de Paz",
@@ -232,7 +250,7 @@ export const projectsData: Project[] = [
     fullDescription:
       "Plataforma informativa para la Fundación Caminos de Paz, diseñada para dar visibilidad a sus proyectos y facilitar el contacto con  voluntarios. El sitio incluye un banner principal con información clave, un botón directo de WhatsApp para comunicación inmediata, un formulario de contacto que envía mensajes directamente al correo de la fundación y un mapa interactivo que muestra su ubicación. El diseño se centra en la claridad y accesibilidad, permitiendo a los visitantes conocer la labor de la organización y establecer contacto de manera sencilla.",
     image:
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_webp,q_auto:good,dpr_auto,w_1200,c_limit/v1774647564/n3q8szxnz2atayssz8a3.png",
     category: "web",
     technologies: ["Vite", "Typescript", "EmailJS"],
     duration: "2 meses",
@@ -272,8 +290,8 @@ export const projectsData: Project[] = [
       },
     ],
     gallery: [
-      "https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_webp,q_auto:good,dpr_auto,w_1200,c_limit/v1774647562/xg0vfz1d8rwezwehtbj3.png",
+      "https://res.cloudinary.com/dqky6oqrd/image/upload/f_webp,q_auto:good,dpr_auto,w_1200,c_limit/v1774647561/flzqpnphxs4hhiozrfgm.png",
     ],
   },
   {
@@ -358,82 +376,7 @@ export const projectsData: Project[] = [
       "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/vision-tree-pasto/vision-tree-pasto4.webp",
     ],
   },
-  {
-    id: "gamification-app",
-    title: "Gamification App",
-    description:
-      "Plataforma educativa gamificada con desafíos de programación interactivos, sistema de puntos y autenticación segura para potenciar el aprendizaje en código",
-    fullDescription:
-      "Esta aplicación de gamificación está orientada al aprendizaje de programación mediante mecánicas de juego. Los usuarios pueden autenticarse de forma segura, acceder a desafíos de código resolvibles desde un editor integrado directamente en el navegador, y obtener retroalimentación visual inmediata con animaciones y notificaciones. La plataforma utiliza Firebase como backend para la persistencia de datos en tiempo real, Clerk para la gestión de identidad y sesiones, y Phaser para elementos de juego 2D. Las animaciones fluidas con Framer Motion y GSAP ofrecen una experiencia visual envolvente. El proyecto está pensado para estudiantes y desarrolladores que quieren practicar habilidades de programación de forma entretenida y motivadora.",
-    image:
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app1.webp",
-    category: "web",
-    technologies: [
-      "Next.js",
-      "TypeScript",
-      "Firebase",
-      "Clerk",
-      "Phaser",
-      "Framer Motion",
-      "GSAP",
-      "Tailwind CSS",
-      "Monaco Editor",
-    ],
-    duration: "6 meses",
-    year: "2025",
-    cost: "3,000,000 - 5,000,000 COP",
-    demoUrl: "https://edocode.vercel.app/",
-    githubUrl: "",
-    videoUrl: "",
-    modules: [
-      {
-        title: "Sistema de Autenticación",
-        description:
-          "Gestión de identidad y sesiones mediante Clerk, con registro, inicio de sesión, protección de rutas por middleware y manejo de roles de usuario.",
-      },
-      {
-        title: "Editor de Código Integrado",
-        description:
-          "Editor Monaco embebido directamente en el navegador con resaltado de sintaxis, soporte multilenguaje y ejecución de desafíos de programación en tiempo real.",
-      },
-      {
-        title: "Motor de Juego 2D",
-        description:
-          "Integración con Phaser 3 para escenas interactivas, mecánicas de juego, control de sprites y lógica de niveles gamificados.",
-      },
-      {
-        title: "Sistema de Puntos y Progreso",
-        description:
-          "Seguimiento del progreso del usuario, acumulación de puntos por desafíos completados y persistencia de datos en Firebase en tiempo real.",
-      },
-      {
-        title: "Animaciones e Interfaz Visual",
-        description:
-          "Animaciones complejas con Framer Motion y GSAP, incluyendo transiciones entre pantallas, retroalimentación visual con Lottie y notificaciones con React Hot Toast.",
-      },
-      {
-        title: "Protección de Rutas",
-        description:
-          "Middleware de Next.js integrado con Clerk para restringir el acceso a rutas protegidas según el estado de autenticación del usuario.",
-      },
-    ],
-    engineers: [
-      {
-        name: "Michael Coral",
-        role: "Fullstack & Computer Engineer",
-        github: "https://github.com/Mai1203",
-        linkedin: "https://linkedin.com/in/michaelcoral",
-      },
-    ],
-    gallery: [
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app2.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app3.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app4.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app5.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app6.webp",
-      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app7.webp",
-    ],
-  },
+
   {
     id: "systock",
     title: "Systock",
@@ -736,5 +679,54 @@ export const projectsData: Project[] = [
       "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym6.webp",
       "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym7.webp",
     ],
+  },
+    {
+    id: "reserva-plus",
+    title: "ReservaPlus",
+    description:
+      "Sistema de reservas para gimnasio, comidas y más, con inicio de sesión, panel de administración y gestión completa mediante CRUD.",
+    fullDescription:
+      "Un sistema de reservas integral que permite a los usuarios registrarse e iniciar sesión para gestionar sus reservas de manera segura y personalizada. La plataforma está diseñada para cubrir múltiples servicios como gimnasio, comidas y actividades adicionales, ofreciendo un catálogo organizado por categorías y subcategorías. El panel de administración brinda herramientas completas para crear, editar, eliminar y actualizar (CRUD) tanto usuarios como reservas, garantizando un control eficiente de la información. Además, incluye funciones de restablecimiento de contraseña, gestión de disponibilidad en tiempo real y una interfaz intuitiva que facilita la experiencia tanto para clientes como para administradores.",
+    image: "",
+    category: "web",
+    technologies: ["Spring Boot", "Angular", "PostgreSQL"],
+    duration: "1 mes",
+    year: "2026",
+    cost: "3,000,000 - 5,000,000 COP",
+    demoUrl: "https://ladynails.vercel.app/",
+    githubUrl: "",
+    videoUrl: "",
+    modules: [
+      {
+        title: "Sistema de Autenticación",
+        description:
+          "Registro de usuarios, inicio de sesión seguro y recuperación de contraseña, con manejo de roles y permisos.",
+      },
+      {
+        title: "Panel Administrativo",
+        description:
+          "Gestión centralizada con CRUD completo (crear, editar, eliminar) de reservas, servicios y usuarios.",
+      },
+      {
+        title: "Notificaciones",
+        description:
+          "Alertas automáticas al crear, editar o eliminar registros, con envío por correo o dentro del sistema.",
+      },
+    ],
+    engineers: [
+      {
+        name: "Sergio Muñoz",
+        role: "Frontend & Computer Engineer",
+        github: "https://github.com/Alg4ret3",
+        linkedin: "https://www.linkedin.com/in/sergio-muñoz-b75bba208",
+      },
+      {
+        name: "Michael Coral",
+        role: "Backend & Computer Engineer",
+        github: "https://github.com/Mai1203",
+        linkedin: "https://linkedin.com/in/michaelcoral",
+      },
+    ],
+    gallery: [],
   },
 ];

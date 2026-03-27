@@ -4,7 +4,25 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { unoptimized: true },
+  images: { 
+    // Para modo export, habilitamos la optimización delegando al loader personalizado
+    // si se define en cada componente o globalmente.
+    unoptimized: process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
