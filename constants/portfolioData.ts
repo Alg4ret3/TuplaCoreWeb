@@ -38,8 +38,8 @@ export const projectsData: Project[] = [
     fullDescription:
       "Esta tienda online cuenta con un banner principal que destaca promociones y productos estrella, acompañado de un catálogo organizado por categorías y subcategorías (por ejemplo: esmaltes, herramientas, decoración, cuidado de uñas). Los usuarios pueden crear una cuenta e iniciar sesión, con opciones de restablecimiento de contraseña para mayor seguridad. El sistema incluye un carrito de compras donde se pueden añadir, modificar o eliminar productos antes de finalizar la compra. Además, la plataforma ofrece una navegación intuitiva, filtros de búsqueda, y un diseño pensado para que tanto profesionales como clientes encuentren fácilmente lo que necesitan. Todo está orientado a brindar una experiencia de compra rápida, segura y eficiente, con un enfoque en la distribución especializada de productos para uñas.",
     image:
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
-    category: "web",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store1.webp",
+    category: "software",
     technologies: [
       "Medusa.js",
       "Next.js",
@@ -105,8 +105,13 @@ export const projectsData: Project[] = [
       },
     ],
     gallery: [
-      "https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store2.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store3.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store4.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store5.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store6.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store7.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/nail-store/nail-store8.webp",
     ],
   },
   {
@@ -279,7 +284,7 @@ export const projectsData: Project[] = [
     fullDescription:
       "Un sistema web innovador que utiliza un modelo de Machine Learning entrenado en imágenes de árboles para identificar especies a partir de fotografías cargadas por el usuario. La plataforma permite loguearse para llevar un historial personal de consultas y resultados El usuario puede subir una foto del árbol y el sistema procesa la imagen para devolver la especie identificada, junto con datos relevantes como nombre científico, características principales y distribución geográfica. Además, cuenta con un panel administrativo para gestionar usuarios, entrenar o actualizar el modelo y mantener la base de conocimiento. La experiencia se complementa con filtros y reportes, que permiten ver estadísticas de identificación, historial de imágenes analizadas y métricas de precisión del modelo",
     image:
-      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/vision-tree-pasto/vision-tree-pasto1.webp",
     category: "ia",
     technologies: [
       "Python",
@@ -348,8 +353,388 @@ export const projectsData: Project[] = [
       },
     ],
     gallery: [
-      "https://images.pexels.com/photos/34577/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=800",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/vision-tree-pasto/vision-tree-pasto2.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/vision-tree-pasto/vision-tree-pasto3.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/vision-tree-pasto/vision-tree-pasto4.webp",
+    ],
+  },
+  {
+    id: "gamification-app",
+    title: "Gamification App",
+    description:
+      "Plataforma educativa gamificada con desafíos de programación interactivos, sistema de puntos y autenticación segura para potenciar el aprendizaje en código",
+    fullDescription:
+      "Esta aplicación de gamificación está orientada al aprendizaje de programación mediante mecánicas de juego. Los usuarios pueden autenticarse de forma segura, acceder a desafíos de código resolvibles desde un editor integrado directamente en el navegador, y obtener retroalimentación visual inmediata con animaciones y notificaciones. La plataforma utiliza Firebase como backend para la persistencia de datos en tiempo real, Clerk para la gestión de identidad y sesiones, y Phaser para elementos de juego 2D. Las animaciones fluidas con Framer Motion y GSAP ofrecen una experiencia visual envolvente. El proyecto está pensado para estudiantes y desarrolladores que quieren practicar habilidades de programación de forma entretenida y motivadora.",
+    image:
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app1.webp",
+    category: "web",
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Firebase",
+      "Clerk",
+      "Phaser",
+      "Framer Motion",
+      "GSAP",
+      "Tailwind CSS",
+      "Monaco Editor",
+    ],
+    duration: "6 meses",
+    year: "2025",
+    cost: "3,000,000 - 5,000,000 COP",
+    demoUrl: "https://edocode.vercel.app/",
+    githubUrl: "",
+    videoUrl: "",
+    modules: [
+      {
+        title: "Sistema de Autenticación",
+        description:
+          "Gestión de identidad y sesiones mediante Clerk, con registro, inicio de sesión, protección de rutas por middleware y manejo de roles de usuario.",
+      },
+      {
+        title: "Editor de Código Integrado",
+        description:
+          "Editor Monaco embebido directamente en el navegador con resaltado de sintaxis, soporte multilenguaje y ejecución de desafíos de programación en tiempo real.",
+      },
+      {
+        title: "Motor de Juego 2D",
+        description:
+          "Integración con Phaser 3 para escenas interactivas, mecánicas de juego, control de sprites y lógica de niveles gamificados.",
+      },
+      {
+        title: "Sistema de Puntos y Progreso",
+        description:
+          "Seguimiento del progreso del usuario, acumulación de puntos por desafíos completados y persistencia de datos en Firebase en tiempo real.",
+      },
+      {
+        title: "Animaciones e Interfaz Visual",
+        description:
+          "Animaciones complejas con Framer Motion y GSAP, incluyendo transiciones entre pantallas, retroalimentación visual con Lottie y notificaciones con React Hot Toast.",
+      },
+      {
+        title: "Protección de Rutas",
+        description:
+          "Middleware de Next.js integrado con Clerk para restringir el acceso a rutas protegidas según el estado de autenticación del usuario.",
+      },
+    ],
+    engineers: [
+      {
+        name: "Michael Coral",
+        role: "Fullstack & Computer Engineer",
+        github: "https://github.com/Mai1203",
+        linkedin: "https://linkedin.com/in/michaelcoral",
+      },
+    ],
+    gallery: [
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app2.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app3.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app4.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app5.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app6.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/gamification-app/gamification-app7.webp",
+    ],
+  },
+  {
+    id: "systock",
+    title: "Systock",
+    description:
+      "Sistema de escritorio para gestión integral de inventarios y ventas con facturación electrónica, ventas a crédito, reportes avanzados y control de acceso seguro",
+    fullDescription:
+      "Systock es una aplicación de escritorio desarrollada en Python orientada a pequeños y medianos negocios que necesitan automatizar su operación comercial. Cuenta con un módulo de inventarios que permite escanear y generar códigos de barras, recibir alertas de stock en tiempo real y exportar datos a Excel o PDF. La facturación es ágil y precisa, permitiendo generar tickets y facturas electrónicas con cálculo automático de descuentos e impresión directa a impresoras locales. El sistema incluye un módulo de ventas a crédito con seguimiento de deudas, historial de pagos y notificaciones automáticas de recordatorios. Los reportes financieros se presentan con gráficos interactivos y pueden exportarse en múltiples formatos. Todo el sistema está protegido mediante autenticación JWT, cifrado de contraseñas con bcrypt, roles de usuario personalizados y registro de auditorías para garantizar la trazabilidad de cada operación.",
+    image:
       "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+    category: "software",
+    technologies: [
+      "Python",
+      "CustomTkinter",
+      "SQLite",
+      "JWT",
+      "bcrypt",
+      "ReportLab",
+      "OpenPyXL",
+      "Matplotlib",
+      "PyInstaller",
+    ],
+    duration: "3 meses",
+    year: "2025",
+    cost: "4,000,000 - 6,000,000 COP",
+    demoUrl: "",
+    githubUrl: "",
+    videoUrl: "",
+    modules: [
+      {
+        title: "Gestión de Inventarios",
+        description:
+          "Registro, edición y eliminación de productos con soporte para escaneo y generación de códigos de barras, alertas de stock mínimo y exportación de datos a Excel y PDF.",
+      },
+      {
+        title: "Facturación y Tickets",
+        description:
+          "Generación de facturas electrónicas y tickets de venta con cálculo automático de descuentos, subtotales e impuestos, e impresión directa a impresoras locales.",
+      },
+      {
+        title: "Ventas a Crédito",
+        description:
+          "Registro y seguimiento de ventas a crédito, control de pagos parciales, historial de deudas por cliente y notificaciones automáticas de recordatorios de pago.",
+      },
+      {
+        title: "Reportes y Análisis",
+        description:
+          "Generación de reportes financieros con gráficos interactivos, análisis detallado de inventarios y ventas, y exportación en formatos Excel y PDF.",
+      },
+      {
+        title: "Seguridad y Control de Acceso",
+        description:
+          "Autenticación de usuarios mediante JWT, cifrado seguro de contraseñas con bcrypt, gestión de roles y permisos, y registro de auditorías para trazabilidad completa.",
+      },
+      {
+        title: "Panel de Control",
+        description:
+          "Interfaz de escritorio centralizada con navegación por módulos, visualización de métricas clave en tiempo real y acceso rápido a las funciones más usadas del sistema.",
+      },
+    ],
+    engineers: [
+      {
+        name: "Michael Coral",
+        role: "Fullstack & Computer Engineer",
+        github: "https://github.com/Mai1203",
+        linkedin: "https://linkedin.com/in/michaelcoral",
+      },
+      {
+        name: "Sergio Muñoz",
+        role: "Computer Engineer | AI & Data Integration",
+        github: "https://github.com/Alg4ret3",
+        linkedin: "https://www.linkedin.com/in/sergio-muñoz-b75bba208",
+      },
+    ],
+    gallery: [
+      "https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=800",
+    ],
+  },
+  {
+    id: "aqueducto-manager",
+    title: "Acueducto Manager",
+    description:
+      "Sistema web de administración integral para acueductos rurales con facturación mensual automatizada, control de morosidad, gestión de usuarios y panel financiero en tiempo real",
+    fullDescription:
+      "Acueducto Manager es una plataforma web diseñada específicamente para simplificar la administración de acueductos rurales. Cuenta con un dashboard financiero que muestra el estado general del sistema, ingresos, pagos recientes y métricas clave de un vistazo. Los administradores pueden gestionar el padrón completo de usuarios del acueducto, incluyendo sus datos personales y direcciones, así como configurar categorías tarifarias diferenciadas para servicios residenciales y comerciales. El módulo de facturación genera automáticamente los recibos mensuales para cada usuario, mientras que el módulo de pagos permite registrar abonos de forma ágil y llevar un control preciso de los usuarios en mora. El acceso al sistema está protegido mediante autenticación segura con Supabase y un esquema de roles que distingue entre administradores y cajeros, garantizando que cada perfil acceda únicamente a las funciones que le corresponden.",
+    image:
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/aqueducto-manager/aqueducto-manager1.webp",
+    category: "web",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Supabase",
+      "Tailwind CSS",
+      "Lucide React",
+    ],
+    duration: "2 meses",
+    year: "2025",
+    cost: "3,500,000 - 5,500,000 COP",
+    demoUrl: "https://sfacueducto.vercel.app",
+    githubUrl: "",
+    videoUrl: "",
+    modules: [
+      {
+        title: "Dashboard Financiero",
+        description:
+          "Panel principal con métricas clave en tiempo real: ingresos del período, total de pagos recibidos, usuarios en mora y resumen del estado financiero general del acueducto.",
+      },
+      {
+        title: "Gestión de Usuarios",
+        description:
+          "CRUD completo de usuarios del acueducto con gestión de datos personales, direcciones y asignación de categoría tarifaria (residencial o comercial).",
+      },
+      {
+        title: "Categorías Tarifarias",
+        description:
+          "Configuración y administración de tarifas diferenciadas por tipo de servicio, permitiendo asignar valores específicos a cada categoría de usuario del sistema.",
+      },
+      {
+        title: "Facturación Mensual",
+        description:
+          "Generación automatizada de recibos mensuales por usuario, con seguimiento del estado de cada factura (pagada, pendiente, vencida) y acceso al historial de facturación.",
+      },
+      {
+        title: "Registro de Pagos",
+        description:
+          "Módulo de caja para el registro rápido de pagos, consulta de facturas pendientes por usuario y control de morosidad con visualización de deudas acumuladas.",
+      },
+      {
+        title: "Roles y Control de Acceso",
+        description:
+          "Sistema de autenticación segura con Supabase y gestión de roles (Administrador y Cajero), con middleware de Next.js que protege las rutas según el perfil del usuario autenticado.",
+      },
+    ],
+    engineers: [
+      {
+        name: "Michael Coral",
+        role: "Fullstack & Computer Engineer",
+        github: "https://github.com/Mai1203",
+        linkedin: "https://linkedin.com/in/michaelcoral",
+      },
+    ],
+    gallery: [
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/aqueducto-manager/aqueducto-manager2.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/aqueducto-manager/aqueducto-manager3.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/aqueducto-manager/aqueducto-manager4.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/aqueducto-manager/aqueducto-manager5.webp",
+    ],
+  },
+  {
+    id: "sistema-ventas",
+    title: "Sistema de Ventas",
+    description:
+      "Aplicación de escritorio para gestión integral de ventas e inventario con punto de venta, administración de clientes y proveedores, reportes en PDF y control de pagos",
+    fullDescription:
+      "Sistema de Ventas es una aplicación de escritorio desarrollada en Java que centraliza y automatiza los procesos comerciales de pequeños y medianos negocios. Ofrece un punto de venta (POS) ágil para procesar transacciones rápidamente, acompañado de un módulo de inventario con control total sobre productos, stock, precios y categorías. La gestión de clientes y proveedores permite mantener un directorio de contactos comerciales siempre actualizado. Cada venta queda registrada en un historial detallado de movimientos que facilita el seguimiento de abonos y cuentas pendientes. Los reportes y facturas se generan en PDF mediante iText, listos para imprimir o compartir. El sistema cuenta con paneles diferenciados para administradores y usuarios estándar, garantizando que cada rol acceda únicamente a las funciones que le corresponden mediante un login seguro.",
+    image:
+      "https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=800",
+    category: "software",
+    technologies: [
+      "Java",
+      "Java Swing",
+      "SwingX",
+      "MySQL",
+      "JDBC",
+      "iText 5",
+      "Apache Ant",
+    ],
+    duration: "2 meses",
+    year: "2023",
+    cost: "2,000,000 - 3,500,000 COP",
+    demoUrl: "",
+    githubUrl: "",
+    videoUrl: "",
+    modules: [
+      {
+        title: "Punto de Venta (POS)",
+        description:
+          "Interfaz intuitiva para registrar ventas de forma rápida, seleccionar productos del inventario, aplicar descuentos y calcular totales automáticamente.",
+      },
+      {
+        title: "Gestión de Inventario",
+        description:
+          "CRUD completo de productos con control de stock, precios y categorías, con alertas visuales para productos con bajo inventario.",
+      },
+      {
+        title: "Clientes y Proveedores",
+        description:
+          "Administración del directorio de clientes y proveedores con historial de transacciones, saldos pendientes y datos de contacto.",
+      },
+      {
+        title: "Pagos y Abonos",
+        description:
+          "Sistema de registro de pagos parciales y abonos, con seguimiento de cuentas pendientes y visualización del saldo de cada cliente.",
+      },
+      {
+        title: "Reportes y Facturación PDF",
+        description:
+          "Generación dinámica de facturas y reportes de ventas exportables en formato PDF mediante la librería iText, listos para impresión.",
+      },
+      {
+        title: "Autenticación y Roles",
+        description:
+          "Login seguro con roles diferenciados (Administrador y Usuario), con paneles y permisos de acceso distintos según el perfil autenticado.",
+      },
+    ],
+    engineers: [
+      {
+        name: "Michael Coral",
+        role: "Fullstack & Computer Engineer",
+        github: "https://github.com/Mai1203",
+        linkedin: "https://linkedin.com/in/michaelcoral",
+      },
+    ],
+    gallery: [
+      "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800",
+    ],
+  },
+  {
+    id: "powergym",
+    title: "PowerGym",
+    description:
+      "Sistema web de gestión integral para gimnasios con dashboard administrativo, planes de membresía, caja financiera, control de acceso por roles y animaciones modernas",
+    fullDescription:
+      "PowerGym es una plataforma web completa diseñada para centralizar la administración de gimnasios. Su dashboard muestra KPIs en tiempo real como ingresos, check-ins activos, suscripciones vigentes y próximos vencimientos, acompañados de gráficos de tendencias. El módulo de usuarios permite gestionar el padrón completo de miembros con búsquedas avanzadas, historial de pagos, check-ins y estados de membresía actualizados. Los planes de membresía son totalmente configurables, con características personalizadas, estadísticas de suscripciones e ingresos por plan. La caja administrativa centraliza las transacciones diarias, el cierre de caja automático y la exportación de reportes financieros. El sistema de autenticación con NextAuth.js y validación con Zod garantiza la seguridad de los datos, con roles diferenciados para Administradores, Staff y Usuarios. La interfaz cuenta con un tema oscuro elegante, animaciones fluidas con Framer Motion y diseño completamente responsive, construida sobre una arquitectura robusta con PostgreSQL y Prisma ORM.",
+    image:
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym1.webp",
+    category: "web",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "NextAuth.js",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Shadcn/ui",
+      "Zod",
+      "Jest",
+    ],
+    duration: "3 meses",
+    year: "2025",
+    cost: "4,500,000 - 7,000,000 COP",
+    demoUrl: "https://powergym-gamma.vercel.app",
+    githubUrl: "",
+    videoUrl: "https://www.youtube.com/watch?v=qN0j-x3KipY",
+    modules: [
+      {
+        title: "Dashboard Administrativo",
+        description:
+          "Panel principal con KPIs en tiempo real: ingresos del período, check-ins activos, suscripciones vigentes y próximos vencimientos, con gráficos de tendencias y actividad reciente.",
+      },
+      {
+        title: "Gestión de Usuarios",
+        description:
+          "CRUD completo de miembros del gimnasio con búsqueda y filtros avanzados, visualización de historial de pagos, registro de check-ins y control del estado de membresía.",
+      },
+      {
+        title: "Planes de Membresía",
+        description:
+          "Creación y administración de planes personalizables con características configurables, precios, estadísticas de suscripciones activas e ingresos generados por plan.",
+      },
+      {
+        title: "Caja Administrativa",
+        description:
+          "Registro de transacciones diarias, cierre de caja automático, reportes financieros por período y exportación de datos para análisis contable.",
+      },
+      {
+        title: "Autenticación y Roles",
+        description:
+          "Sistema de autenticación basado en JWT con NextAuth.js, control de acceso por roles (Admin, Staff, Usuario), validación de datos con Zod y protección CSRF en formularios.",
+      },
+      {
+        title: "Testing y Calidad de Código",
+        description:
+          "Suite de pruebas unitarias e integración con Jest y React Testing Library sobre componentes, servicios y endpoints de la API, complementada con ESLint y Prettier.",
+      },
+    ],
+    engineers: [
+      {
+        name: "Michael Coral",
+        role: "Fullstack & Computer Engineer",
+        github: "https://github.com/Mai1203",
+        linkedin: "https://linkedin.com/in/michaelcoral",
+      },
+      {
+        name: "Sergio Muñoz",
+        role: "Computer Engineer | AI & Data Integration",
+        github: "https://github.com/Alg4ret3",
+        linkedin: "https://www.linkedin.com/in/sergio-muñoz-b75bba208",
+      },
+    ],
+    gallery: [
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym2.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym3.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym4.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym5.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym6.webp",
+      "https://cdn.jsdelivr.net/gh/Mai1203/cdn-images@main/proyectos/powergym/power-gym7.webp",
     ],
   },
 ];

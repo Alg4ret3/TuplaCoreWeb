@@ -81,7 +81,7 @@ const Portfolio = () => {
           <div className="w-20 h-1.5 bg-tupla-primary mb-10 rounded-full" />
           <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-black dark:text-white leading-[0.85] mb-10 uppercase tracking-tighter italic text-left">
             Nuestros <br />
-            <span className="text-tupla-primary lg:text-transparent lg:bg-clip-text lg:bg-gradient-to-r lg:from-tupla-primary lg:to-tupla-accent">proyectos </span>
+            <span className="text-tupla-primary lg:text-transparent lg:bg-clip-text lg:bg-gradient-to-r lg:from-tupla-primary lg:to-tupla-accent pr-3">proyectos </span>
           </h2>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-2xl leading-relaxed font-normal">
             Mira nuestros trabajos. Una selección de ecosistemas digitales diseñados 
