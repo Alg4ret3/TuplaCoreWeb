@@ -1,13 +1,12 @@
 import Navbar from '@/components/organisms/Navbar';
 import Footer from '@/components/organisms/Footer';
-import About from '@/components/organisms/About';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-black">
       <Navbar />
-      <div className="p-0">
-        <About />
+      <div className="flex flex-col items-center justify-center py-48 text-white font-outfit uppercase tracking-extrawide">
+        <h1>Hola Mundo</h1>
       </div>
       <Footer />
     </main>

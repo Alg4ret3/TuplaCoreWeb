@@ -1,110 +1,140 @@
 "use client";
 
-import { Cpu, Zap, Settings2, Network, ArrowRight } from "lucide-react";
-import { Button } from "@/components/atoms/button";
 import { m } from "framer-motion";
+import { 
+  Cpu, 
+  ArrowRight, 
+  Mail, 
+  Database, 
+  MessageSquare, 
+  Globe, 
+  Settings2,
+  Share2
+} from "lucide-react";
+import { Button } from "@/components/atoms/button";
+import Link from "next/link";
 
 const N8nBanner = () => {
+  const nodes = [
+    { icon: Mail, label: "Marketing", delay: 0 },
+    { icon: Database, label: "Data", delay: 1.5 },
+    { icon: MessageSquare, label: "CRM", delay: 3 },
+    { icon: Globe, label: "Web", delay: 4.5 },
+  ];
+
   return (
-    <section className="relative py-24 overflow-hidden bg-tupla-dark text-white">
-      {/* Dynamic Background Pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-tupla-accent/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-tupla-primary/20 rounded-full blur-[100px] animate-pulse" />
-      </div>
+    <section className="relative w-full min-h-[100vh] lg:min-h-[90vh] overflow-hidden flex items-center justify-center bg-transparent py-20 lg:py-40 border-y border-white/5">
+      {/* Dynamic Background Effects */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Massive Background Text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-[0.03]">
+          <span className="text-[30vw] lg:text-[25vw] font-black font-outfit uppercase tracking-tighter leading-none">
+            Auto
+          </span>
+        </div>
 
-      {/* Grid Pattern Overlay */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
+        {/* Scanning Laser Line */}
+        <m.div 
+          animate={{ y: ["-100%", "100%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+          className="absolute left-0 right-0 h-[60px] lg:h-[100px] bg-gradient-to-b from-transparent via-white/[0.04] to-transparent z-10"
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - Visual Representation of Automation */}
-          <m.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="order-2 lg:order-1"
-          >
-            <div className="relative group">
-              {/* Central Node */}
-              <div className="relative w-48 h-48 mx-auto bg-tupla-primary rounded-3xl flex items-center justify-center shadow-[0_0_50px_rgba(30,144,255,0.4)] z-20">
-                <Cpu className="w-20 h-20 text-white animate-pulse" />
-              </div>
-
-              {/* Orbital Nodes */}
-              {[
-                { icon: Zap, pos: "-top-10 left-1/2 -translate-x-1/2", delay: 0 },
-                { icon: Settings2, pos: "top-1/2 -right-10 -translate-y-1/2", delay: 0.2 },
-                { icon: Network, pos: "-bottom-10 left-1/2 -translate-x-1/2", delay: 0.4 },
-                { icon: Settings2, pos: "top-1/2 -left-10 -translate-y-1/2", delay: 0.6 },
-              ].map((node, idx) => (
-                <m.div
-                  key={idx}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: node.delay }}
-                  className={`absolute ${node.pos} w-20 h-20 bg-tupla-dark/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center justify-center shadow-2xl z-10`}
-                >
-                  <node.icon className="w-8 h-8 text-tupla-accent" />
-                </m.div>
-              ))}
-
-              {/* Connecting Lines (Decorative) */}
-              <div className="absolute inset-0 border-2 border-dashed border-white/5 rounded-full animate-[spin_20s_linear_infinite]" />
-            </div>
-          </m.div>
-
-          {/* Right Column - Content */}
-          <m.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="order-1 lg:order-2 space-y-8 text-center lg:text-left"
-          >
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-tupla-accent/20 border border-tupla-accent/30 text-tupla-accent text-sm font-semibold uppercase tracking-wider">
-              <Zap className="w-4 h-4" />
-              <span>Automatización con n8n</span>
-            </div>
-
-            <h2 className="text-4xl md:text-6xl font-black leading-tight italic">
-              AGENTE INTELIGENTE: <br />
-              <span className="text-tupla-accent">TU EMPLEADO 24/7</span>
-            </h2>
-
-            <p className="text-xl text-gray-300 leading-relaxed font-light">
-              Desplegamos agentes de IA y flujos de trabajo con **n8n** que gestionan 
-              tus ventas, atención al cliente y procesos internos de forma autónoma. 
-              Reduce costes operativos y escala sin límites.
-            </p>
-
-            <ul className="space-y-4 inline-block text-left">
-              {[
-                "Atención al cliente automatizada",
-                "Integración total con tus herramientas",
-                "Gestión de leads en tiempo real",
-                "Escalabilidad masiva y sin errores",
-              ].map((feat, idx) => (
-                <li key={idx} className="flex items-center space-x-3 group">
-                  <div className="w-2 h-2 bg-tupla-accent rounded-full group-hover:scale-150 transition-transform" />
-                  <span className="text-lg text-gray-200">{feat}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="pt-6">
-              <Button
-                size="lg"
-                className="bg-tupla-accent hover:bg-white hover:text-tupla-dark text-white px-10 py-8 rounded-full text-xl font-bold transition-all shadow-2xl shadow-tupla-accent/30"
+        {/* Orbital System (Responsive Scale) */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-30 lg:opacity-40 scale-75 lg:scale-100">
+          {[300, 550, 800].map((size, i) => (
+            <m.div
+              key={i}
+              initial={{ rotate: 0 }}
+              animate={{ rotate: 360 }}
+              transition={{ 
+                duration: 15 + i * 8, 
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
+              className="absolute border border-white/10 rounded-full"
+              style={{ width: size, height: size }}
+            />
+          ))}
+          
+          {nodes.map((node, i) => (
+            <m.div
+              key={i}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear", delay: -node.delay }}
+              className="absolute h-full flex items-start justify-center"
+              style={{ width: 300 + i * 120 }}
+            >
+              <m.div 
+                whileHover={{ scale: 1.2, backgroundColor: "rgba(255,255,255,0.1)" }}
+                className="p-3 lg:p-5 bg-black border border-white/20 rounded-xl backdrop-blur-xl shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all"
               >
-                Solicitar Consultoría Automatizada
-                <ArrowRight className="ml-3 w-6 h-6" />
-              </Button>
-            </div>
-          </m.div>
+                <node.icon size={18} className="text-white lg:w-5 lg:h-5" />
+              </m.div>
+            </m.div>
+          ))}
         </div>
       </div>
+
+      <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8 text-center space-y-12 lg:space-y-16">
+        <m.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          className="space-y-6 lg:space-y-8"
+        >
+          <div className="inline-flex items-center space-x-3 px-4 lg:px-6 py-2 rounded-md border border-white/10 bg-white/[0.05] text-[8px] lg:text-[10px] font-bold tracking-[0.4em] lg:tracking-[0.6em] uppercase text-white">
+            <Cpu size={12} className="animate-pulse lg:w-3.5 lg:h-3.5" />
+            <span>Automatización de Siguiente Nivel</span>
+          </div>
+
+          <h2 className="text-5xl md:text-8xl lg:text-9xl font-light font-outfit leading-[0.9] tracking-[0.6em] text-white uppercase">
+            <span className="opacity-10 block mb-2">n8n</span>
+            <span className="font-bold">Flow.</span>
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-16 max-w-4xl mx-auto pt-10">
+            {[
+              { title: "Sincronización Total", desc: "Conecta más de 400 aplicaciones (Gmail, WhatsApp, Stripe, ChatGPT) en flujos de trabajo inteligentes." },
+              { title: "Cero Errores", desc: "Sustituye tareas manuales por bots autónomos que trabajan 24/7 sin fallos humanos." }
+            ].map((info, idx) => (
+              <div key={idx} className="space-y-4 text-center md:text-left">
+                <span className="text-[10px] font-bold tracking-[0.4em] text-white uppercase">{info.title}</span>
+                <p className="text-[9px] lg:text-[11px] font-medium leading-relaxed tracking-[0.2em] uppercase text-white/30">
+                  {info.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </m.div>
+
+        <m.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex flex-col items-center space-y-8 lg:space-y-12"
+        >
+          <p className="text-[10px] lg:text-xs max-w-2xl mx-auto font-bold leading-relaxed tracking-[0.4em] uppercase text-white/40 px-4">
+            No es solo código. Es el sistema operativo de tu eficiencia.
+          </p>
+
+          <Link href="/n8n" prefetch={true}>
+            <Button 
+              className="group bg-white text-black hover:bg-gray-200 text-[10px] lg:text-[12px] font-bold uppercase tracking-[0.5em] px-10 lg:px-20 py-6 lg:py-10 rounded-md shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all hover:scale-105 w-full sm:w-auto"
+            >
+              Consultar con un Experto
+              <ArrowRight className="ml-3 lg:ml-5 w-4 h-4 lg:w-5 lg:h-5 group-hover:translate-x-2 transition-transform" />
+            </Button>
+          </Link>
+        </m.div>
+      </div>
+
+      {/* Decorative scanning line grid */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none" />
+
+      {/* Decorative vertical lines */}
+      <div className="absolute left-1/2 top-0 w-[1px] h-32 bg-gradient-to-b from-white/10 to-transparent" />
+      <div className="absolute left-1/2 bottom-0 w-[1px] h-32 bg-gradient-to-t from-white/10 to-transparent" />
     </section>
   );
 };

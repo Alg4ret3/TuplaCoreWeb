@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Clock, Zap } from "lucide-react";
 import { Button } from "@/components/atoms/button";
+import { Skeleton } from "@/components/atoms/skeleton";
 import { Badge } from "@/components/atoms/badge";
 import { m } from "framer-motion";
 import type { MotionProps } from "framer-motion";
@@ -22,6 +23,14 @@ const fadeUp = (delay = 0): MotionProps => ({
 });
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("todos");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleFilterChange = (id: string) => {
+    if (id === activeFilter) return;
+    setIsLoading(true);
+    setActiveFilter(id);
+    setTimeout(() => setIsLoading(false), 600); // Simulación de carga fluida
+  };
 
   // Función para obtener colores según la categoría
   const getCategoryColors = (category: string) => {
@@ -97,8 +106,8 @@ const Portfolio = () => {
       >
         {/* Animated Background Elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-tupla-primary/20 rounded-full blur-[120px] group-hover:scale-110 transition-transform duration-[3s]" />
-          <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-tupla-accent/10 rounded-full blur-[100px] group-hover:translate-x-10 transition-transform duration-[4s]" />
+          <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-tupla-primary/20 rounded-full blur-[120px] group-hover:scale-110 transition-transform duration-1000" />
+          <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-tupla-accent/10 rounded-full blur-[100px] group-hover:translate-x-10 transition-transform duration-2000" />
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/big-dot-grid.png')] opacity-[0.05] pointer-events-none" />
         </div>
 
@@ -148,7 +157,8 @@ const Portfolio = () => {
           {filters.map((filter) => (
             <button
               key={filter.id}
-              onClick={() => setActiveFilter(filter.id)}
+              onClick={() => handleFilterChange(filter.id)}
+              aria-pressed={activeFilter === filter.id}
               className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 border ${
                 activeFilter === filter.id
                   ? "bg-tupla-dark dark:bg-white text-white dark:text-black border-transparent shadow-lg scale-105"
@@ -162,73 +172,92 @@ const Portfolio = () => {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <m.div
-              key={project.id}
-              className={`group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border ${getCategoryColors(project.category)}`}
-              {...fadeUp(index * 0.1)}
-            >
-              {/* Project Image */}
-              <div className="relative overflow-hidden h-48">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-tupla-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-
-                {/* Project Content */}
-              <div className="p-8 space-y-6">
+          {isLoading ? (
+            Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="space-y-6 p-8 border border-gray-100 dark:border-white/5 rounded-xl">
+                <Skeleton className="h-48 w-full rounded-xl" />
                 <div className="space-y-3">
-                  <div className="flex justify-between items-start">
-                    <h3 className={`text-2xl font-black text-black dark:text-white uppercase tracking-tight italic transition-colors duration-300 leading-tight ${getCategoryAccent(project.category)}`}>
-                      {project.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed font-normal">
-                    {project.description}
-                  </p>
+                  <Skeleton className="h-8 w-3/4" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                </div>
+                <div className="grid grid-cols-2 gap-4 py-4 border-y border-gray-100 dark:border-white/5">
+                  <Skeleton className="h-10 w-full" />
+                  <Skeleton className="h-10 w-full" />
+                </div>
+                <Skeleton className="h-10 w-full rounded-lg" />
+              </div>
+            ))
+          ) : (
+            filteredProjects.map((project, index) => (
+              <m.div
+                key={project.id}
+                className={`group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border ${getCategoryColors(project.category)}`}
+                {...fadeUp(index * 0.1)}
+              >
+                {/* Project Image */}
+                <div className="relative overflow-hidden h-48">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-tupla-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
-                {/* Tech & Duration Stats */}
-                <div className="grid grid-cols-2 gap-4 py-4 border-y border-gray-100 dark:border-white/5">
-                  <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Tecnologías</span>
-                    <div className="flex flex-wrap gap-1.5 mt-1">
-                      {project.technologies.slice(0, 3).map((tech, idx) => (
-                        <span key={idx} className={`text-[10px] font-bold ${getCategoryAccent(project.category)}`}>
-                          #{tech}
-                        </span>
-                      ))}
+                  {/* Project Content */}
+                <div className="p-8 space-y-6">
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-start">
+                      <h3 className={`text-2xl font-black text-black dark:text-white uppercase tracking-tight italic transition-colors duration-300 leading-tight ${getCategoryAccent(project.category)}`}>
+                        {project.title}
+                      </h3>
+                    </div>
+                    <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed font-normal">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Tech & Duration Stats */}
+                  <div className="grid grid-cols-2 gap-4 py-4 border-y border-gray-100 dark:border-white/5">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Tecnologías</span>
+                      <div className="flex flex-wrap gap-1.5 mt-1">
+                        {project.technologies.slice(0, 3).map((tech, idx) => (
+                          <span key={idx} className={`text-[10px] font-bold ${getCategoryAccent(project.category)}`}>
+                            #{tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-1 text-right">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Desarrollo</span>
+                      <span className="text-xs font-bold text-black dark:text-white mt-1 flex items-center justify-end gap-1.5">
+                        <Clock className={`w-3 h-3 ${getCategoryAccent(project.category)}`} />
+                        {project.duration}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex flex-col gap-1 text-right">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Desarrollo</span>
-                    <span className="text-xs font-bold text-black dark:text-white mt-1 flex items-center justify-end gap-1.5">
-                      <Clock className={`w-3 h-3 ${getCategoryAccent(project.category)}`} />
-                      {project.duration}
-                    </span>
-                  </div>
-                </div>
 
-                <Link href={`/portafolio/${project.id}`} className="block">
-                  <Button className={`w-full text-white font-black uppercase tracking-widest text-[10px] h-10 rounded-lg transition-all ${
-                    project.category === "web" 
-                      ? "bg-green-600 hover:bg-green-700" 
-                      : project.category === "mobile" 
-                      ? "bg-blue-600 hover:bg-blue-700" 
-                      : project.category === "software"
-                      ? "bg-purple-600 hover:bg-purple-700"
-                      : "bg-red-600 hover:bg-red-700"
-                  }`}>
-                    Ver Detalles
-                  </Button>
-                </Link>
-              </div>
-            </m.div>
-          ))}
+                  <Link href={`/portafolio/${project.id}`} className="block">
+                    <Button className={`w-full text-white font-black uppercase tracking-widest text-[10px] h-10 rounded-lg transition-all ${
+                      project.category === "web" 
+                        ? "bg-green-600 hover:bg-green-700" 
+                        : project.category === "mobile" 
+                        ? "bg-blue-600 hover:bg-blue-700" 
+                        : project.category === "software"
+                        ? "bg-purple-600 hover:bg-purple-700"
+                        : "bg-red-600 hover:bg-red-700"
+                    }`}>
+                      Ver Detalles
+                    </Button>
+                  </Link>
+                </div>
+              </m.div>
+            ))
+          )}
         </div>
 
         {/* Gallery Footer */}

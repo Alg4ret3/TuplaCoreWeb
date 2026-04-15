@@ -1,210 +1,131 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { ArrowRight, Zap, Smartphone, Globe } from "lucide-react";
+import { m } from "framer-motion";
+import { ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/atoms/button";
 import { useRouter } from "next/navigation";
 
 const Hero = () => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [textIndex, setTextIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
-  const rotatingTexts = useMemo(
-    () => [
-      "Software a Medida",
-      "Web Modernas",
-      "Apps Móviles",
-    ],
-    [],
-  );
-
-  useEffect(() => {
-    const fullText = rotatingTexts[textIndex];
-    const speed = isDeleting ? 50 : 100; // velocidad de escritura y borrado
-
-    const timeout = setTimeout(() => {
-      setDisplayedText((prev) =>
-        isDeleting
-          ? fullText.substring(0, prev.length - 1)
-          : fullText.substring(0, prev.length + 1),
-      );
-
-      // Si terminó de escribir, espera antes de borrar
-      if (!isDeleting && displayedText === fullText) {
-        setTimeout(() => setIsDeleting(true), 1000);
-      }
-
-      // Si terminó de borrar, pasa al siguiente texto
-      if (isDeleting && displayedText === "") {
-        setIsDeleting(false);
-        setTextIndex((prev) => (prev + 1) % rotatingTexts.length);
-      }
-    }, speed);
-
-    return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, textIndex, rotatingTexts]);
-
-  useEffect(() => {
-    // Al recargar la página, desplaza suavemente al inicio
-    const element = document.querySelector("#inicio");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  }, []);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
   };
 
-  const [isMobile, setIsMobile] = (require("react")).useState(false);
-  (require("react")).useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.8,
+      }
+    },
+  };
 
   return (
-    <section
-      id="inicio"
-      className="relative min-h-screen bg-white transition-colors duration-500 dark:bg-gradient-to-br dark:from-tupla-dark dark:via-tupla-dark dark:to-gray-900 overflow-hidden"
-    >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 -left-4 w-72 h-72 bg-tupla-primary rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-        <div className="absolute top-0 -right-4 w-72 h-72 bg-tupla-accent rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-tupla-primary rounded-full mix-blend-multiply filter blur-xl animate-pulse animation-delay-4000"></div>
-      </div>
+    <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center pt-20">
+      {/* Background is now global in page.tsx */}
 
-      {/* Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 min-h-screen flex items-center">
-        <div className="flex flex-col lg:flex-row items-center gap-12 w-full">
-          {/* Left Column - Text Content */}
-          <div className={`text-tupla-dark dark:text-white space-y-8 text-center lg:text-left w-full ${isMobile ? '' : 'animate-fade-in'}`}>
-            <div className="space-y-4">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight uppercase tracking-tighter italic">
-                Transformamos Ideas en <br />
-                <span className="text-tupla-accent relative min-h-[1em] inline-block">
-                  {displayedText}
-                  <span className="animate-pulse">|</span>{" "}
-                  {/* cursor parpadeante */}
-                </span>
-              </h1>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                Desarrollamos soluciones tecnológicas innovadoras para empresas
-                que buscan digitalizar sus operaciones y alcanzar el éxito
-                digital.
-              </p>
-            </div>
 
-            {/* Features List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <Globe className="h-6 w-6 text-tupla-accent" />
-                <span className="text-sm font-medium text-tupla-dark dark:text-white">
-                  Web Responsivo
-                </span>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <Smartphone className="h-6 w-6 text-tupla-accent" />
-                <span className="text-sm font-medium text-tupla-dark dark:text-white">
-                  Apps Nativas
-                </span>
-              </div>
-              <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <Zap className="h-6 w-6 text-tupla-accent" />
-                <span className="text-sm font-medium text-tupla-dark dark:text-white">
-                  Alta Performance
-                </span>
-              </div>
-            </div>
+      <m.div 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 max-w-7xl mx-auto px-6 text-center"
+      >
+        <header>
+          {/* Minimalist Badge */}
+          <m.div variants={itemVariants} className="mb-10">
+            <span className="inline-block text-[10px] font-bold tracking-extrawide uppercase text-white border border-white/20 px-6 py-2 rounded-full backdrop-blur-md">
+              Tupla Core Studio
+            </span>
+          </m.div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button
-                onClick={() => {
-                  const waNumber = "573193142840";
-                  const waMessage = "Hola! Estoy en el sitio web de Tupla Core y me gustaría solicitar una cotización para un nuevo proyecto.";
-                  window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
-                }}
-                size="lg"
-                className="bg-tupla-accent hover:bg-tupla-accent/80 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                Solicitar Cotización
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                onClick={() => router.push("/portafolio")}
-                size="lg"
-                className="bg-tupla-primary hover:bg-tupla-primary/80 text-white font-semibold px-8 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                Ver Proyectos
-              </Button>
-            </div>
+          {/* Ultra-Minimalist Title */}
+          <m.h1 
+            variants={itemVariants} 
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-[110px] font-outfit font-light leading-[1.1] sm:leading-[0.9] lg:leading-[0.85] tracking-extrawide text-white uppercase text-center"
+          >
+            <span className="opacity-10 block mb-2 sm:mb-4">Diseñamos</span>
+            <span className="opacity-30 block mb-2 sm:mb-4">El Futuro</span>
+            <span className="text-white font-bold block">Digital</span>
+          </m.h1>
+        </header>
+
+        {/* Subtitle */}
+        <m.p 
+          variants={itemVariants} 
+          className="mt-8 sm:mt-12 text-gray-400 max-w-xs sm:max-w-2xl mx-auto text-[10px] md:text-sm font-outfit tracking-extrawide uppercase leading-relaxed px-4"
+        >
+          Creamos experiencias tecnológicas de alto impacto que fusionan arte,
+          estratégia y software de vanguardia.
+        </m.p>
+
+        {/* CTA Actions */}
+        <nav aria-label="CTA links">
+          <m.div 
+            variants={itemVariants} 
+            className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-8"
+          >
+            <Button
+              size="lg"
+              aria-label="Solicitar cotización por WhatsApp"
+              onClick={() => {
+                const waNumber = "573193142840";
+                const waMessage = "Hola! Quiero empezar un proyecto minimalista con Tupla Core.";
+                window.open(`https://wa.me/${waNumber}?text=${waMessage}`, '_blank');
+              }}
+              className="bg-white text-black hover:bg-gray-200 text-[11px] font-bold uppercase tracking-extrawide px-12 py-8 rounded-md transition-all duration-500 shadow-2xl shadow-white/5 hover:scale-105"
+            >
+              Empezar Ahora
+            </Button>
+            
+            <button
+              onClick={() => router.push("/portafolio")}
+              aria-label="Ver portafolio de proyectos"
+              className="group flex items-center space-x-4 text-white text-[11px] font-bold uppercase tracking-extrawide hover:opacity-70 transition-all"
+            >
+              <span>Ver Portafolio</span>
+              <div className="w-12 h-12 rounded-md border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </div>
+            </button>
+          </m.div>
+        </nav>
+
+        {/* Stats Row */}
+        <m.div 
+          variants={itemVariants}
+          className="mt-24 grid grid-cols-3 gap-8 md:gap-20 border-t border-white/10 pt-10 opacity-30"
+          role="region"
+          aria-label="Estadísticas de la empresa"
+        >
+          <div className="flex flex-col gap-2 text-white">
+            <span className="text-xl md:text-3xl font-light font-outfit tracking-tighter">10+</span>
+            <span className="text-[8px] uppercase tracking-extrawide font-bold">Proyectos</span>
           </div>
-
-          {/* Right Column - Visual Element */}
-          <div className={`w-full max-w-md lg:max-w-lg ${isMobile ? '' : 'animate-slide-up'}`}>
-            <div className="relative z-10 bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-              <div className="space-y-6">
-                {/* Mock Code Editor */}
-                <div className="bg-tupla-dark rounded-lg p-4 overflow-x-auto">
-                  <div className="flex items-center space-x-2 mb-4">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  </div>
-                  <pre className="text-white bg-gray-900 p-4 rounded-md text-sm">
-                    <code>
-                      {`const solution = {
-  web: 'responsive',
-  mobile: 'native',
-  software: 'custom'
-};`}
-                    </code>
-                  </pre>
-                </div>
-
-                {/* Stats */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-white/5 rounded-lg">
-                    <div className="text-2xl font-bold text-tupla-accent">
-                      10+
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">
-                      Proyectos
-                    </div>
-                  </div>
-                  <div className="text-center p-4 bg-white/5 rounded-lg">
-                    <div className="text-2xl font-bold text-tupla-accent">
-                      94%
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">
-                      Satisfacción
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Floating Elements */}
-            <div className={`absolute -top-4 -right-4 w-20 h-20 bg-tupla-primary rounded-full opacity-20 ${isMobile ? '' : 'animate-bounce'}`}></div>
-            <div className={`absolute -bottom-4 -left-4 w-16 h-16 bg-tupla-accent rounded-full opacity-20 ${isMobile ? '' : 'animate-bounce animation-delay-1000'}`}></div>
+          <div className="flex flex-col gap-2 text-white">
+            <span className="text-xl md:text-3xl font-light font-outfit tracking-tighter">94%</span>
+            <span className="text-[8px] uppercase tracking-extrawide font-bold">Satisfacción</span>
           </div>
-        </div>
-      </div>
+          <div className="flex flex-col gap-2 text-white">
+            <span className="text-xl md:text-3xl font-light font-outfit tracking-tighter">24/7</span>
+            <span className="text-[8px] uppercase tracking-extrawide font-bold">Soporte</span>
+          </div>
+        </m.div>
+      </m.div>
 
-      {/* Scroll Indicator */}
-      <div className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 ${isMobile ? 'hidden' : 'animate-bounce'}`}>
-        <div className="w-6 h-10 border-2 border-tupla-dark/30 dark:border-white/30 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-tupla-dark/50 dark:bg-white/50 rounded-full mt-2 animate-pulse"></div>
-        </div>
-      </div>
+      {/* Side Decorative line */}
+      <div className="absolute left-10 top-1/2 -translate-y-1/2 w-[1px] h-32 bg-gradient-to-b from-transparent via-white/20 to-transparent hidden xl:block" />
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 w-[1px] h-32 bg-gradient-to-b from-transparent via-white/20 to-transparent hidden xl:block" />
     </section>
   );
 };

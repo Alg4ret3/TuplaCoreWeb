@@ -1,9 +1,7 @@
 "use client";
 import type { MotionProps } from "framer-motion";
-import { useState } from "react";
 import { m } from "framer-motion";
 import { Globe, Smartphone, Settings, ArrowRight, Check } from "lucide-react";
-import { Button } from "@/components/atoms/button";
 import {
   Card,
   CardContent,
@@ -13,253 +11,107 @@ import {
 } from "@/components/atoms/card";
 
 const fadeUp = (delay = 0): MotionProps => ({
-  initial: { opacity: 0, y: 50 },
+  initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: 50 },
   transition: {
     duration: 0.8,
     delay,
-    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    ease: [0.16, 1, 0.3, 1],
   },
-  viewport: { once: false, amount: 0.2 },
+  viewport: { once: true },
 });
 
-const zoomIn = (delay = 0): MotionProps => ({
-  initial: { opacity: 0, scale: 0.8 },
-  whileInView: { opacity: 1, scale: 1 },
-  exit: { opacity: 0, scale: 0.8 },
-  transition: {
-    duration: 0.8,
-    delay,
-    ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
-  },
-  viewport: { once: false, amount: 0.2 },
-});
 const Services = () => {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-
   const services = [
     {
+      icon: Settings,
+      title: "Agentes de IA con n8n",
+      description: "Automatización inteligente. Agentes de IA integrados con n8n que transforman flujos de trabajo repetitivos en sistemas autónomos.",
+      features: ["Agentes Autónomos", "Integración n8n", "Automatización de Procesos", "IA Conversacional"],
+      hoverBg: "group-hover:bg-white/[0.03]",
+    },
+    {
       icon: Globe,
-      title: "Desarrollo Web",
-      description:
-        "Sitios web modernos, responsivos y optimizados para SEO que impulsan tu presencia digital.",
-      features: [
-        "Diseño responsivo",
-        "Optimización SEO",
-        "Panel de administración",
-        "Integración con redes sociales",
-        "Analytics y métricas",
-      ],
-      technologies: ["React", "Next.js", "TailwindCSS", "Node.js"],
-      gradient: "from-blue-500 to-cyan-500",
+      title: "Desarrollo Web a Medida",
+      description: "Interfaces que respiran. Sitios web y plataformas personalizadas que fusionan estética editorial con rendimiento extremo.",
+      features: ["Next.js & React", "SEO Arquitectónico", "UX Minimalista", "Cloud Solutions"],
+      hoverBg: "group-hover:bg-white/[0.03]",
     },
     {
       icon: Smartphone,
       title: "Aplicaciones Móviles",
-      description:
-        "Apps nativas y multiplataforma que conectan con tus usuarios de manera efectiva.",
-      features: [
-        "iOS y Android",
-        "UI/UX intuitivo",
-        "Notificaciones push",
-        "Integración con APIs",
-        "Soporte offline",
-      ],
-      technologies: ["React Native", "Flutter", "Swift", "Kotlin"],
-      gradient: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: Settings,
-      title: "Software a Medida",
-      description:
-        "Soluciones personalizadas que se adaptan perfectamente a los procesos de tu empresa.",
-      features: [
-        "Análisis de requerimientos",
-        "Arquitectura escalable",
-        "Integración con sistemas",
-        "Automatización de procesos",
-        "Soporte técnico",
-      ],
-      technologies: ["Python", "Java", "C#", ".NET"],
-      gradient: "from-green-500 to-teal-500",
+      description: "Experiencias nativas fluidas. Diseñamos apps para el pulgar y para la vista, priorizando simplicidad y rendimiento.",
+      features: ["iOS & Android", "React Native", "Micro-interacciones", "Push Intelligence"],
+      hoverBg: "group-hover:bg-white/[0.03]",
     },
   ];
 
-  const scrollToContact = () => {
-    const element = document.querySelector("#contacto");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <section id="servicios" className="py-20 bg-tupla-light dark:bg-tupla-dark/40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="servicios" className="py-32 bg-background border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-8">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="mb-24 text-center lg:text-left">
           <m.h2
             {...fadeUp(0)}
-            className="text-4xl md:text-6xl font-black text-tupla-dark dark:text-white mb-6 uppercase tracking-tighter italic"
+            className="text-4xl md:text-6xl font-light text-white uppercase tracking-extrawide font-outfit mb-8"
           >
-            Impulsa tu <span className="text-tupla-accent">Éxito Digital</span>
+            Nuestros <span className="font-bold">Servicios</span>
           </m.h2>
 
           <m.p
-            {...zoomIn(0.15)}
-            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed font-light"
+            {...fadeUp(0.1)}
+            className="text-gray-500 max-w-2xl text-[10px] uppercase tracking-widest leading-relaxed font-bold"
           >
-            No solo creamos software; construimos los cimientos tecnológicos de tu 
-            crecimiento. Soluciones a medida, escalables y orientadas a resultados 
-            que transforman tu visión en una realidad competitiva.
+            Llevamos la ingeniería al plano artístico. No entregamos código, 
+            entregamos soluciones diseñadas para perdurar y destacar en el ecosistema digital moderno.
           </m.p>
         </div>
 
         {/* Services Grid */}
-        <m.div
-          {...fadeUp(0.2)}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           {services.map((service, index) => {
             const IconComponent = service.icon;
             return (
-              <Card
-                key={index}
-                className={`relative overflow-hidden transition-all duration-500 cursor-pointer group bg-white dark:bg-tupla-dark/60 dark:border-white/10 ${
-                  hoveredCard === index
-                    ? "transform -translate-y-2 shadow-2xl"
-                    : "hover:shadow-lg"
-                }`}
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-              >
-                {/* Gradient Background */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                />
-
-                <CardHeader className="relative z-10">
-                  <div className="flex items-center space-x-4 mb-4">
-                    <div
-                      className={`p-3 rounded-lg bg-gradient-to-br ${service.gradient} text-white`}
-                    >
-                      <IconComponent className="h-6 w-6" />
+              <m.div key={index} {...fadeUp(0.1 * index)}>
+                <Card className={`bg-transparent border-white/5 hover:border-white/20 transition-all duration-700 h-full flex flex-col group p-8 rounded-xl overflow-hidden relative ${service.hoverBg}`}>
+                  <CardHeader className="p-0 mb-8 z-10">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="p-3 rounded-2xl bg-white/5 border border-white/10 text-white group-hover:scale-110 transition-transform duration-500">
+                        <IconComponent size={20} strokeWidth={1.5} />
+                      </div>
+                      <CardTitle className="text-sm font-bold uppercase tracking-extrawide text-white font-outfit">
+                        {service.title}
+                      </CardTitle>
                     </div>
-                    <CardTitle className="text-2xl font-bold text-tupla-dark dark:text-white">
-                      {service.title}
-                    </CardTitle>
-                  </div>
-                  <CardDescription className="text-gray-600 dark:text-gray-400 text-lg leading-relaxed">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
+                    <CardDescription className="text-gray-400 text-xs uppercase tracking-widest leading-relaxed">
+                      {service.description}
+                    </CardDescription>
+                  </CardHeader>
 
-                <CardContent className="relative z-10 space-y-6">
-                  {/* Features */}
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-tupla-dark dark:text-white">
-                      Características:
-                    </h4>
-                    <ul className="space-y-2">
+                  <CardContent className="p-0 space-y-10 z-10 flex-grow">
+                    <ul className="space-y-4">
                       {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-center space-x-2">
-                          <Check className="h-4 w-4 text-tupla-accent" />
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
+                        <li key={idx} className="flex items-center space-x-3">
+                          <Check className="h-3 w-3 text-white/40" />
+                          <span className="text-[9px] uppercase tracking-widest text-gray-500 font-bold">
                             {feature}
                           </span>
                         </li>
                       ))}
                     </ul>
-                  </div>
 
-                  {/* Technologies */}
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-tupla-dark dark:text-white">
-                      Tecnologías:
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {service.technologies.map((tech, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 bg-gray-100 dark:bg-white/10 text-tupla-dark dark:text-gray-300 text-xs font-medium rounded-full"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                    <div className="pt-6 border-t border-white/5 mt-auto">
+                      <button className="flex items-center space-x-3 text-white text-[10px] uppercase tracking-extrawide font-bold group/btn">
+                        <span>Saber más</span>
+                        <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+                      </button>
                     </div>
-                  </div>
-
-                  {/* CTA Button */}
-                  <Button
-                    onClick={scrollToContact}
-                    className="w-full bg-tupla-primary hover:bg-tupla-accent text-white transition-colors duration-300"
-                  >
-                    Solicitar Información
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </m.div>
             );
           })}
-        </m.div>
-
-        {/* Process Section */}
-        <m.div
-          {...fadeUp(0.3)}
-          className="bg-white dark:bg-tupla-dark/60 rounded-2xl p-8 md:p-12 shadow-lg dark:border dark:border-white/10"
-        >
-          <h3 className="text-3xl font-bold text-tupla-dark dark:text-white text-center mb-12">
-            Nuestro Proceso de Trabajo
-          </h3>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Análisis",
-                desc: "Entendemos tus necesidades y objetivos",
-              },
-              {
-                step: "02",
-                title: "Diseño",
-                desc: "Creamos prototipos y wireframes",
-              },
-              {
-                step: "03",
-                title: "Desarrollo",
-                desc: "Programamos con las mejores prácticas",
-              },
-              {
-                step: "04",
-                title: "Entrega",
-                desc: "Desplegamos y brindamos soporte",
-              },
-            ].map((item, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-4 flex justify-center">
-                  <m.div
-                    whileHover={{
-                      scale: [1, 1.15, 0.95, 1.05, 1],
-                      transition: { duration: 0.8, ease: "easeOut" },
-                    }}
-                    className="w-16 h-16 bg-tupla-primary rounded-full flex items-center justify-center text-white font-bold text-lg mx-auto "
-                    
-                  >
-                    {item.step}
-                  </m.div>
-
-                  {index < 3 && (
-                    <div className="hidden md:block absolute left-full top-1/2 transform -translate-y-1/2 w-16 h-0.5 bg-tupla-primary"></div>
-                  )}
-                </div>
-                <h4 className="text-xl font-semibold text-tupla-dark dark:text-white mb-2">
-                  {item.title}
-                </h4>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </m.div>
+        </div>
       </div>
     </section>
   );

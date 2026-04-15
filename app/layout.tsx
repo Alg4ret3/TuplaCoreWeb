@@ -1,10 +1,11 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Audiowide } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 
 import AOSProvider from '@/components/atoms/aos/AOSProvider';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { FramerProvider } from '@/components/providers/framer-provider';
+
 import WhatsAppButton from '@/components/atoms/WhatsAppButton';
 
 const inter = Inter({ 
@@ -13,10 +14,9 @@ const inter = Inter({
   display: 'swap',
 });
 
-const audiowide = Audiowide({
-  weight: '400',
+const outfit = Outfit({
   subsets: ['latin'],
-  variable: '--font-audiowide',
+  variable: '--font-outfit',
   display: 'swap',
 });
 
@@ -59,17 +59,45 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${audiowide.variable}`}>
-      <body className={inter.className}>
+    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${outfit.variable}`}>
+      <body className={`${inter.className} bg-black text-white relative`}>
+        {/* Persistent Video Background - GLOBAL */}
+        <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="w-full h-full object-cover brightness-[0.5] contrast-[1.1]"
+          >
+            <source 
+              src="https://res.cloudinary.com/dqky6oqrd/video/upload/f_auto,q_auto/v1776289495/lcsg5tvt1nriu8ffr7tw.mp4" 
+              type="video/mp4" 
+            />
+          </video>
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black" />
+        </div>
+
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-tupla-primary focus:text-white focus:rounded-md focus:outline-none"
+        >
+          Saltar al contenido principal
+        </a>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
-          enableSystem
+          forcedTheme="dark"
           disableTransitionOnChange
         >
           <FramerProvider>
             <AOSProvider>
-              {children}
+              <main id="main-content" className="relative z-10 font-outfit">
+                {children}
+              </main>
               <WhatsAppButton />
             </AOSProvider>
           </FramerProvider>

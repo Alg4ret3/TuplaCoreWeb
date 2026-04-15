@@ -42,17 +42,16 @@ const N8nSalesBanner = () => {
             viewport={{ once: true }}
             className="space-y-8"
           >
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-tupla-primary/5 dark:bg-white/5 border border-tupla-primary/10 dark:border-white/10 backdrop-blur-md">
-              <Zap className="w-4 h-4 text-tupla-primary dark:text-tupla-accent" />
-              <span className="text-sm font-bold tracking-widest uppercase text-tupla-primary/60 dark:text-gray-300">
-                Automatización Inteligente
-              </span>
+            <div className="inline-flex items-center space-x-3 px-5 py-2 rounded-full bg-primary/5 border border-primary/10 text-[10px] font-bold tracking-minimal text-primary/60 uppercase font-outfit">
+              <Zap className="w-3.5 h-3.5 text-primary" />
+              <span>Automatización Inteligente</span>
             </div>
 
-            <h2 className="text-3xl md:text-5xl font-black leading-[1.1] tracking-tighter uppercase italic text-tupla-dark dark:text-white mb-8">
-              Tu Negocio en <br />
-              <span className="text-tupla-accent">
-                Piloto Automático
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-light font-outfit leading-[0.85] tracking-extrawide text-foreground mb-12 uppercase">
+              <span className="opacity-10 block mb-4">Tu Negocio en</span>
+              <span className="text-primary/20 block mb-2">Piloto</span>
+              <span className="text-tupla-accent font-bold">
+                Automático
               </span>
             </h2>
 
@@ -66,10 +65,10 @@ const N8nSalesBanner = () => {
               <Link href="/planes">
                 <Button
                   size="lg"
-                  className="bg-tupla-accent hover:bg-tupla-primary text-white font-bold px-10 py-7 rounded-xl transition-all hover:scale-105 shadow-[0_15px_30px_-5px_rgba(30,144,255,0.3)] group"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 text-[11px] font-bold uppercase tracking-minimal px-10 py-7 rounded-full transition-all duration-300 shadow-xl shadow-primary/10 hover:shadow-2xl hover:scale-105"
                 >
-                  CONOCE NUESTROS PLANES
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  Conoce Nuestros Planes
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>

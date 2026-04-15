@@ -11,7 +11,7 @@ const config: Config = {
     extend: {
       fontFamily: {
         inter: ['var(--font-inter)', 'sans-serif'],
-        audiowide: ['var(--font-audiowide)', 'cursive'],
+        outfit: ['var(--font-outfit)', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -27,10 +27,10 @@ const config: Config = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
 
-        'tupla-primary': '#1E90FF',  // azul morado
-        'tupla-accent': '#00C896',   // violeta
-        'tupla-dark': '#121212',     // negro grisáceo
-        'tupla-light': '#F4F4F4',    // gris muy claro
+        'tupla-primary': 'hsl(var(--tupla-primary))',
+        'tupla-accent': 'hsl(var(--tupla-accent))',
+        'tupla-dark': 'hsl(var(--background))',
+        'tupla-light': 'hsl(var(--muted))',
 
         card: {
           DEFAULT: 'hsl(var(--card))',

@@ -1,6 +1,5 @@
 import Navbar from '@/components/organisms/Navbar';
 import Footer from '@/components/organisms/Footer';
-import ProjectDetail from '@/components/organisms/ProjectDetail';
 import { projectsData } from '@/constants/portfolioData';
 import { notFound } from 'next/navigation';
 
@@ -47,7 +46,6 @@ export default function ProjectPage({ params }: { params: Params }) {
   return (
     <main className="min-h-screen">
       <Navbar />
-      <ProjectDetail project={project} />
       <Footer />
     </main>
   );

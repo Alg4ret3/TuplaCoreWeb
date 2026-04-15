@@ -3,6 +3,7 @@
 import { m } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { LucideIcon } from "lucide-react";
+import { useState, useEffect } from "react";
 
 interface PromoBannerProps {
   title: string;
@@ -13,7 +14,7 @@ interface PromoBannerProps {
   buttonText: string;
   onClick?: () => void;
   className?: string;
-  variant?: "slate" | "navy" | "charcoal" | "steel" | "light";
+  variant?: "slate" | "charcoal" | "steel";
   fullWidth?: boolean;
 }
 
@@ -26,27 +27,11 @@ const PromoBanner = ({
   buttonText,
   onClick,
   className = "",
-  variant = "slate",
   fullWidth = true
 }: PromoBannerProps) => {
-  const variants = {
-    slate: "bg-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 border-y border-slate-200 dark:border-slate-700/50",
-    navy: "bg-blue-50/50 dark:from-[#0a192f] dark:via-[#112240] dark:to-[#0a192f] border-y border-blue-100 dark:border-blue-900/30",
-    charcoal: "bg-neutral-50 dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 border-y border-neutral-200 dark:border-neutral-700/50",
-    steel: "bg-zinc-50 dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900 border-y border-zinc-200 dark:border-zinc-700/50",
-    light: "bg-white dark:from-neutral-900 dark:via-neutral-800 dark:to-neutral-900 border-y border-gray-100 dark:border-neutral-700/50"
-  };
-
-  const textColors = {
-    slate: "text-slate-900 dark:text-white",
-    navy: "text-blue-900 dark:text-white",
-    charcoal: "text-neutral-900 dark:text-white",
-    steel: "text-zinc-900 dark:text-white",
-    light: "text-slate-900 dark:text-white"
-  };
-
-  const [isMobile, setIsMobile] = (require("react")).useState(false);
-  (require("react")).useEffect(() => {
+  const [isMobile, setIsMobile] = useState(false);
+  
+  useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -54,36 +39,28 @@ const PromoBanner = ({
   }, []);
 
   return (
-    <section className={`relative overflow-hidden ${fullWidth ? "w-full" : "max-w-7xl mx-auto rounded-3xl"} ${className}`}>
-      {/* Background with understated professional gradient */}
-      <div className={`absolute inset-0 bg-gradient-to-r dark:block hidden ${variants[variant]}`} />
-      <div className={`absolute inset-0 block dark:hidden ${variants[variant]}`} />
-      
-      {/* Subtle architectural background elements */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-10 pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-tupla-primary/10 dark:bg-white/5 rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-tupla-accent/10 dark:bg-white/5 rounded-full blur-[150px] translate-y-1/2 -translate-x-1/2" />
-      </div>
+    <section className={`relative overflow-hidden ${fullWidth ? "w-full border-y" : "max-w-7xl mx-auto rounded-xl border"} border-white/5 bg-transparent ${className}`}>
 
-      <div className="relative max-w-7xl mx-auto px-6 py-14 md:py-20 z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+
+      <div className="relative max-w-7xl mx-auto px-10 py-20 md:py-32 z-10">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-16">
           
           {/* Content Wrapper */}
           <div className="flex-1 space-y-8 text-center md:text-left">
             {/* Professional Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-tupla-primary/5 dark:bg-white/5 border border-tupla-primary/10 dark:border-white/10 text-[0.65rem] font-bold tracking-[0.2em] text-tupla-primary/60 dark:text-white/60 uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-tupla-primary dark:text-blue-400" />
+            <div className="inline-flex items-center space-x-3 px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold tracking-minimal text-white uppercase font-outfit">
+              <Sparkles className="w-3.5 h-3.5 text-white/40" />
               <span>Oferta Corporativa Exclusiva</span>
             </div>
             
-            <h3 className={`text-4xl md:text-5xl lg:text-7xl font-bold leading-[1.15] tracking-tight ${textColors[variant]}`}>
-              {title} <br />
-              <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-tupla-primary via-blue-600 to-indigo-600 dark:from-blue-200 dark:to-indigo-200 italic pb-1 pr-10">
+            <h3 className={`text-4xl md:text-5xl lg:text-6xl font-light font-outfit leading-[1.2] tracking-[0.4em] uppercase text-white`}>
+              <span className="opacity-10 block mb-6">{title}</span>
+              <span className="font-bold">
                 {highlight}
               </span>
             </h3>
             
-            <p className={`text-lg md:text-xl max-w-2xl font-light leading-relaxed opacity-70 ${textColors[variant]}`}>
+            <p className={`text-[10px] md:text-xs max-w-xl font-bold leading-relaxed tracking-[0.3em] uppercase text-white/40`}>
               {description}
             </p>
           </div>
@@ -94,10 +71,10 @@ const PromoBanner = ({
               <div className="relative">
                 <div className="absolute -inset-8 bg-white/5 rounded-full blur-3xl" />
                 <div className="relative flex flex-col items-center md:items-end">
-                  <span className="text-7xl md:text-8xl font-light tracking-tighter text-tupla-dark dark:text-white/90">
+                  <span className="text-7xl md:text-8xl font-black font-outfit tracking-tighter text-white">
                     {discount}
                   </span>
-                  <span className="text-[0.6rem] font-bold tracking-[0.3em] uppercase opacity-40 text-tupla-dark dark:text-white mt-1">
+                  <span className="text-[8px] font-bold tracking-[0.5em] uppercase opacity-20 text-white mt-4 font-outfit text-right">
                     Descuento Preferencial
                   </span>
                 </div>
@@ -112,27 +89,20 @@ const PromoBanner = ({
             >
               <button
                 onClick={onClick}
-                className="group relative flex items-center space-x-4 bg-tupla-primary/5 dark:bg-white/5 hover:bg-tupla-primary/10 dark:hover:bg-white/10 active:scale-95 transition-all duration-300 pl-8 pr-1 py-1 rounded-full border border-tupla-primary/20 dark:border-white/10 backdrop-blur-sm"
+                className="group relative flex items-center space-x-6 bg-white text-black hover:bg-gray-200 active:scale-95 transition-all duration-300 pl-10 pr-2 py-2 rounded-md shadow-xl shadow-white/5 hover:scale-105"
               >
-                <span className={`text-base font-medium tracking-wide ${textColors[variant]}`}>
+                <span className="text-[11px] font-bold uppercase tracking-minimal font-outfit">
                   {buttonText}
                 </span>
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-tupla-primary text-white dark:bg-white dark:text-slate-900 group-hover:bg-tupla-accent group-hover:text-white transition-all duration-300 shadow-lg">
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" />
+                <div className="flex items-center justify-center w-10 h-10 rounded-md bg-black text-white transition-all duration-300">
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </div>
-                
-                {/* Subtle Shine */}
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-tupla-primary/5 dark:via-white/5 to-transparent -translate-x-full group-hover:animate-[shine_2s_infinite] pointer-events-none" />
               </button>
             </m.div>
           </div>
         </div>
       </div>
 
-      {/* Subtle Large Icon Background Graphic */}
-      <div className={`absolute -right-20 -bottom-20 opacity-[0.03] pointer-events-none ${textColors[variant]}`}>
-        <Icon size={500} strokeWidth={0.5} />
-      </div>
     </section>
   );
 };
