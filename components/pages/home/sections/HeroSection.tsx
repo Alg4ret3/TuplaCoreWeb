@@ -101,7 +101,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
            animationDelay: '0.5s' 
          }}
        >
-         Diseño & Desarrollo Web Minimalista
+         Diseño & Desarrollo de Software
        </p>
 
        {/* Description paragraph */}
@@ -112,7 +112,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
          }}
        >
          Creamos experiencias digitales que combinan estética y funcionalidad.
-         Más de 15 años transformando ideas en soluciones web innovadoras.
+         Más de 2 años transformando ideas en soluciones web innovadoras.
        </p>
 
       {/* Second description line */}
