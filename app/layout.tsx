@@ -1,22 +1,23 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Outfit } from 'next/font/google';
+import { Audiowide, Inter } from 'next/font/google';
 
-import AOSProvider from '@/components/atoms/aos/AOSProvider';
+
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { FramerProvider } from '@/components/providers/framer-provider';
 
 import WhatsAppButton from '@/components/atoms/WhatsAppButton';
 
-const inter = Inter({ 
+const audiowide = Audiowide({
   subsets: ['latin'],
-  variable: '--font-inter',
+  weight: '400',
+  variable: '--font-audiowide',
   display: 'swap',
 });
 
-const outfit = Outfit({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-outfit',
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -59,8 +60,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning className={`${inter.variable} ${outfit.variable}`}>
-      <body className={`${inter.className} bg-black text-white relative`}>
+    <html lang="es" suppressHydrationWarning className={`${audiowide.variable} ${inter.variable}`}>
+      <body className="font-audiowide bg-background text-foreground relative">
         {/* Persistent Video Background - GLOBAL */}
         <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
           <video
@@ -69,15 +70,15 @@ export default function RootLayout({
             muted
             playsInline
             preload="auto"
-            className="w-full h-full object-cover brightness-[0.5] contrast-[1.1]"
+            className="w-full h-full object-cover brightness-[1.1] contrast-[1.0]"
           >
             <source 
-              src="https://res.cloudinary.com/dqky6oqrd/video/upload/f_auto,q_auto/v1776289495/lcsg5tvt1nriu8ffr7tw.mp4" 
+              src="https://res.cloudinary.com/dqky6oqrd/video/upload/v1777062135/pumudh3z1nwd6hgccmgm.mp4" 
               type="video/mp4" 
             />
           </video>
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black" />
+          <div className="absolute inset-0 bg-white/80 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white" />
         </div>
 
         <a 
@@ -94,12 +95,12 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <FramerProvider>
-            <AOSProvider>
-              <main id="main-content" className="relative z-10 font-outfit">
+
+              <main id="main-content" className="relative z-10 font-plus-jakarta">
                 {children}
               </main>
               <WhatsAppButton />
-            </AOSProvider>
+
           </FramerProvider>
         </ThemeProvider>
       </body>
