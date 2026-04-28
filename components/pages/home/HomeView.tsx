@@ -22,64 +22,121 @@ const HomeView = () => {
   const heroTextRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(() => {
-    // 1. Animación Pixar Hero (TUPLA CORE) - Letter animation
+    // 1. Animación Rotativa 3D Vertical (TUPLA CORE)
     if (heroTextRef.current) {
       const letters = heroTextRef.current.querySelectorAll(".hero-letter");
+      
       gsap.fromTo(
         letters,
         {
           opacity: 0,
-          x: -80,
+          scale: 0,
+          filter: "blur(20px)",
+          rotationX: -180, // Giro vertical inicial
+          x: (i) => {
+            const mod = i % 4;
+            if (mod === 0) return -300; // Izquierda
+            if (mod === 2) return 300;  // Derecha
+            return 0;
+          },
+          y: (i) => {
+            const mod = i % 4;
+            if (mod === 1) return -300; // Arriba
+            if (mod === 3) return 300;  // Abajo
+            return 0;
+          }
         },
         {
           opacity: 1,
           x: 0,
-          duration: 0.8,
-          stagger: 0.06,
-          ease: "power3.out",
-          delay: 0.3,
+          y: 0,
+          scale: 1,
+          rotationX: 360, // Giro vertical completo
+          filter: "blur(0px)",
+          duration: 1.8,
+          stagger: 0.1,
+          ease: "power4.out",
+          delay: 0.5,
+          onComplete: () => {
+            // Loop infinito vertical solo para la "A" (índice 4)
+            if (letters[4]) {
+              gsap.to(letters[4], {
+                rotationX: "+=360",
+                duration: 4,
+                repeat: -1,
+                ease: "none",
+              });
+            }
+          }
         }
       );
     }
 
-    // 2. Subtitle - Fade up
-    gsap.fromTo(
-      ".js-subtitle",
-      { opacity: 0, y: 20 },
-      {
-        opacity: 0.7,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        delay: 1.2,
-      }
-    );
+    // 2. Subtitle - Spiral In
+    const subtitleLetters = document.querySelectorAll(".js-subtitle .hero-letter");
+    if (subtitleLetters.length > 0) {
+      gsap.fromTo(subtitleLetters, 
+        {
+          x: (i) => Math.cos(i) * 100,
+          y: (i) => Math.sin(i) * 100,
+          rotation: 360,
+          scale: 0,
+          opacity: 0,
+        },
+        {
+          x: 0,
+          y: 0,
+          rotation: 0,
+          scale: 1,
+          opacity: 1,
+          stagger: 0.02,
+          duration: 1,
+          ease: "power3.out",
+          delay: 1.2,
+        }
+      );
+    }
 
-    // 3. Description paragraph - Fade up
-    gsap.fromTo(
-      ".js-description",
-      { opacity: 0, y: 15 },
-      {
-        opacity: 0.5,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        delay: 1.4,
-      }
-    );
+    // 3. Description paragraph - Reveal Wipe
+    const description = document.querySelector(".js-description");
+    if (description) {
+      gsap.fromTo(description, 
+        {
+          clipPath: "inset(0 100% 0 0)",
+          opacity: 0,
+          x: -30
+        },
+        {
+          clipPath: "inset(0 0% 0 0)",
+          opacity: 1,
+          x: 0,
+          duration: 2,
+          ease: "power4.inOut",
+          delay: 1.6
+        }
+      );
+    }
 
-    // 4. Second description line (Innovación • Precisión • Pasión) - Fade up
-    gsap.fromTo(
-      ".js-tagline",
-      { opacity: 0, y: 10 },
-      {
-        opacity: 0.7,
-        y: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        delay: 1.6,
-      }
-    );
+    // 4. Animación FadeUpWords (KEYWORDS)
+    const pinballWords = document.querySelectorAll(".js-pinball-word");
+    if (pinballWords.length > 0) {
+      gsap.fromTo(pinballWords, 
+        {
+          opacity: 0,
+          y: 40,
+          filter: "blur(10px)"
+        },
+        {
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+          duration: 1.5,
+          stagger: 0.2,
+          ease: "power4.out",
+          delay: 2.5,
+        }
+      );
+    }
 
     // 5. Scroll Indicator - Fade in with bounce
     gsap.fromTo(
