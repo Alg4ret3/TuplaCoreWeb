@@ -1,4 +1,5 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Audio+Wide&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -27,13 +28,12 @@
     --input: 0 0% 90%;
     --ring: 0 0% 0%;
     --radius: 0.5rem;
-  @import url('https://fonts.googleapis.com/css2?family=Audio+Wide&display=swap');
+    --tupla-primary: 0 0% 0%;
+    --tupla-accent: 0 0% 35%;
+  }
 
   .font-audio-wide {
     font-family: 'Audio Wide', sans-serif;
-  }
-    --tupla-primary: 0 0% 0%;
-    --tupla-accent: 0 0% 35%;
   }
 
   * {
@@ -100,6 +100,10 @@
     50% {
       transform: translateY(-12px);
     }
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
   }
 }
 

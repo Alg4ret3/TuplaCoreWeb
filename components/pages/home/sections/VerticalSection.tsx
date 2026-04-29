@@ -6,17 +6,17 @@ const VerticalSection = forwardRef<HTMLElement>((_, ref) => {
     <section
       id="section-2"
       ref={ref}
-      className="relative z-20 bg-white h-[100dvh] flex items-center justify-center border-y border-black/5"
+      className="relative z-20 bg-white h-[75vh] w-full flex items-center justify-center overflow-hidden font-inter"
     >
-      <h2
-        id="s2-text"
-        className="text-2xl md:text-5xl font-plus-jakarta font-light uppercase tracking-[0.2em] md:tracking-[0.4em]"
-      >
-        Sección 2
-      </h2>
+      <div className="relative z-20">
+        <h2 className="text-sm tracking-[0.8em] uppercase text-black/20 font-medium">
+          SECCIÓN 2
+        </h2>
+      </div>
     </section>
   );
 });
 
 VerticalSection.displayName = "VerticalSection";
 export default VerticalSection;
+

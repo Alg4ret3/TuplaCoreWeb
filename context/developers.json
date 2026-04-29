@@ -1,0 +1,30 @@
+{
+  "developers": [
+    {
+      "id": "sergio-munoz",
+      "name": "Ing. Sergio Muñoz",
+      "image": "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg",
+      "skills": ["Fullstack", "GSAP", "React", "Next.js"],
+      "social": {
+        "linkedin": "https://linkedin.com/in/sergiomunoz",
+        "github": "https://github.com/sergiomunoz",
+        "telegram": "https://t.me/sergiomunoz",
+        "whatsapp": "https://wa.me/573000000000",
+        "phone": "+57 300 000 0000"
+      }
+    },
+    {
+      "id": "michael-coral",
+      "name": "Ing. Michael Coral",
+      "image": "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+      "skills": ["Frontend", "UI/UX", "Tailwind", "TypeScript"],
+      "social": {
+        "linkedin": "https://linkedin.com/in/michaelcoral",
+        "github": "https://github.com/michaelcoral",
+        "telegram": "https://t.me/michaelcoral",
+        "whatsapp": "https://wa.me/573000000000",
+        "phone": "+57 300 000 0000"
+      }
+    }
+  ]
+}

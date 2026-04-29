@@ -14,7 +14,6 @@ import HorizontalSection from './sections/HorizontalSection';
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = dynamic(() => import('@/components/organisms/Footer'), { ssr: false });
-const Toaster = dynamic(() => import('@/components/atoms/toaster').then(mod => mod.Toaster), { ssr: false });
 
 const HomeView = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -22,45 +21,35 @@ const HomeView = () => {
   const heroTextRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(() => {
-    // 1. Animación Rotativa 3D Vertical (TUPLA CORE)
-    if (heroTextRef.current) {
-      const letters = heroTextRef.current.querySelectorAll(".hero-letter");
-      
-      gsap.fromTo(
-        letters,
+    // --- 1. HERO MAIN TITLE (3D ROTATION) ---
+    const mainLetters = gsap.utils.toArray<HTMLElement>(".hero-letter", heroTextRef.current || undefined);
+    
+    if (mainLetters.length > 0) {
+      gsap.fromTo(mainLetters,
         {
           opacity: 0,
           scale: 0,
           filter: "blur(20px)",
-          rotationX: -180, // Giro vertical inicial
-          x: (i) => {
-            const mod = i % 4;
-            if (mod === 0) return -300; // Izquierda
-            if (mod === 2) return 300;  // Derecha
-            return 0;
-          },
-          y: (i) => {
-            const mod = i % 4;
-            if (mod === 1) return -300; // Arriba
-            if (mod === 3) return 300;  // Abajo
-            return 0;
-          }
+          rotationX: -180,
+          x: (i) => [-300, 0, 300, 0][i % 4],
+          y: (i) => [0, -300, 0, 300][i % 4],
         },
         {
           opacity: 1,
           x: 0,
           y: 0,
           scale: 1,
-          rotationX: 360, // Giro vertical completo
+          rotationX: 360,
           filter: "blur(0px)",
           duration: 1.8,
           stagger: 0.1,
           ease: "power4.out",
           delay: 0.5,
+          force3D: true,
           onComplete: () => {
-            // Loop infinito vertical solo para la "A" (índice 4)
-            if (letters[4]) {
-              gsap.to(letters[4], {
+            // Loop for the "A" in TUPLA
+            if (mainLetters[4]) {
+              gsap.to(mainLetters[4], {
                 rotationX: "+=360",
                 duration: 4,
                 repeat: -1,
@@ -72,75 +61,68 @@ const HomeView = () => {
       );
     }
 
-    // 2. Subtitle - Spiral In
-    const subtitleLetters = document.querySelectorAll(".js-subtitle .hero-letter");
-    if (subtitleLetters.length > 0) {
-      gsap.fromTo(subtitleLetters, 
-        {
-          x: (i) => Math.cos(i) * 100,
-          y: (i) => Math.sin(i) * 100,
-          rotation: 360,
-          scale: 0,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          y: 0,
-          rotation: 0,
-          scale: 1,
-          opacity: 1,
-          stagger: 0.02,
-          duration: 1,
-          ease: "power3.out",
-          delay: 1.2,
-        }
-      );
-    }
+    // --- 2. SUBTITLE (SPIRAL ENTRY) ---
+    gsap.fromTo(".js-subtitle .hero-letter", 
+      {
+        x: (i) => Math.cos(i) * 100,
+        y: (i) => Math.sin(i) * 100,
+        rotation: 360,
+        scale: 0,
+        opacity: 0,
+      },
+      {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        scale: 1,
+        opacity: 1,
+        stagger: 0.02,
+        duration: 1,
+        ease: "power3.out",
+        delay: 1.2,
+        force3D: true,
+      }
+    );
 
-    // 3. Description paragraph - Reveal Wipe
-    const description = document.querySelector(".js-description");
-    if (description) {
-      gsap.fromTo(description, 
-        {
-          clipPath: "inset(0 100% 0 0)",
-          opacity: 0,
-          x: -30
-        },
-        {
-          clipPath: "inset(0 0% 0 0)",
-          opacity: 1,
-          x: 0,
-          duration: 2,
-          ease: "power4.inOut",
-          delay: 1.6
-        }
-      );
-    }
+    // --- 3. DESCRIPTION (WIPE REVEAL) ---
+    gsap.fromTo(".js-description", 
+      {
+        clipPath: "inset(0 100% 0 0)",
+        opacity: 0,
+        x: -30
+      },
+      {
+        clipPath: "inset(0 0% 0 0)",
+        opacity: 1,
+        x: 0,
+        duration: 2,
+        ease: "power4.inOut",
+        delay: 1.6,
+        force3D: true,
+      }
+    );
 
-    // 4. Animación FadeUpWords (KEYWORDS)
-    const pinballWords = document.querySelectorAll(".js-pinball-word");
-    if (pinballWords.length > 0) {
-      gsap.fromTo(pinballWords, 
-        {
-          opacity: 0,
-          y: 40,
-          filter: "blur(10px)"
-        },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 1.5,
-          stagger: 0.2,
-          ease: "power4.out",
-          delay: 2.5,
-        }
-      );
-    }
+    // --- 4. KEYWORDS (FADE UP) ---
+    gsap.fromTo(".js-pinball-word", 
+      {
+        opacity: 0,
+        y: 40,
+        filter: "blur(10px)"
+      },
+      {
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power4.out",
+        delay: 2.5,
+        force3D: true,
+      }
+    );
 
-    // 5. Scroll Indicator - Fade in with bounce
-    gsap.fromTo(
-      ".js-scroll-indicator",
+    // --- 5. SCROLL INDICATOR ---
+    gsap.fromTo(".js-scroll-indicator",
       { opacity: 0, y: -10 },
       {
         opacity: 0.6,
@@ -151,22 +133,23 @@ const HomeView = () => {
       }
     );
 
-    // 5. Hero Pinning
+    // --- 6. PINNING & PARALLAX ---
     ScrollTrigger.create({
       trigger: "#hero-section",
       start: "top top",
       end: "bottom top",
       pin: true,
       pinSpacing: false,
+      anticipatePin: 1,
     });
 
-    // 6. Parallax de Salida del Hero (Desenfoque)
     if (heroTextRef.current) {
       gsap.to(heroTextRef.current, {
         opacity: 0,
         filter: "blur(20px)",
         scale: 0.8,
         yPercent: -20,
+        force3D: true,
         scrollTrigger: {
           trigger: "#hero-section",
           start: "top top",
@@ -176,46 +159,44 @@ const HomeView = () => {
       });
     }
 
-    // 7. Parallax Sección 2 (Entrada) - Simple fade
-    gsap.fromTo(
-      "#s2-text",
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: "#section-2",
-          start: "top 80%",
-          end: "top 60%",
-          scrub: 1,
-        },
+    // SECTION 2 ENTRANCE
+    gsap.from("#section-2 .content", { 
+      scale: 0.8, 
+      opacity: 0, 
+      duration: 1.2,
+      ease: "power4.out",
+      force3D: true,
+      scrollTrigger: {
+        trigger: "#section-2",
+        start: "top center",
+        toggleActions: "play none none reverse",
       }
-    );
+    });
 
-    // 8. Horizontal Scroll
-    const horizontalContainer = document.getElementById("horizontal-container");
-    const horizontalFlex = horizontalRef.current;
 
-    if (horizontalContainer && horizontalFlex) {
-      const getScrollDistance = () => horizontalFlex.scrollWidth - window.innerWidth;
 
-      gsap.to(horizontalFlex, {
-        x: () => -getScrollDistance(),
+    // HORIZONTAL SCROLL
+    const hContainer = document.getElementById("horizontal-container");
+    const hFlex = horizontalRef.current;
+
+    if (hContainer && hFlex) {
+      const getDist = () => hFlex.scrollWidth - window.innerWidth;
+
+      gsap.to(hFlex, {
+        x: () => -getDist(),
         ease: "none",
+        force3D: true,
         scrollTrigger: {
-          trigger: horizontalContainer,
+          trigger: hContainer,
           pin: true,
-          pinSpacing: true,
           scrub: 0.5,
           invalidateOnRefresh: true,
+          anticipatePin: 1,
           start: "top top",
-          end: () => `+=${getScrollDistance()}`,
+          end: () => `+=${getDist()}`,
           snap: {
             snapTo: 1,
             duration: 0.5,
-            ease: "power1.inOut",
           },
         },
       });
@@ -229,13 +210,12 @@ const HomeView = () => {
   return (
     <div ref={containerRef} className="bg-background overflow-x-hidden w-full relative">
       <Navbar />
-      
-      <HeroSection heroTextRef={heroTextRef} />
-      <VerticalSection />
-      <HorizontalSection ref={horizontalRef} panelClass={panelClass} />
-
+      <main className="relative z-10 bg-background shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
+        <HeroSection heroTextRef={heroTextRef} />
+        <VerticalSection />
+        <HorizontalSection ref={horizontalRef} panelClass={panelClass} />
+      </main>
       <Footer />
-      <Toaster />
     </div>
   );
 };
