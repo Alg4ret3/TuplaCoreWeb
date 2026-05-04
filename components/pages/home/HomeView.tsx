@@ -8,8 +8,13 @@ import { useGSAP } from "@gsap/react";
 
 import Navbar from '@/components/organisms/Navbar';
 import HeroSection from './sections/HeroSection';
-import VerticalSection from './sections/VerticalSection';
-import HorizontalSection from './sections/HorizontalSection';
+import ServicesSection from './sections/ServicesSection';
+import ProcessSection from './sections/ProcessSection';
+import PortfolioSection from './sections/PortfolioSection';
+import TechStackSection from './sections/TechStackSection';
+import TeamSection from './sections/TeamSection';
+import TestimonialsSection from './sections/TestimonialsSection';
+import ContactSection from './sections/ContactSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,7 +126,39 @@ const HomeView = () => {
       }
     );
 
-    // --- 5. SCROLL INDICATOR ---
+
+    // --- 6. COUNTERS (SCALE + REVEAL) ---
+    gsap.fromTo(".js-counters",
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.6,
+        ease: "power2.out",
+        delay: 2.8,
+      }
+    );
+
+    gsap.fromTo(".js-counter-item",
+      {
+        opacity: 0,
+        y: 25,
+        scale: 0.7,
+        filter: "blur(6px)",
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        filter: "blur(0px)",
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power3.out",
+        delay: 3.0,
+        force3D: true,
+      }
+    );
+
+    // --- 7. SCROLL INDICATOR ---
     gsap.fromTo(".js-scroll-indicator",
       { opacity: 0, y: -10 },
       {
@@ -129,7 +166,7 @@ const HomeView = () => {
         y: 0,
         duration: 0.8,
         ease: "power2.out",
-        delay: 1.8,
+        delay: 3.5,
       }
     );
 
@@ -159,21 +196,61 @@ const HomeView = () => {
       });
     }
 
-    // SECTION 2 ENTRANCE
-    gsap.from("#section-2 .content", { 
-      scale: 0.8, 
-      opacity: 0, 
-      duration: 1.2,
-      ease: "power4.out",
-      force3D: true,
+    // SERVICES ENTRANCE
+    gsap.from(".js-service-card", { 
+      y: 60,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: "power3.out",
       scrollTrigger: {
         trigger: "#section-2",
-        start: "top center",
+        start: "top 70%",
         toggleActions: "play none none reverse",
       }
     });
 
+    // TEAM ENTRANCE
+    gsap.from(".js-team-member", { 
+      y: 50,
+      opacity: 0,
+      duration: 1.2,
+      stagger: 0.3,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".js-team-member",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      }
+    });
 
+    // PORTFOLIO ENTRANCE
+    gsap.from(".js-portfolio-item", { 
+      y: 80,
+      opacity: 0,
+      duration: 1.5,
+      stagger: 0.2,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: ".js-portfolio-item",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    // TESTIMONIALS ENTRANCE
+    gsap.from(".js-testimonial-card", { 
+      y: 40,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".js-testimonial-card",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      }
+    });
 
     // HORIZONTAL SCROLL
     const hContainer = document.getElementById("horizontal-container");
@@ -195,7 +272,7 @@ const HomeView = () => {
           start: "top top",
           end: () => `+=${getDist()}`,
           snap: {
-            snapTo: 1,
+            snapTo: 1 / (4 - 1), // 4 panels
             duration: 0.5,
           },
         },
@@ -212,8 +289,13 @@ const HomeView = () => {
       <Navbar />
       <main className="relative z-10 bg-background shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
         <HeroSection heroTextRef={heroTextRef} />
-        <VerticalSection />
-        <HorizontalSection ref={horizontalRef} panelClass={panelClass} />
+        <ServicesSection />
+        <ProcessSection ref={horizontalRef} panelClass={panelClass} />
+        <PortfolioSection />
+        <TechStackSection />
+        <TeamSection />
+        <TestimonialsSection />
+        <ContactSection />
       </main>
       <Footer />
     </div>

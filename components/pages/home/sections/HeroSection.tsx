@@ -1,11 +1,14 @@
 "use client";
 import { forwardRef } from "react";
+import ParticlesCanvas from "@/components/atoms/ParticlesCanvas";
+import AnimatedCounter from "@/components/atoms/AnimatedCounter";
 
 interface HeroSectionProps {
   heroTextRef: React.RefObject<HTMLHeadingElement>;
 }
 
 const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, ref) => {
+
   const renderHeroText = (text: string) => {
     return text.split("").map((char, index) => (
       <span
@@ -63,49 +66,62 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
             transform: scale(1);
           }
         }
+        @keyframes shimmer {
+          0% {
+            background-position: -200% center;
+          }
+          100% {
+            background-position: 200% center;
+          }
+        }
       `}</style>
+
        {/* Video Background */}
        <div className="absolute inset-0 w-full h-full">
          <video
-           autoPlay
-           loop
-           muted
-           playsInline
-           className="w-full h-full object-cover opacity-40 grayscale brightness-75"
-           style={{ animation: 'fadeIn 2s ease-out forwards' }}
-         >
-           <source src="https://res.cloudinary.com/dqky6oqrd/video/upload/v1776293360/w0j24ooz1q3qw7jbbvql.mp4" type="video/mp4" />
-         </video>
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover opacity-40 grayscale brightness-75"
+            style={{ animation: 'fadeIn 2s ease-out forwards' }}
+          >
+            <source src="https://res.cloudinary.com/dqky6oqrd/video/upload/v1776293360/w0j24ooz1q3qw7jbbvql.mp4" type="video/mp4" />
+          </video>
        </div>
 
+      {/* Code Particles Overlay */}
+      <ParticlesCanvas />
+
       {/* Dark overlay for contrast */}
-      <div className="absolute inset-0 bg-black/60 z-0" />
+      <div className="absolute inset-0 bg-black/50 z-[6]" />
 
        {/* Main Title - Centered, prominent */}
        <h1
-         ref={heroTextRef}
-         className="flex flex-row items-center justify-center gap-4 md:gap-8 relative z-20 leading-none"
-       >
-         <span className="text-5xl md:text-[8rem] lg:text-[12rem] font-audiowide font-black uppercase text-white flex">
-           {renderHeroText("TUPLA")}
-         </span>
-         <span className="text-5xl md:text-[8rem] lg:text-[12rem] font-audiowide font-black uppercase text-white flex">
-           {renderHeroText("CORE")}
-         </span>
-       </h1>
+          ref={heroTextRef}
+          className="flex flex-row items-center justify-center gap-4 md:gap-8 relative z-20 leading-none"
+        >
+          <span className="text-5xl md:text-[8rem] lg:text-[12rem] font-audiowide font-black uppercase text-white flex">
+            {renderHeroText("TUPLA")}
+          </span>
+          <span className="text-5xl md:text-[8rem] lg:text-[12rem] font-audiowide font-black uppercase text-white flex">
+            {renderHeroText("CORE")}
+          </span>
+        </h1>
 
        {/* Subtitle - Tagline */}
-        <p className="text-sm md:text-xl font-inter font-light uppercase tracking-[0.2em] text-white text-center mt-4 md:mt-6 max-w-2xl px-4 js-subtitle">
+        <p className="text-sm md:text-xl font-inter font-light uppercase tracking-[0.2em] text-white text-center mt-4 md:mt-6 max-w-2xl px-4 js-subtitle relative z-20">
           {renderHeroText("Diseño & Desarrollo De Software")}
         </p>
 
        {/* Description paragraph */}
-        <p className="text-xs md:text-sm font-inter font-light leading-relaxed text-white/80 text-center mt-6 md:mt-8 max-w-lg md:max-w-3xl px-4 js-description">
+        <p className="text-xs md:text-sm font-inter font-light leading-relaxed text-white/80 text-center mt-6 md:mt-8 max-w-lg md:max-w-3xl px-4 js-description relative z-20">
           {renderHeroText("Nuestro enfoque se centra en la precisión técnica y la estética, garantizando que cada proyecto no solo funcione a la perfección, sino que también defina un nuevo estándar de excelencia digital.")}
         </p>
 
-      {/* Second description line */}
-      <h3 className="text-pinball text-[10px] md:text-sm font-audiowide text-white/40 uppercase tracking-[0.4em] mt-16 relative z-20">
+
+      {/* Keywords */}
+      <h3 className="text-pinball text-[10px] md:text-sm font-audiowide text-white/40 uppercase tracking-[0.4em] mt-10 md:mt-14 relative z-20">
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
           <span className="js-pinball-word text-white/70">{renderHeroText("PERFORMANCE")}</span>
           <span className="hidden md:block text-white/10">•</span>
@@ -115,13 +131,37 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
         </div>
       </h3>
 
+      {/* Animated Counters */}
+      <div className="js-counters flex items-center gap-6 sm:gap-10 md:gap-16 mt-8 md:mt-12 relative z-20">
+        <AnimatedCounter
+          prefix="+"
+          target={50}
+          label="Proyectos Entregados"
+          delay={3.2}
+        />
+        <div className="w-px h-10 md:h-14 bg-white/15" />
+        <AnimatedCounter
+          prefix="+"
+          target={3}
+          label="Años de Experiencia"
+          delay={3.5}
+        />
+        <div className="w-px h-10 md:h-14 bg-white/15" />
+        <AnimatedCounter
+          target={100}
+          suffix="%"
+          label="Clientes Satisfechos"
+          delay={3.8}
+        />
+      </div>
+
       {/* Scroll Indicator - Static Minimal */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-80">
+      <div className="js-scroll-indicator absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-80 z-20">
         <span className="text-[8px] uppercase tracking-[0.6em] text-white font-inter">
           Scroll
         </span>
         <svg
-          className="w-4 h-4 text-white"
+          className="w-4 h-4 text-white animate-bounce"
           fill="none"
           stroke="currentColor"
           strokeWidth={1}
