@@ -12,7 +12,7 @@ const TeamSection = () => {
       <div className="max-w-7xl mx-auto">
         <SectionTitle 
           subtitle="Quiénes Somos"
-          title="Nuestro Equipo"
+          title="Los Fundadores"
           className="mb-16 md:mb-24"
         />
 

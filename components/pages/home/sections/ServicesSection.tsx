@@ -46,7 +46,7 @@ const ServicesSection = forwardRef<HTMLElement>((_, ref) => {
     >
       <div className="max-w-7xl mx-auto">
         <SectionTitle 
-          subtitle="Nuestra Experticia"
+          subtitle="Nuestra Experiencia"
           title="Servicios"
           className="mb-16 md:mb-24"
         />

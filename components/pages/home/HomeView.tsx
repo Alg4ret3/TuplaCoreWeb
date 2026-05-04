@@ -197,60 +197,77 @@ const HomeView = () => {
     }
 
     // SERVICES ENTRANCE
-    gsap.from(".js-service-card", { 
-      y: 60,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.15,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: "#section-2",
-        start: "top 70%",
-        toggleActions: "play none none reverse",
+    gsap.fromTo(".js-service-card", 
+      {
+        y: 60,
+        opacity: 0,
+        scale: 0.95,
+      },
+      { 
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#section-2",
+          start: "top 80%",
+          once: true,
+        }
       }
-    });
+    );
 
     // TEAM ENTRANCE
-    gsap.from(".js-team-member", { 
-      y: 50,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.3,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".js-team-member",
-        start: "top 80%",
-        toggleActions: "play none none reverse",
+    gsap.fromTo(".js-team-member", 
+      { y: 50, opacity: 0 },
+      { 
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.3,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".js-team-member",
+          start: "top 85%",
+          once: true,
+        }
       }
-    });
+    );
 
     // PORTFOLIO ENTRANCE
-    gsap.from(".js-portfolio-item", { 
-      y: 80,
-      opacity: 0,
-      duration: 1.5,
-      stagger: 0.2,
-      ease: "power4.out",
-      scrollTrigger: {
-        trigger: ".js-portfolio-item",
-        start: "top 85%",
-        toggleActions: "play none none reverse",
+    gsap.fromTo(".js-portfolio-item", 
+      { y: 80, opacity: 0 },
+      { 
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".js-portfolio-item",
+          start: "top 90%",
+          once: true,
+        }
       }
-    });
+    );
 
     // TESTIMONIALS ENTRANCE
-    gsap.from(".js-testimonial-card", { 
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".js-testimonial-card",
-        start: "top 85%",
-        toggleActions: "play none none reverse",
+    gsap.fromTo(".js-testimonial-card", 
+      { y: 40, opacity: 0 },
+      { 
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".js-testimonial-card",
+          start: "top 90%",
+          once: true,
+        }
       }
-    });
+    );
 
     // HORIZONTAL SCROLL
     const hContainer = document.getElementById("horizontal-container");

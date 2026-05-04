@@ -29,8 +29,8 @@ const ParticlesCanvas = () => {
       y: spreadY ? Math.random() * height : height + 20 + Math.random() * 40,
       char: CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)],
       speed: 0.2 + Math.random() * 0.6,
-      opacity: 0.03 + Math.random() * 0.1,
-      size: 10 + Math.random() * 14,
+      opacity: 0.08 + Math.random() * 0.2,
+      size: 12 + Math.random() * 14,
       sway: 12 + Math.random() * 20,
       swaySpeed: 0.003 + Math.random() * 0.012,
       swayOffset: Math.random() * Math.PI * 2,
@@ -101,7 +101,7 @@ const ParticlesCanvas = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full z-[5] pointer-events-none"
+      className="absolute inset-0 w-full h-full z-[10] pointer-events-none"
       aria-hidden="true"
     />
   );
