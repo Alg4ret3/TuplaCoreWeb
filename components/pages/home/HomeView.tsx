@@ -283,14 +283,16 @@ const HomeView = () => {
         scrollTrigger: {
           trigger: hContainer,
           pin: true,
-          scrub: 0.5,
+          scrub: 1,
           invalidateOnRefresh: true,
           anticipatePin: 1,
           start: "top top",
-          end: () => `+=${getDist()}`,
+          end: () => `+=${getDist() * 2.5}`,
           snap: {
-            snapTo: 1 / (4 - 1), // 4 panels
-            duration: 0.5,
+            snapTo: 1 / (4 - 1),
+            duration: { min: 0.4, max: 0.8 },
+            delay: 0.1,
+            ease: "power1.inOut",
           },
         },
       });
