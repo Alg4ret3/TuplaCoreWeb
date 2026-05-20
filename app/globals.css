@@ -105,6 +105,38 @@
   .perspective-1000 {
     perspective: 1000px;
   }
+
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 500px;
+  }
+
+  /* Modern :has() usage for navigation hover effects */
+  .nav-links-container {
+    transition: all 0.3s ease;
+  }
+  .nav-links-container:has(a:hover) a:not(:hover) {
+    opacity: 0.3;
+    filter: blur(1px);
+  }
+
+  /* Native CSS Scroll-Driven Animations */
+  @keyframes scroll-reveal {
+    from {
+      opacity: 0;
+      transform: scale(0.8) translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .animate-scroll-reveal {
+    animation: scroll-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 40%;
+  }
 }
 
 /* Custom scrollbar */

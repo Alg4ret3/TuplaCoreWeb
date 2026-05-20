@@ -159,19 +159,7 @@ const HomeView = () => {
       });
     }
 
-    // SECTION 2 ENTRANCE
-    gsap.from("#section-2 .content", { 
-      scale: 0.8, 
-      opacity: 0, 
-      duration: 1.2,
-      ease: "power4.out",
-      force3D: true,
-      scrollTrigger: {
-        trigger: "#section-2",
-        start: "top center",
-        toggleActions: "play none none reverse",
-      }
-    });
+    // SCROLL-DRIVEN ANIMATION MOVED TO CSS IN VERTICAL SECTION
 
 
 
@@ -189,15 +177,11 @@ const HomeView = () => {
         scrollTrigger: {
           trigger: hContainer,
           pin: true,
-          scrub: 0.5,
+          scrub: true,
           invalidateOnRefresh: true,
           anticipatePin: 1,
           start: "top top",
-          end: () => `+=${getDist()}`,
-          snap: {
-            snapTo: 1,
-            duration: 0.5,
-          },
+          end: () => `+=${getDist()}`
         },
       });
     }

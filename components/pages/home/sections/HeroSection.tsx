@@ -10,7 +10,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
     return text.split("").map((char, index) => (
       <span
         key={index}
-        className="hero-letter inline-block"
+        className="hero-letter inline-block opacity-0"
       >
         {char === " " ? "\u00A0" : char}
       </span>
@@ -100,23 +100,23 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
         </p>
 
        {/* Description paragraph */}
-        <p className="text-xs md:text-sm font-inter font-light leading-relaxed text-white/80 text-center mt-6 md:mt-8 max-w-lg md:max-w-3xl px-4 js-description">
-          {renderHeroText("Nuestro enfoque se centra en la precisión técnica y la estética, garantizando que cada proyecto no solo funcione a la perfección, sino que también defina un nuevo estándar de excelencia digital.")}
+        <p className="text-xs md:text-sm font-inter font-light leading-relaxed text-white/80 text-center mt-6 md:mt-8 max-w-lg md:max-w-3xl px-4 js-description opacity-0" style={{ clipPath: "inset(0 100% 0 0)", transform: "translateX(-30px)" }}>
+          Nuestro enfoque se centra en la precisión técnica y la estética, garantizando que cada proyecto no solo funcione a la perfección, sino que también defina un nuevo estándar de excelencia digital.
         </p>
 
       {/* Second description line */}
       <h3 className="text-pinball text-[10px] md:text-sm font-audiowide text-white/40 uppercase tracking-[0.4em] mt-16 relative z-20">
         <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
-          <span className="js-pinball-word text-white/70">{renderHeroText("PERFORMANCE")}</span>
+          <span className="js-pinball-word text-white/70 opacity-0 transform translate-y-10">PERFORMANCE</span>
           <span className="hidden md:block text-white/10">•</span>
-          <span className="js-pinball-word text-white/70">{renderHeroText("CLEAN CODE")}</span>
+          <span className="js-pinball-word text-white/70 opacity-0 transform translate-y-10">CLEAN CODE</span>
           <span className="hidden md:block text-white/10">•</span>
-          <span className="js-pinball-word text-white/70">{renderHeroText("SCALABILITY")}</span>
+          <span className="js-pinball-word text-white/70 opacity-0 transform translate-y-10">SCALABILITY</span>
         </div>
       </h3>
 
       {/* Scroll Indicator - Static Minimal */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-80">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-0 js-scroll-indicator">
         <span className="text-[8px] uppercase tracking-[0.6em] text-white font-inter">
           Scroll
         </span>

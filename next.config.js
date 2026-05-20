@@ -7,7 +7,7 @@ const nextConfig = {
   images: { 
     // Para modo export, habilitamos la optimización delegando al loader personalizado
     // si se define en cada componente o globalmente.
-    unoptimized: process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

@@ -6,7 +6,8 @@ import { Audiowide, Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/theme-provider';
 import { FramerProvider } from '@/components/providers/framer-provider';
 
-import WhatsAppButton from '@/components/atoms/WhatsAppButton';
+
+import ContactDialog from '@/components/organisms/ContactDialog';
 
 const audiowide = Audiowide({
   subsets: ['latin'],
@@ -61,6 +62,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning className={`${audiowide.variable} ${inter.variable}`}>
+      <head>
+        {/* Priorizar la carga del video de fondo para mejorar el LCP */}
+        <link 
+          rel="preload" 
+          as="video" 
+          href="https://res.cloudinary.com/dqky6oqrd/video/upload/v1777062135/pumudh3z1nwd6hgccmgm.mp4" 
+          type="video/mp4" 
+          fetchPriority="high"
+        />
+      </head>
       <body className="font-audiowide bg-background text-foreground relative">
         {/* Persistent Video Background - GLOBAL */}
         <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
@@ -99,7 +110,8 @@ export default function RootLayout({
               <main id="main-content" className="relative z-10 font-plus-jakarta">
                 {children}
               </main>
-              <WhatsAppButton />
+
+              <ContactDialog />
 
           </FramerProvider>
         </ThemeProvider>
