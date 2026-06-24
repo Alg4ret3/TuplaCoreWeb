@@ -10,7 +10,6 @@ const navLinks = [
   { name: "Software a medida", href: "/" },
   { name: "Desarrollo de Apps", href: "/desarrollo-de-apps" },
   { name: "Nuestro Trabajo", href: "/nuestro-trabajo" },
-  { name: "Contacto", href: "/contacto" },
 ];
 
 const Navbar = () => {
