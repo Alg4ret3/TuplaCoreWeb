@@ -4,35 +4,42 @@ import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import Image from "next/image";
+import { Globe, ChevronDown, User } from "lucide-react";
 
 const navLinks = [
-  { name: "Inicio", href: "/" },
-  { name: "Servicios", href: "/servicios" },
-  { name: "Proyectos", href: "/proyectos" }
+  { name: "Software a medida", href: "/" },
+  { name: "Desarrollo de Apps", href: "/desarrollo-de-apps" },
+  { name: "Nuestro Trabajo", href: "/nuestro-trabajo" },
+  { name: "Contacto", href: "/contacto" },
 ];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOverHero, setIsOverHero] = useState(true);
+  const [lang, setLang] = useState("ES");
+  const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  
   const navRef = useRef<HTMLElement>(null);
+  const langRef = useRef<HTMLDivElement>(null);
 
-  // ── GSAP Slide-From-Left entry ───────────────────────────────────────────
+  // ── GSAP Slide-Down entry ────────────────────────────────────────────────
   useEffect(() => {
     const el = navRef.current;
     if (!el) return;
 
-    gsap.set(el, { x: "-100%", opacity: 0 });
+    gsap.set(el, { y: "-150%", opacity: 0 });
 
     const tween = gsap.to(el, {
-      x: "0%",
+      y: "0%",
       opacity: 1,
       duration: 1.2,
       ease: "power3.out",
-      clearProps: "x,opacity",
+      clearProps: "y,opacity",
     });
 
-    // cleanup: mata el tween si React StrictMode desmonta antes de terminar
-    return () => { tween.kill(); };
+    return () => {
+      tween.kill();
+    };
   }, []);
 
   // ── Scroll: detectar si estamos sobre el hero ────────────────────────────
@@ -45,92 +52,187 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // ── Clic fuera para cerrar dropdown de idioma ───────────────────────────
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (langRef.current && !langRef.current.contains(event.target as Node)) {
+        setIsLangDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-[padding,background,border-color,backdrop-filter] duration-300 ${isOverHero
-          ? "py-3 bg-transparent backdrop-blur-sm"
-          : "py-2 bg-white/95 backdrop-blur-md border-b border-black/5"
-        }`}
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[92%] max-w-7xl transition-all duration-300 rounded-full border ${
+        isOverHero
+          ? "py-3 px-6 md:px-8 bg-black/15 backdrop-blur-md border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)]"
+          : "py-2.5 px-6 md:px-8 bg-white/80 backdrop-blur-md border-black/5 shadow-[0_8px_32px_0_rgba(0,0,0,0.08)]"
+      }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between relative">
-
-        {/* ── Logo ── */}
-        <Link href="/" className="relative z-[110]">
-          <Image
-            src="https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1777477653/yzuhpdmywqomvj68rtzm.svg"
-            alt="TUPLΛ CORE"
-            width={160}
-            height={40}
-            className={`h-8 md:h-10 w-auto object-contain transition-all duration-300 ${isOverHero ? "brightness-0 invert" : "brightness-0"
+      <div className="w-full flex items-center justify-between relative">
+        {/* ── Logo (Left) ── */}
+        <div className="flex-1 flex justify-start">
+          <Link href="/" className="relative z-[110]">
+            <Image
+              src="https://res.cloudinary.com/dqky6oqrd/image/upload/f_auto,q_auto/v1777477653/yzuhpdmywqomvj68rtzm.svg"
+              alt="TUPLΛ CORE"
+              width={160}
+              height={40}
+              className={`h-7 md:h-8.5 w-auto object-contain transition-all duration-300 ${
+                isOverHero ? "brightness-0 invert" : "brightness-0"
               }`}
-            priority
-          />
-        </Link>
+              priority
+            />
+          </Link>
+        </div>
 
-        {/* ── Desktop links ── */}
-        <div className="hidden lg:flex items-center gap-10 nav-links-container">
+        {/* ── Desktop links (Center) ── */}
+        <div className="hidden lg:flex items-center justify-center gap-6 xl:gap-8 nav-links-container">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className={`font-inter text-[11px] font-bold uppercase tracking-[0.3em] transition-opacity duration-200 hover:opacity-60 ${isOverHero ? "text-white" : "text-black"
-                }`}
+              className={`font-inter text-[11px] font-bold uppercase tracking-[0.3em] transition-opacity duration-200 hover:opacity-60 ${
+                isOverHero ? "text-white" : "text-black"
+              }`}
             >
               {link.name}
             </Link>
           ))}
         </div>
 
-        {/* ── Hamburger ── */}
-        <button
-          onClick={() => setIsMenuOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={isMenuOpen}
-          className={`lg:hidden relative z-[110] flex flex-col items-center justify-center gap-[5px] w-8 h-8 bg-transparent border-none cursor-pointer focus:outline-none transition-transform duration-300 active:scale-95 ${isOverHero ? "text-white" : "text-black"
+        {/* ── Actions (Right) ── */}
+        <div className="flex-1 flex items-center justify-end gap-3 md:gap-5 relative z-[110]">
+          {/* Language Switcher */}
+          <div ref={langRef} className="relative">
+            <button
+              onClick={() => setIsLangDropdownOpen(!isLangDropdownOpen)}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-bold tracking-wider transition-all duration-200 uppercase ${
+                isOverHero
+                  ? "text-white/80 hover:text-white hover:bg-white/10"
+                  : "text-black/80 hover:text-black hover:bg-black/5"
+              }`}
+              aria-label="Select language"
+              aria-haspopup="true"
+              aria-expanded={isLangDropdownOpen}
+            >
+              <Globe className="w-3.5 h-3.5" />
+              <span>{lang}</span>
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                  isLangDropdownOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+
+            {isLangDropdownOpen && (
+              <div
+                className={`absolute right-0 mt-2 w-32 rounded-2xl p-1.5 border shadow-xl z-[120] transition-all duration-200 animate-in fade-in slide-in-from-top-2 ${
+                  isOverHero
+                    ? "bg-black/90 backdrop-blur-xl border-white/10 text-white"
+                    : "bg-white/90 backdrop-blur-xl border-black/10 text-black"
+                }`}
+              >
+                {["ES", "EN"].map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => {
+                      setLang(l);
+                      setIsLangDropdownOpen(false);
+                    }}
+                    className={`w-full text-left px-3 py-2 rounded-xl text-[11px] font-bold tracking-wider transition-colors duration-200 ${
+                      lang === l
+                        ? isOverHero
+                          ? "bg-white/15 text-white"
+                          : "bg-black/5 text-black"
+                        : isOverHero
+                          ? "hover:bg-white/10 text-white/60 hover:text-white"
+                          : "hover:bg-black/5 text-black/60 hover:text-black"
+                    }`}
+                  >
+                    {l === "ES" ? "ES (Español)" : "EN (English)"}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Login Button */}
+          <Link
+            href="/login"
+            className={`flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.2em] transition-all duration-300 ${
+              isOverHero
+                ? "bg-white text-black hover:bg-white/90 border border-transparent shadow-[0_4px_12px_rgba(255,255,255,0.15)] hover:scale-[1.03]"
+                : "bg-black text-white hover:bg-black/90 border border-transparent shadow-[0_4px_12px_rgba(0,0,0,0.15)] hover:scale-[1.03]"
             }`}
-        >
-          <span
-            className="block w-5 h-0.5 bg-current origin-center transition-transform duration-200"
-            style={{ transform: isMenuOpen ? "translateY(7px) rotate(45deg)" : "none" }}
-          />
-          <span
-            className="block w-5 h-0.5 bg-current transition-opacity duration-200"
-            style={{ opacity: isMenuOpen ? 0 : 1 }}
-          />
-          <span
-            className="block w-5 h-0.5 bg-current origin-center transition-transform duration-200"
-            style={{ transform: isMenuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }}
-          />
-        </button>
+          >
+            <User className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Login</span>
+          </Link>
+
+          {/* Hamburger (Mobile) */}
+          <button
+            onClick={() => setIsMenuOpen((v) => !v)}
+            aria-label="Toggle menu"
+            aria-expanded={isMenuOpen}
+            className={`lg:hidden relative z-[110] flex flex-col items-center justify-center gap-[5px] w-8 h-8 bg-transparent border-none cursor-pointer focus:outline-none transition-transform duration-300 active:scale-95 ${
+              isOverHero ? "text-white" : "text-black"
+            }`}
+          >
+            <span
+              className="block w-5 h-0.5 bg-current origin-center transition-transform duration-200"
+              style={{ transform: isMenuOpen ? "translateY(7px) rotate(45deg)" : "none" }}
+            />
+            <span
+              className="block w-5 h-0.5 bg-current transition-opacity duration-200"
+              style={{ opacity: isMenuOpen ? 0 : 1 }}
+            />
+            <span
+              className="block w-5 h-0.5 bg-current origin-center transition-transform duration-200"
+              style={{ transform: isMenuOpen ? "translateY(-7px) rotate(-45deg)" : "none" }}
+            />
+          </button>
+        </div>
 
         {/* ── Mobile dropdown ── */}
         <div
-          className={`absolute top-full left-0 right-0 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] shadow-2xl ${isMenuOpen
+          className={`absolute top-[calc(100%+0.75rem)] left-0 right-0 overflow-hidden shadow-2xl rounded-3xl ${
+            isMenuOpen
               ? isOverHero
-                ? "bg-black/90 backdrop-blur-2xl border-t border-white/10"
-                : "bg-white/95 backdrop-blur-2xl border-b border-black/10"
-              : "bg-transparent"
-            }`}
-          style={{ maxHeight: isMenuOpen ? 400 : 0, opacity: isMenuOpen ? 1 : 0 }}
+                ? "bg-black/90 backdrop-blur-2xl border border-white/10"
+                : "bg-white/95 backdrop-blur-2xl border border-black/10"
+              : "bg-transparent border-transparent pointer-events-none"
+          }`}
+          style={{
+            maxHeight: isMenuOpen ? 350 : 0,
+            opacity: isMenuOpen ? 1 : 0,
+            transition: "all 500ms cubic-bezier(0.22, 1, 0.36, 1)"
+          }}
         >
-          <div className="flex flex-col px-6 md:px-12 pb-8 pt-4">
+          <div className="flex flex-col px-6 pb-6 pt-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className={`group flex items-center justify-between py-5 border-b transition-colors duration-300 ${isOverHero
+                className={`group flex items-center justify-between py-4 border-b transition-colors duration-300 last:border-none ${
+                  isOverHero
                     ? "border-white/10 text-white/70 hover:text-white"
                     : "border-black/5 text-black/60 hover:text-black"
-                  }`}
+                }`}
               >
-                <span className="font-inter text-[11px] font-bold uppercase tracking-[0.3em]">
+                <span className="font-inter text-[10px] font-bold uppercase tracking-[0.25em]">
                   {link.name}
                 </span>
                 <span
-                  className={`text-lg font-light transition-all duration-300 transform -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 ${isOverHero ? "text-white" : "text-black"
-                    }`}
+                  className={`text-base font-light transition-all duration-300 transform -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 ${
+                    isOverHero ? "text-white" : "text-black"
+                  }`}
                 >
                   →
                 </span>
@@ -138,7 +240,6 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-
       </div>
     </nav>
   );
