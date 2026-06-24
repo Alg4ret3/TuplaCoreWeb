@@ -82,17 +82,19 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
       <div className="absolute inset-0 bg-black/60 z-0" />
 
        {/* Main Title - Centered, prominent */}
-       <h1
-         ref={heroTextRef}
-         className="flex flex-row items-center justify-center gap-4 md:gap-8 relative z-20 leading-none"
-       >
-         <span className="text-5xl md:text-[8rem] lg:text-[12rem] font-audiowide font-black uppercase text-white flex">
-           {renderHeroText("TUPLA")}
-         </span>
-         <span className="text-5xl md:text-[8rem] lg:text-[12rem] font-audiowide font-black uppercase text-white flex">
-           {renderHeroText("CORE")}
-         </span>
-       </h1>
+       <div className="w-[92%] max-w-7xl flex justify-center relative z-20">
+         <h1
+           ref={heroTextRef}
+           className="flex flex-row items-center justify-center gap-[2vw] leading-none w-full"
+         >
+           <span className="text-[clamp(2.5rem,10vw,8.5rem)] font-audiowide font-black uppercase text-white flex">
+             {renderHeroText("TUPLA")}
+           </span>
+           <span className="text-[clamp(2.5rem,10vw,8.5rem)] font-audiowide font-black uppercase text-white flex">
+             {renderHeroText("CORE")}
+           </span>
+         </h1>
+       </div>
 
        {/* Subtitle - Tagline */}
         <p className="text-sm md:text-xl font-inter font-light uppercase tracking-[0.2em] text-white text-center mt-4 md:mt-6 max-w-2xl px-4 js-subtitle">
