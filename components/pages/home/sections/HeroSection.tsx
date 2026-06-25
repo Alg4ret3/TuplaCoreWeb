@@ -5,6 +5,8 @@ interface HeroSectionProps {
   heroTextRef: React.RefObject<HTMLHeadingElement>;
 }
 
+import Beams from "@/components/organisms/Beams";
+
 const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, ref) => {
   const renderHeroText = (text: string) => {
     return text.split("").map((char, index) => (
@@ -64,19 +66,19 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
           }
         }
       `}</style>
-       {/* Video Background */}
-       <div className="absolute inset-0 w-full h-full">
-         <video
-           autoPlay
-           loop
-           muted
-           playsInline
-           className="w-full h-full object-cover opacity-40 grayscale brightness-75"
-           style={{ animation: 'fadeIn 2s ease-out forwards' }}
-         >
-           <source src="https://res.cloudinary.com/dqky6oqrd/video/upload/v1776293360/w0j24ooz1q3qw7jbbvql.mp4" type="video/mp4" />
-         </video>
-       </div>
+{/* Beams Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <Beams
+          beamWidth={2.8}
+          beamHeight={15}
+          beamNumber={31}
+          lightColor="#ffffff"
+          speed={2}
+          noiseIntensity={1.75}
+          scale={0.2}
+          rotation={25}
+        />
+      </div>
 
       {/* Dark overlay for contrast */}
       <div className="absolute inset-0 bg-black/60 z-0" />
