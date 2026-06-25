@@ -13,7 +13,7 @@ const VerticalSection = forwardRef<HTMLElement>((_, ref) => {
     <section
       id="section-2"
       ref={ref}
-      className="relative z-20 bg-gradient-to-b from-[#050508] to-[#0b0b10] h-[100vh] w-full flex items-center justify-center overflow-hidden font-inter border-y border-white/5"
+      className="relative z-20 bg-gradient-to-b from-[#050508] to-[#0b0b10] h-[110vh] w-full flex items-center justify-center overflow-hidden font-inter border-y border-white/5"
     >
       {/* 3D Antigravity Background – wrapper must have explicit dimensions for R3F */}
       <div className="absolute inset-0 z-10 w-full h-full pointer-events-auto">
