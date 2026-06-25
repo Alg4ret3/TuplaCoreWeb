@@ -17,7 +17,6 @@ const Footer = dynamic(() => import('@/components/organisms/Footer'), { ssr: fal
 
 const HomeView = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const horizontalRef = useRef<HTMLDivElement>(null);
   const heroTextRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(() => {
@@ -159,45 +158,16 @@ const HomeView = () => {
       });
     }
 
-    // SCROLL-DRIVEN ANIMATION MOVED TO CSS IN VERTICAL SECTION
-
-
-
-    // HORIZONTAL SCROLL
-    const hContainer = document.getElementById("horizontal-container");
-    const hFlex = horizontalRef.current;
-
-    if (hContainer && hFlex) {
-      const getDist = () => hFlex.scrollWidth - window.innerWidth;
-
-      gsap.to(hFlex, {
-        x: () => -getDist(),
-        ease: "none",
-        force3D: true,
-        scrollTrigger: {
-          trigger: hContainer,
-          pin: true,
-          scrub: true,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-          start: "top top",
-          end: () => `+=${getDist()}`
-        },
-      });
-    }
-
     ScrollTrigger.refresh();
   }, { scope: containerRef });
-
-  const panelClass = "w-[100vw] flex-none min-h-[100dvh] flex items-center justify-center text-2xl md:text-5xl font-plus-jakarta font-bold uppercase tracking-widest md:tracking-[0.6em] text-foreground p-10 text-center";
 
   return (
     <div ref={containerRef} className="bg-background overflow-x-hidden w-full relative">
       <Navbar />
       <main className="relative z-10 bg-background shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
-        <HeroSection heroTextRef={heroTextRef} />
-        <VerticalSection />
-        <HorizontalSection ref={horizontalRef} panelClass={panelClass} />
+<HeroSection heroTextRef={heroTextRef} />
+         <VerticalSection />
+         <HorizontalSection />
       </main>
       <Footer />
     </div>

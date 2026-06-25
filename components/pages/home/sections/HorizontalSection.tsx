@@ -1,28 +1,22 @@
 "use client";
-import { forwardRef } from "react";
 
-interface HorizontalSectionProps {
-  panelClass: string;
-}
-
-const HorizontalSection = forwardRef<HTMLDivElement, HorizontalSectionProps>(({ panelClass }, ref) => {
+const HorizontalSection = () => {
   return (
-    <div id="horizontal-container" className="relative z-30 bg-background overflow-hidden min-h-[100dvh]">
-      <div 
-        ref={ref} 
-        className="flex flex-nowrap h-[100dvh] items-center will-change-transform"
-        style={{ width: "200vw" }}
-      >
-        <div className={panelClass}>
+    <section
+      id="section-3"
+      className="relative z-30 bg-background min-h-[200vh] flex flex-col justify-center overflow-hidden"
+    >
+      <div className="parallax-wrapper relative h-[100vh] overflow-clip">
+        <div className="parallax-layer absolute inset-0 flex items-center justify-center text-2xl md:text-5xl font-plus-jakarta font-bold uppercase tracking-widest md:tracking-[0.6em] text-foreground will-change-transform">
           <span>Sección 3 - Panel 1</span>
         </div>
-        <div className={panelClass}>
+        <div className="parallax-layer absolute inset-0 flex items-center justify-center text-2xl md:text-5xl font-plus-jakarta font-bold uppercase tracking-widest md:tracking-[0.6em] text-foreground/80 will-change-transform">
           <span>Sección 3 - Panel 2</span>
         </div>
       </div>
-    </div>
+    </section>
   );
-});
+};
 
 HorizontalSection.displayName = "HorizontalSection";
 export default HorizontalSection;

@@ -137,6 +137,40 @@
     animation-timeline: view();
     animation-range: entry 10% cover 40%;
   }
+
+  /* Parallax effect for section 3 */
+  @keyframes parallaxMove {
+    from {
+      transform: translateY(var(--parallax-offset, 0));
+    }
+  }
+
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    .parallax-wrapper {
+      view-timeline-name: --parallax-tl;
+      view-timeline-axis: block;
+    }
+
+    .parallax-layer {
+      animation: parallaxMove linear both;
+      animation-timeline: --parallax-tl;
+      animation-range: entry 25% cover 75%;
+    }
+
+    .parallax-layer:nth-child(1) {
+      --parallax-offset: 100px;
+    }
+
+    .parallax-layer:nth-child(2) {
+      --parallax-offset: 200px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .parallax-layer {
+      animation: none;
+    }
+  }
 }
 
 /* Custom scrollbar */
