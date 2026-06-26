@@ -72,7 +72,7 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
           beamWidth={2.8}
           beamHeight={15}
           beamNumber={31}
-          lightColor="#ffffff"
+          lightColor="#7F77DD"
           speed={2}
           noiseIntensity={1.75}
           scale={0.2}
@@ -105,7 +105,8 @@ const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(({ heroTextRef }, 
 
        {/* Description paragraph */}
         <p className="text-xs md:text-sm font-inter font-light leading-relaxed text-white/80 text-center mt-6 md:mt-8 max-w-lg md:max-w-3xl px-4 js-description opacity-0" style={{ clipPath: "inset(0 100% 0 0)", transform: "translateX(-30px)" }}>
-          Nuestro enfoque se centra en la precisión técnica y la estética, garantizando que cada proyecto no solo funcione a la perfección, sino que también defina un nuevo estándar de excelencia digital.
+          Convertimos los procesos manuales de tu negocio en sistemas que trabajan solos <br></br>
+          Para que tú te enfoques en crecer.
         </p>
 
       {/* Second description line */}

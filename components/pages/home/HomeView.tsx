@@ -9,7 +9,11 @@ import { useGSAP } from "@gsap/react";
 import Navbar from '@/components/organisms/Navbar';
 import HeroSection from './sections/HeroSection';
 import VerticalSection from './sections/VerticalSection';
-import HorizontalSection from './sections/HorizontalSection';
+import BenefitsSection from './sections/BenefitsSection';
+import MethodSection from './sections/MethodSection';
+import SocialProofSection from './sections/SocialProofSection';
+import FaqSection from './sections/FaqSection';
+import FinalCtaSection from './sections/FinalCtaSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,9 +169,13 @@ const HomeView = () => {
     <div ref={containerRef} className="bg-background overflow-x-hidden w-full relative">
       <Navbar />
       <main className="relative z-10 bg-background shadow-[0_50px_100px_rgba(0,0,0,0.3)]">
-<HeroSection heroTextRef={heroTextRef} />
+         <HeroSection heroTextRef={heroTextRef} />
          <VerticalSection />
-         <HorizontalSection />
+         <BenefitsSection />
+         <MethodSection />
+         <SocialProofSection />
+         <FaqSection />
+         <FinalCtaSection />
       </main>
       <Footer />
     </div>
