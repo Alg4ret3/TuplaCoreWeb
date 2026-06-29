@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame, useThree, RootState } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import * as THREE from 'three';
 
 export interface AntigravityProps {
@@ -65,6 +65,30 @@ const AntigravityInner = ({
   const lastMousePos = useRef({ x: 0, y: 0 });
   const lastMouseMoveTime = useRef(0);
   const virtualMouse = useRef({ x: 0, y: 0 });
+  
+  // Track mouse position globally to handle pointer-events-none containers
+  const globalMousePos = useRef({ x: 0, y: 0, timestamp: 0 });
+  
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Check if mouse is over section-2
+      const section = document.getElementById('section-2');
+      if (section) {
+        const rect = section.getBoundingClientRect();
+        if (e.clientX >= rect.left && e.clientX <= rect.right && 
+            e.clientY >= rect.top && e.clientY <= rect.bottom) {
+          globalMousePos.current = {
+            x: (e.clientX - rect.left) / rect.width * 2 - 1,
+            y: (e.clientY - rect.top) / rect.height * -2 + 1,
+            timestamp: Date.now()
+          };
+        }
+      }
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    return () => document.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const particles = useMemo<Particle[]>(() => {
     const temp: Particle[] = [];
@@ -113,15 +137,22 @@ const AntigravityInner = ({
 
     const { viewport: v, pointer: m } = state;
 
-    const mouseDist = Math.sqrt(Math.pow(m.x - lastMousePos.current.x, 2) + Math.pow(m.y - lastMousePos.current.y, 2));
+    // Use global mouse position if available (within last 100ms), otherwise use internal pointer
+    const now = Date.now();
+    const useGlobalMouse = now - globalMousePos.current.timestamp < 100;
+    
+    const mouseX = useGlobalMouse ? globalMousePos.current.x : m.x;
+    const mouseY = useGlobalMouse ? globalMousePos.current.y : m.y;
+
+    const mouseDist = Math.sqrt(Math.pow(mouseX - lastMousePos.current.x, 2) + Math.pow(mouseY - lastMousePos.current.y, 2));
 
     if (mouseDist > 0.001) {
       lastMouseMoveTime.current = Date.now();
-      lastMousePos.current = { x: m.x, y: m.y };
+      lastMousePos.current = { x: mouseX, y: mouseY };
     }
 
-    let destX = (m.x * v.width) / 2;
-    let destY = (m.y * v.height) / 2;
+    let destX = (mouseX * v.width) / 2;
+    let destY = (mouseY * v.height) / 2;
 
     if (autoAnimate && Date.now() - lastMouseMoveTime.current > 2000) {
       const time = state.clock.getElapsedTime();
